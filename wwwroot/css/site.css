@@ -21,7 +21,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #FF7000;
+    background: #FFFFFF;
 }
 
 .material-symbols-outlined {
@@ -29,7 +29,7 @@ body {
 }
 
 .hero-pattern {
-    background-image: radial-gradient(circle at center, rgba(255, 112, 0, 0.1) 0%, transparent 70%);
+    background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
 }
 
 header nav a,
@@ -59,8 +59,8 @@ textarea.orion-input {
 }
 
 .orion-input:focus {
-    border-color: #FF7000;
-    box-shadow: 0 0 0 1px #FF7000;
+    border-color: #FFFFFF;
+    box-shadow: 0 0 0 1px #FFFFFF;
 }
 
 .orion-input::placeholder {
@@ -68,13 +68,12 @@ textarea.orion-input {
     opacity: 1;
 }
 
-.orion-search-form .material-symbols-outlined {
-    color: #FF7000 !important;
-    opacity: 1;
+.orion-button .material-symbols-outlined {
+    color: inherit;
 }
 
 form[action="/Cars"] > div > .material-symbols-outlined {
-    color: #FF7000 !important;
+    color: #FFFFFF !important;
     opacity: 1;
 }
 
@@ -103,12 +102,12 @@ input.orion-input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .orion-button-primary {
-    background-color: #FF7000;
-    color: #FFFFFF;
+    background-color: #FFFFFF;
+    color: #0D0D0D;
 }
 
 .orion-button-primary:hover {
-    background-color: #FF9440;
+    background-color: #E5E5E5;
 }
 
 .orion-button-outline {
@@ -117,8 +116,8 @@ input.orion-input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .orion-button-outline:hover {
-    border-color: #FF7000;
-    color: #FF7000;
+    border-color: #FFFFFF;
+    color: #FFFFFF;
 }
 
 input[type=range]::-webkit-slider-thumb {
@@ -126,7 +125,7 @@ input[type=range]::-webkit-slider-thumb {
     height: 16px;
     width: 16px;
     border-radius: 50%;
-    background: #FF7000;
+    background: #FFFFFF;
     cursor: pointer;
     margin-top: -6px;
 }
