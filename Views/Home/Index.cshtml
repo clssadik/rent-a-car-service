@@ -14,8 +14,7 @@
 
 <section class="w-full relative py-section-lg flex flex-col items-center justify-center min-h-[716px] hero-pattern px-gutter overflow-hidden">
     <div class="max-w-container-max w-full mx-auto relative z-10 text-center flex flex-col items-center gap-gap-md">
-        <h1 class="font-display text-display text-text-primary max-w-4xl text-center">MEU RENT ile aradığınız aracı bulun</h1>
-        <p class="text-body text-text-secondary max-w-2xl text-center">Hassas mühendislik ve kusursuz performans. Hızlı rezervasyon, sıfır sorun.</p>
+        <h1 class="font-display text-display text-text-primary max-w-4xl text-center">Hayalinizdeki Yolculuk</h1>
 
         <form class="mt-gap-lg bg-surface border border-border rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.6)] p-gap-sm w-full max-w-5xl flex flex-col md:flex-row gap-gap-sm items-center" asp-controller="Cars" asp-action="Index" method="get">
             <div class="flex-1 w-full relative">
@@ -24,11 +23,11 @@
             </div>
             <div class="flex-1 w-full relative">
                 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">calendar_today</span>
-                <input class="orion-input pl-10" name="pickupDate" type="date" />
+                <input class="orion-input pl-10" name="pickupDate" placeholder="Alış tarihi" type="text" onfocus="this.type='date'" onblur="if (!this.value) this.type='text'" />
             </div>
             <div class="flex-1 w-full relative">
                 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">calendar_month</span>
-                <input class="orion-input pl-10" name="returnDate" type="date" />
+                <input class="orion-input pl-10" name="returnDate" placeholder="İade tarihi" type="text" onfocus="this.type='date'" onblur="if (!this.value) this.type='text'" />
             </div>
             <div class="flex-1 w-full relative">
                 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">directions_car</span>
