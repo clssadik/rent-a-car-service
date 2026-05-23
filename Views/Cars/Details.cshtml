@@ -1,7 +1,7 @@
 @model RentACarService.Models.Car
 
 @{
-    ViewData["Title"] = "Car Details";
+    ViewData["Title"] = "Araç Detayları";
     var detailImage = "https://lh3.googleusercontent.com/aida-public/AB6AXuA6h3uOi4kCTSpHFkJZ6-r4DXwuWzU_EImY_NOpLZ2DoiFfe_Qg0uoikWaZdXx3wna4mhnNHfrHI_LhxMG4Wg_fP5HCU1jAyUPPCyUUN_Ef2-Iir4WBSdr0pSDVhFJTt3mltGKfWwCm06lkaGwJ27f7fAKhc3QhAjGwiF__4suSCSojQXB_m7YIuqhYV0jJ2B0zW67IerCLYW8NBiBS6e4cDq5hm7pt4J2uh62dgQqsv6TjYgavXPx1bCxW1OBkJjYMOCYf8yhHzI";
 }
 
@@ -22,7 +22,7 @@
             <div>
                 <div class="flex items-center gap-gap-sm mb-gap-sm">
                     <span class="@(Model.IsAvailable ? "bg-success text-bg-app" : "bg-text-muted text-bg-app") text-caption px-2 py-1 rounded font-bold">
-                        @(Model.IsAvailable ? "AVAILABLE NOW" : "UNAVAILABLE")
+                        @(Model.IsAvailable ? "ŞİMDİ MÜSAİT" : "MÜSAİT DEĞİL")
                     </span>
                     <span class="text-text-secondary">@Model.Type</span>
                 </div>
@@ -32,11 +32,11 @@
 
             <div class="orion-card p-gap-md flex items-center justify-between">
                 <div>
-                    <p class="text-text-secondary text-caption">Daily rental price</p>
+                    <p class="text-text-secondary text-caption">Günlük kiralama fiyatı</p>
                     <p class="font-code text-primary text-h1 font-bold">$@Model.DailyPrice</p>
                 </div>
                 <a class="orion-button orion-button-primary" asp-controller="Reservations" asp-action="Create" asp-route-carId="@Model.Id">
-                    Rent This Car
+                    Bu Aracı Kirala
                     <span class="material-symbols-outlined">arrow_forward</span>
                 </a>
             </div>
@@ -44,33 +44,33 @@
             <div class="grid grid-cols-2 md:grid-cols-3 gap-gap-sm">
                 <div class="orion-card p-gap-sm">
                     <span class="material-symbols-outlined text-primary mb-2">calendar_month</span>
-                    <p class="text-text-secondary text-caption">Year</p>
+                    <p class="text-text-secondary text-caption">Yıl</p>
                     <strong>@Model.Year</strong>
                 </div>
                 <div class="orion-card p-gap-sm">
                     <span class="material-symbols-outlined text-primary mb-2">local_gas_station</span>
-                    <p class="text-text-secondary text-caption">Fuel type</p>
+                    <p class="text-text-secondary text-caption">Yakıt tipi</p>
                     <strong>@Model.FuelType</strong>
                 </div>
                 <div class="orion-card p-gap-sm">
                     <span class="material-symbols-outlined text-primary mb-2">settings</span>
-                    <p class="text-text-secondary text-caption">Transmission</p>
+                    <p class="text-text-secondary text-caption">Vites</p>
                     <strong>@Model.Transmission</strong>
                 </div>
                 <div class="orion-card p-gap-sm">
                     <span class="material-symbols-outlined text-primary mb-2">airline_seat_recline_normal</span>
-                    <p class="text-text-secondary text-caption">Seat count</p>
+                    <p class="text-text-secondary text-caption">Koltuk sayısı</p>
                     <strong>@Model.SeatCount</strong>
                 </div>
                 <div class="orion-card p-gap-sm">
                     <span class="material-symbols-outlined text-primary mb-2">speed</span>
-                    <p class="text-text-secondary text-caption">Mileage</p>
+                    <p class="text-text-secondary text-caption">Kilometre</p>
                     <strong>24,000 km</strong>
                 </div>
                 <div class="orion-card p-gap-sm">
                     <span class="material-symbols-outlined text-primary mb-2">verified</span>
-                    <p class="text-text-secondary text-caption">Status</p>
-                    <strong>@(Model.IsAvailable ? "Ready" : "Booked")</strong>
+                    <p class="text-text-secondary text-caption">Durum</p>
+                    <strong>@(Model.IsAvailable ? "Hazır" : "Rezerve")</strong>
                 </div>
             </div>
         </div>

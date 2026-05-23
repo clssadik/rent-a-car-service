@@ -1,15 +1,15 @@
 @model RentACarService.ViewModels.ReservationCreateViewModel
 
 @{
-    ViewData["Title"] = "Create Reservation";
+    ViewData["Title"] = "Rezervasyon Oluştur";
     var carImage = "https://lh3.googleusercontent.com/aida-public/AB6AXuA6h3uOi4kCTSpHFkJZ6-r4DXwuWzU_EImY_NOpLZ2DoiFfe_Qg0uoikWaZdXx3wna4mhnNHfrHI_LhxMG4Wg_fP5HCU1jAyUPPCyUUN_Ef2-Iir4WBSdr0pSDVhFJTt3mltGKfWwCm06lkaGwJ27f7fAKhc3QhAjGwiF__4suSCSojQXB_m7YIuqhYV0jJ2B0zW67IerCLYW8NBiBS6e4cDq5hm7pt4J2uh62dgQqsv6TjYgavXPx1bCxW1OBkJjYMOCYf8yhHzI";
 }
 
 <section class="max-w-container-max mx-auto px-gutter py-section-md">
     <div class="mb-gap-lg">
-        <span class="text-primary font-bold uppercase tracking-wide text-caption">Reservation</span>
-        <h1 class="text-h1 font-bold text-text-primary mt-2">Confirm Reservation</h1>
-        <p class="text-text-secondary max-w-2xl">Review the selected car, enter customer details and confirm the rental request.</p>
+        <span class="text-primary font-bold uppercase tracking-wide text-caption">Rezervasyon</span>
+        <h1 class="text-h1 font-bold text-text-primary mt-2">Rezervasyonu Onayla</h1>
+        <p class="text-text-secondary max-w-2xl">Seçilen aracı inceleyin, müşteri bilgilerini girin ve kiralama talebini onaylayın.</p>
     </div>
 
     @if (TempData["SuccessMessage"] is string successMessage)
@@ -27,20 +27,20 @@
             <div asp-validation-summary="ModelOnly" class="text-error mb-gap-sm"></div>
 
             <div class="mb-gap-md">
-                <h2 class="text-h3 font-semibold mb-gap-sm">Customer Information</h2>
+                <h2 class="text-h3 font-semibold mb-gap-sm">Müşteri Bilgileri</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-gap-sm">
                     <div>
-                        <label class="block text-caption text-text-secondary mb-2" asp-for="FullName">Full name</label>
-                        <input class="orion-input" asp-for="FullName" placeholder="Enter full name" />
+                        <label class="block text-caption text-text-secondary mb-2" asp-for="FullName">Ad soyad</label>
+                        <input class="orion-input" asp-for="FullName" placeholder="Ad soyad girin" />
                         <span class="text-error text-caption" asp-validation-for="FullName"></span>
                     </div>
                     <div>
-                        <label class="block text-caption text-text-secondary mb-2" asp-for="Email">Email</label>
-                        <input class="orion-input" asp-for="Email" placeholder="name@example.com" />
+                        <label class="block text-caption text-text-secondary mb-2" asp-for="Email">E-posta</label>
+                        <input class="orion-input" asp-for="Email" placeholder="ad@ornek.com" />
                         <span class="text-error text-caption" asp-validation-for="Email"></span>
                     </div>
                     <div>
-                        <label class="block text-caption text-text-secondary mb-2" asp-for="PhoneNumber">Phone number</label>
+                        <label class="block text-caption text-text-secondary mb-2" asp-for="PhoneNumber">Telefon numarası</label>
                         <input class="orion-input" asp-for="PhoneNumber" placeholder="+90 555 000 00 00" />
                         <span class="text-error text-caption" asp-validation-for="PhoneNumber"></span>
                     </div>
@@ -48,28 +48,28 @@
             </div>
 
             <div>
-                <h2 class="text-h3 font-semibold mb-gap-sm">Reservation Details</h2>
+                <h2 class="text-h3 font-semibold mb-gap-sm">Rezervasyon Detayları</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-gap-sm">
                     <div>
-                        <label class="block text-caption text-text-secondary mb-2" asp-for="PickupDate">Pickup date</label>
+                        <label class="block text-caption text-text-secondary mb-2" asp-for="PickupDate">Alış tarihi</label>
                         <input class="orion-input" asp-for="PickupDate" />
                         <span class="text-error text-caption" asp-validation-for="PickupDate"></span>
                     </div>
                     <div>
-                        <label class="block text-caption text-text-secondary mb-2" asp-for="ReturnDate">Return date</label>
+                        <label class="block text-caption text-text-secondary mb-2" asp-for="ReturnDate">İade tarihi</label>
                         <input class="orion-input" asp-for="ReturnDate" />
                         <span class="text-error text-caption" asp-validation-for="ReturnDate"></span>
                     </div>
                     <div class="md:col-span-2">
-                        <label class="block text-caption text-text-secondary mb-2" asp-for="PickupLocation">Pickup location</label>
-                        <input class="orion-input" asp-for="PickupLocation" placeholder="Rental office or city" />
+                        <label class="block text-caption text-text-secondary mb-2" asp-for="PickupLocation">Alış lokasyonu</label>
+                        <input class="orion-input" asp-for="PickupLocation" placeholder="Kiralama ofisi veya şehir" />
                         <span class="text-error text-caption" asp-validation-for="PickupLocation"></span>
                     </div>
                 </div>
             </div>
 
             <button class="orion-button orion-button-primary mt-gap-md w-full md:w-auto" type="submit">
-                Confirm Reservation
+                Rezervasyonu Onayla
                 <span class="material-symbols-outlined">check_circle</span>
             </button>
         </form>
@@ -78,24 +78,24 @@
             <div class="orion-card overflow-hidden">
                 <img alt="@Model.SelectedCar.Brand @Model.SelectedCar.Model" class="w-full h-56 object-cover" src="@carImage" />
                 <div class="p-gap-sm">
-                    <p class="text-text-secondary text-caption">Selected car</p>
+                    <p class="text-text-secondary text-caption">Seçilen araç</p>
                     <h2 class="text-h3 font-semibold">@Model.SelectedCar.Brand @Model.SelectedCar.Model</h2>
                     <p class="text-text-secondary">@Model.SelectedCar.Transmission, @Model.SelectedCar.FuelType, @Model.SelectedCar.Year</p>
                 </div>
             </div>
 
             <div class="orion-card p-gap-md">
-                <h2 class="text-h3 font-semibold mb-gap-sm">Price Summary</h2>
+                <h2 class="text-h3 font-semibold mb-gap-sm">Fiyat Özeti</h2>
                 <div class="flex justify-between text-text-secondary mb-gap-xs">
-                    <span>Daily price</span>
+                    <span>Günlük fiyat</span>
                     <strong class="text-text-primary">$@Model.SelectedCar.DailyPrice</strong>
                 </div>
                 <div class="flex justify-between text-text-secondary mb-gap-sm">
-                    <span>Rental days</span>
+                    <span>Kiralama günü</span>
                     <strong class="text-text-primary">@Model.RentalDays</strong>
                 </div>
                 <div class="border-t border-border pt-gap-sm flex justify-between items-center">
-                    <span class="text-text-primary font-semibold">Total</span>
+                    <span class="text-text-primary font-semibold">Toplam</span>
                     <strong class="font-code text-primary text-h2">$@Model.TotalPrice</strong>
                 </div>
             </div>

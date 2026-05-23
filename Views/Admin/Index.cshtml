@@ -1,47 +1,47 @@
 @model RentACarService.ViewModels.AdminDashboardViewModel
 
 @{
-    ViewData["Title"] = "Admin Dashboard";
+    ViewData["Title"] = "Admin Paneli";
 }
 
 <section class="max-w-container-max mx-auto px-gutter py-section-md">
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-gap-md mb-gap-lg">
         <div>
-            <span class="text-primary font-bold uppercase tracking-wide text-caption">Control Center</span>
-            <h1 class="text-h1 font-bold text-text-primary mt-2">Admin Dashboard</h1>
-            <p class="text-text-secondary max-w-2xl">Track fleet status, reservation activity and revenue summary.</p>
+            <span class="text-primary font-bold uppercase tracking-wide text-caption">Kontrol Merkezi</span>
+            <h1 class="text-h1 font-bold text-text-primary mt-2">Admin Paneli</h1>
+            <p class="text-text-secondary max-w-2xl">Filo durumu, rezervasyon hareketleri ve gelir özetini takip edin.</p>
         </div>
         <a class="orion-button orion-button-primary" asp-controller="Admin" asp-action="Cars">
             <span class="material-symbols-outlined">directions_car</span>
-            Manage Cars
+            Araçları Yönet
         </a>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gap-md mb-gap-lg">
         <div class="orion-card p-gap-md">
             <div class="flex justify-between items-start">
-                <span class="text-text-secondary">Total Cars</span>
+                <span class="text-text-secondary">Toplam Araç</span>
                 <span class="material-symbols-outlined text-primary">directions_car</span>
             </div>
             <strong class="block text-h1 font-bold mt-gap-sm">@Model.TotalCars</strong>
         </div>
         <div class="orion-card p-gap-md">
             <div class="flex justify-between items-start">
-                <span class="text-text-secondary">Active Reservations</span>
+                <span class="text-text-secondary">Aktif Rezervasyon</span>
                 <span class="material-symbols-outlined text-primary">event_available</span>
             </div>
             <strong class="block text-h1 font-bold mt-gap-sm">@Model.ActiveReservations</strong>
         </div>
         <div class="orion-card p-gap-md">
             <div class="flex justify-between items-start">
-                <span class="text-text-secondary">Customers</span>
+                <span class="text-text-secondary">Müşteriler</span>
                 <span class="material-symbols-outlined text-primary">groups</span>
             </div>
             <strong class="block text-h1 font-bold mt-gap-sm">@Model.Customers</strong>
         </div>
         <div class="orion-card p-gap-md">
             <div class="flex justify-between items-start">
-                <span class="text-text-secondary">Total Revenue</span>
+                <span class="text-text-secondary">Toplam Gelir</span>
                 <span class="material-symbols-outlined text-primary">payments</span>
             </div>
             <strong class="block text-h1 font-bold mt-gap-sm">$@Model.TotalRevenue.ToString("N0")</strong>
@@ -50,18 +50,18 @@
 
     <div class="orion-card overflow-hidden">
         <div class="p-gap-md border-b border-border flex justify-between items-center">
-            <h2 class="text-h3 font-semibold">Recent Reservations</h2>
-            <span class="text-text-secondary text-caption">@Model.RecentReservations.Count records</span>
+            <h2 class="text-h3 font-semibold">Son Rezervasyonlar</h2>
+            <span class="text-text-secondary text-caption">@Model.RecentReservations.Count kayıt</span>
         </div>
         <div class="overflow-x-auto">
             <table class="w-full text-left">
                 <thead class="bg-surface-raised text-text-secondary text-caption uppercase">
                     <tr>
-                        <th class="px-gap-sm py-gap-sm">Customer name</th>
-                        <th class="px-gap-sm py-gap-sm">Car</th>
-                        <th class="px-gap-sm py-gap-sm">Pickup date</th>
-                        <th class="px-gap-sm py-gap-sm">Return date</th>
-                        <th class="px-gap-sm py-gap-sm">Status</th>
+                        <th class="px-gap-sm py-gap-sm">Müşteri adı</th>
+                        <th class="px-gap-sm py-gap-sm">Araç</th>
+                        <th class="px-gap-sm py-gap-sm">Alış tarihi</th>
+                        <th class="px-gap-sm py-gap-sm">İade tarihi</th>
+                        <th class="px-gap-sm py-gap-sm">Durum</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-border">

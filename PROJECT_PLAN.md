@@ -61,26 +61,9 @@
 - ~~Musteri yonetim ekrani yok.~~ COZULDU
 - ~~Arac silme icin onay mekanizmasi yok.~~ COZULDU
 
-### Guvenlik
-
-- Login/register sistemi yok.
-- Admin sayfalari yetki kontrolu olmadan aciliyor.
-- Kullanici rolleri yok.
-
-### Arama ve Uygunluk
-
-- Ana sayfadaki lokasyon ve tarih alanlari gercek aramaya bagli degil.
-- Tarihe gore arac uygunluk kontrolu yok.
-- Musaitlik filtresi yok.
-
 ### Arayuz ve Gorseller
 
 - Arac gorselleri veritabanindaki `ImageUrl` alanindan tutarli kullanilmiyor.
 - Bazi sayfalarda sabit dis gorsel URL'leri var.
-- UI dili karisik; Ingilizce ve Turkce metinler birlikte kullaniliyor.
+- ~~UI dili karisik; Ingilizce ve Turkce metinler birlikte kullaniliyor. Sayfa tamamen türkçe olsun~~ COZULDU
 
-### Test ve Kurulum
-
-- Unit test yok.
-- Controller veya servis testi yok.
-- SQL Server/Docker kurulum adimlari dokumante edilmemis.

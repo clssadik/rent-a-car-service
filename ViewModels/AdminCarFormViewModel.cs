@@ -6,31 +6,31 @@ public class AdminCarFormViewModel
 {
     public int Id { get; set; }
 
-    [Required(ErrorMessage = "Brand is required.")]
+    [Required(ErrorMessage = "Marka zorunludur.")]
     public string Brand { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "Model is required.")]
+    [Required(ErrorMessage = "Model zorunludur.")]
     public string Model { get; set; } = string.Empty;
 
-    [Range(2000, 2030, ErrorMessage = "Year must be between 2000 and 2030.")]
+    [Range(2000, 2030, ErrorMessage = "Yıl 2000-2030 arasında olmalıdır.")]
     public int Year { get; set; }
 
-    [Required(ErrorMessage = "Fuel type is required.")]
+    [Required(ErrorMessage = "Yakıt tipi zorunludur.")]
     public string FuelType { get; set; } = "Gasoline";
 
-    [Required(ErrorMessage = "Transmission is required.")]
+    [Required(ErrorMessage = "Vites zorunludur.")]
     public string Transmission { get; set; } = "Automatic";
 
-    [Required(ErrorMessage = "Car type is required.")]
+    [Required(ErrorMessage = "Araç tipi zorunludur.")]
     public string Type { get; set; } = "Sedan";
 
-    [Range(1, 20, ErrorMessage = "Seat count must be between 1 and 20.")]
+    [Range(1, 20, ErrorMessage = "Koltuk sayısı 1-20 arasında olmalıdır.")]
     public int SeatCount { get; set; }
 
-    [Range(1, 1000, ErrorMessage = "Daily price must be greater than 0.")]
+    [Range(1, 1000, ErrorMessage = "Günlük fiyat 0'dan büyük olmalıdır.")]
     public int DailyPrice { get; set; }
 
-    [Url(ErrorMessage = "Please enter a valid image URL.")]
+    [Url(ErrorMessage = "Geçerli bir görsel URL'si girin.")]
     public string? ImageUrl { get; set; }
 
     public bool IsAvailable { get; set; } = true;

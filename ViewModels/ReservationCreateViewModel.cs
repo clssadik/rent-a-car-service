@@ -11,25 +11,25 @@ public class ReservationCreateViewModel
 
     public int RentalDays { get; set; }
 
-    [Required(ErrorMessage = "Full name is required.")]
+    [Required(ErrorMessage = "Ad soyad zorunludur.")]
     public string FullName { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "Email is required.")]
-    [EmailAddress(ErrorMessage = "Please enter a valid email address.")]
+    [Required(ErrorMessage = "E-posta zorunludur.")]
+    [EmailAddress(ErrorMessage = "Geçerli bir e-posta adresi girin.")]
     public string Email { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "Phone number is required.")]
+    [Required(ErrorMessage = "Telefon numarası zorunludur.")]
     public string PhoneNumber { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "Pickup date is required.")]
+    [Required(ErrorMessage = "Alış tarihi zorunludur.")]
     [DataType(DataType.Date)]
     public DateTime? PickupDate { get; set; }
 
-    [Required(ErrorMessage = "Return date is required.")]
+    [Required(ErrorMessage = "İade tarihi zorunludur.")]
     [DataType(DataType.Date)]
     public DateTime? ReturnDate { get; set; }
 
-    [Required(ErrorMessage = "Pickup location is required.")]
+    [Required(ErrorMessage = "Alış lokasyonu zorunludur.")]
     public string PickupLocation { get; set; } = string.Empty;
 
     public int TotalPrice => SelectedCar.DailyPrice * RentalDays;

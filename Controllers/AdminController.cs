@@ -61,12 +61,12 @@ public class AdminController : Controller
         if (viewModel.Form.Id > 0)
         {
             var updated = _sampleDataService.UpdateCar(car);
-            TempData["SuccessMessage"] = updated ? "Car updated successfully." : "Car could not be found.";
+            TempData["SuccessMessage"] = updated ? "Araç başarıyla güncellendi." : "Araç bulunamadı.";
         }
         else
         {
             _sampleDataService.AddCar(car);
-            TempData["SuccessMessage"] = "Car added successfully.";
+            TempData["SuccessMessage"] = "Araç başarıyla eklendi.";
         }
 
         return RedirectToAction(nameof(Cars));
@@ -77,7 +77,7 @@ public class AdminController : Controller
     public IActionResult DeleteCar(int id)
     {
         var deleted = _sampleDataService.DeleteCar(id);
-        TempData["SuccessMessage"] = deleted ? "Car deleted successfully." : "Car could not be found.";
+        TempData["SuccessMessage"] = deleted ? "Araç başarıyla silindi." : "Araç bulunamadı.";
 
         return RedirectToAction(nameof(Cars));
     }
@@ -129,7 +129,7 @@ public class AdminController : Controller
     public IActionResult UpdateReservationStatus(int id, string status)
     {
         var updated = _sampleDataService.UpdateReservationStatus(id, status);
-        TempData["SuccessMessage"] = updated ? "Reservation status updated." : "Reservation not found.";
+        TempData["SuccessMessage"] = updated ? "Rezervasyon durumu güncellendi." : "Rezervasyon bulunamadı.";
         return RedirectToAction(nameof(Reservations));
     }
 

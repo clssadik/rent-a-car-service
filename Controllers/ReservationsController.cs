@@ -37,18 +37,18 @@ public class ReservationsController : Controller
             reservation.ReturnDate.HasValue &&
             reservation.ReturnDate <= reservation.PickupDate)
         {
-            ModelState.AddModelError(nameof(reservation.ReturnDate), "Return date must be after pickup date.");
+            ModelState.AddModelError(nameof(reservation.ReturnDate), "İade tarihi alış tarihinden sonra olmalıdır.");
         }
 
         if (!_sampleDataService.IsCarAvailable(reservation.SelectedCarId))
         {
-            ModelState.AddModelError(nameof(reservation.SelectedCarId), "Selected car is not available.");
+            ModelState.AddModelError(nameof(reservation.SelectedCarId), "Seçilen araç müsait değil.");
         }
 
         if (reservation.PickupDate.HasValue && reservation.ReturnDate.HasValue &&
             _sampleDataService.HasOverlappingReservation(reservation.SelectedCarId, reservation.PickupDate.Value, reservation.ReturnDate.Value))
         {
-            ModelState.AddModelError(nameof(reservation.PickupDate), "The selected car is already reserved for these dates.");
+            ModelState.AddModelError(nameof(reservation.PickupDate), "Seçilen araç bu tarihler için zaten rezerve edilmiş.");
         }
 
         if (!ModelState.IsValid)

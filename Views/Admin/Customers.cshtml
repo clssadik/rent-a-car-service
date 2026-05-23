@@ -1,19 +1,19 @@
 @model RentACarService.ViewModels.AdminCustomersViewModel
 
 @{
-    ViewData["Title"] = "Customer Management";
+    ViewData["Title"] = "Müşteri Yönetimi";
 }
 
 <section class="max-w-container-max mx-auto px-gutter py-section-md">
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-gap-md mb-gap-lg">
         <div>
-            <span class="text-primary font-bold uppercase tracking-wide text-caption">Customer Records</span>
-            <h1 class="text-h1 font-bold text-text-primary mt-2">Customer Management</h1>
-            <p class="text-text-secondary max-w-2xl">View all registered customers and their reservation history.</p>
+            <span class="text-primary font-bold uppercase tracking-wide text-caption">Müşteri Kayıtları</span>
+            <h1 class="text-h1 font-bold text-text-primary mt-2">Müşteri Yönetimi</h1>
+            <p class="text-text-secondary max-w-2xl">Tüm kayıtlı müşterileri ve rezervasyon geçmişlerini görüntüleyin.</p>
         </div>
         <a class="orion-button orion-button-primary" asp-controller="Admin" asp-action="Index">
             <span class="material-symbols-outlined">dashboard</span>
-            Admin Dashboard
+            Admin Paneli
         </a>
     </div>
 
@@ -21,26 +21,26 @@
     {
         <div class="orion-card p-gap-lg text-center">
             <span class="material-symbols-outlined text-5xl text-text-muted mb-gap-sm block">groups</span>
-            <h2 class="text-h3 font-semibold mb-2">No customers yet</h2>
-            <p class="text-text-secondary max-w-prose mx-auto">Customers will appear here once they create reservations. New customer records are automatically created during the reservation process.</p>
+            <h2 class="text-h3 font-semibold mb-2">Henüz müşteri yok</h2>
+            <p class="text-text-secondary max-w-prose mx-auto">Müşteriler rezervasyon oluşturdukça burada görünecektir. Yeni müşteri kayıtları rezervasyon işlemi sırasında otomatik oluşturulur.</p>
         </div>
     }
     else
     {
         <div class="orion-card overflow-hidden">
             <div class="p-gap-md border-b border-border flex justify-between items-center">
-                <h2 class="text-h3 font-semibold">All Customers</h2>
-                <span class="text-text-secondary text-caption">@Model.Customers.Count records</span>
+                <h2 class="text-h3 font-semibold">Tüm Müşteriler</h2>
+                <span class="text-text-secondary text-caption">@Model.Customers.Count kayıt</span>
             </div>
             <div class="overflow-x-auto">
                 <table class="w-full text-left">
                     <thead class="bg-surface-raised text-text-secondary text-caption uppercase">
                         <tr>
                             <th class="px-gap-sm py-gap-sm">ID</th>
-                            <th class="px-gap-sm py-gap-sm">Full Name</th>
-                            <th class="px-gap-sm py-gap-sm">Email</th>
-                            <th class="px-gap-sm py-gap-sm">Phone Number</th>
-                            <th class="px-gap-sm py-gap-sm">Reservation Count</th>
+                            <th class="px-gap-sm py-gap-sm">Ad Soyad</th>
+                            <th class="px-gap-sm py-gap-sm">E-posta</th>
+                            <th class="px-gap-sm py-gap-sm">Telefon Numarası</th>
+                            <th class="px-gap-sm py-gap-sm">Rezervasyon Sayısı</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-border">

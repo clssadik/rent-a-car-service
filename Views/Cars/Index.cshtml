@@ -1,7 +1,7 @@
 @model RentACarService.ViewModels.CarsIndexViewModel
 
 @{
-    ViewData["Title"] = "Available Cars";
+    ViewData["Title"] = "Mevcut Araçlar";
 
     var carImages = new[]
     {
@@ -13,21 +13,21 @@
 
 <section class="max-w-container-max mx-auto px-gutter py-section-md">
     <div class="flex flex-col gap-gap-xs mb-gap-lg">
-        <span class="text-primary font-bold uppercase tracking-wide text-caption">Browse Fleet</span>
-        <h1 class="text-h1 font-bold text-text-primary">Available Cars</h1>
-        <p class="text-text-secondary max-w-2xl">Filter premium vehicles by brand, type, transmission and daily budget.</p>
+        <span class="text-primary font-bold uppercase tracking-wide text-caption">Filoyu İncele</span>
+        <h1 class="text-h1 font-bold text-text-primary">Mevcut Araçlar</h1>
+        <p class="text-text-secondary max-w-2xl">Marka, tip, vites ve günlük bütçeye göre filtreleyin.</p>
     </div>
 
     <div class="orion-card p-gap-md mb-gap-lg">
         <form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-gap-sm" asp-controller="Cars" asp-action="Index" method="get">
             <div>
-                <label class="block text-caption text-text-secondary mb-2" for="brand">Brand</label>
+                <label class="block text-caption text-text-secondary mb-2" for="brand">Marka</label>
                 <input class="orion-input" id="brand" name="brand" placeholder="Toyota" type="text" value="@Model.Brand" />
             </div>
             <div>
-                <label class="block text-caption text-text-secondary mb-2" for="type">Car type</label>
+                <label class="block text-caption text-text-secondary mb-2" for="type">Araç tipi</label>
                 <select class="orion-input" id="type" name="type">
-                    <option value="">All types</option>
+                    <option value="">Tüm tipler</option>
                     <option value="Sedan" selected="@(Model.Type == "Sedan" ? "selected" : null)">Sedan</option>
                     <option value="SUV" selected="@(Model.Type == "SUV" ? "selected" : null)">SUV</option>
                     <option value="Hatchback" selected="@(Model.Type == "Hatchback" ? "selected" : null)">Hatchback</option>
@@ -35,17 +35,17 @@
                 </select>
             </div>
             <div>
-                <label class="block text-caption text-text-secondary mb-2" for="transmission">Transmission</label>
+                <label class="block text-caption text-text-secondary mb-2" for="transmission">Vites</label>
                 <select class="orion-input" id="transmission" name="transmission">
-                    <option value="">Any</option>
+                    <option value="">Tümü</option>
                     <option value="Automatic" selected="@(Model.Transmission == "Automatic" ? "selected" : null)">Automatic</option>
                     <option value="Manual" selected="@(Model.Transmission == "Manual" ? "selected" : null)">Manual</option>
                 </select>
             </div>
             <div>
-                <label class="block text-caption text-text-secondary mb-2" for="priceRange">Price range</label>
+                <label class="block text-caption text-text-secondary mb-2" for="priceRange">Fiyat aralığı</label>
                 <select class="orion-input" id="priceRange" name="priceRange">
-                    <option value="">Any price</option>
+                    <option value="">Tüm fiyatlar</option>
                     <option value="0-50" selected="@(Model.PriceRange == "0-50" ? "selected" : null)">$0 - $50</option>
                     <option value="50-80" selected="@(Model.PriceRange == "50-80" ? "selected" : null)">$50 - $80</option>
                     <option value="80+" selected="@(Model.PriceRange == "80+" ? "selected" : null)">$80+</option>
@@ -54,7 +54,7 @@
             <div class="flex items-end">
                 <button class="orion-button orion-button-primary w-full" type="submit">
                     <span class="material-symbols-outlined">tune</span>
-                    Filter
+                    Filtrele
                 </button>
             </div>
         </form>
@@ -63,7 +63,7 @@
     @if (Model.Cars.Count == 0)
     {
         <div class="orion-card p-gap-md text-text-secondary">
-            No cars match the selected filters.
+            Seçilen filtrelere uygun araç bulunamadı.
         </div>
     }
     else
@@ -77,7 +77,7 @@
                 <div class="h-56 bg-surface-raised relative overflow-hidden">
                     <img alt="@car.Brand @car.Model" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="@image" />
                     <div class="absolute top-3 right-3 @(car.IsAvailable ? "bg-success" : "bg-text-muted") text-bg-app text-caption px-2 py-1 rounded font-bold">
-                        @(car.IsAvailable ? "AVAILABLE" : "UNAVAILABLE")
+                        @(car.IsAvailable ? "MÜSAİT" : "MÜSAİT DEĞİL")
                     </div>
                 </div>
                 <div class="p-gap-sm flex flex-col gap-gap-sm flex-grow">
@@ -92,9 +92,9 @@
                         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">calendar_month</span>@car.Year</div>
                         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">settings</span>@car.Transmission</div>
                         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">local_gas_station</span>@car.FuelType</div>
-                        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">airline_seat_recline_normal</span>@car.SeatCount Seats</div>
+                        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">airline_seat_recline_normal</span>@car.SeatCount Koltuk</div>
                     </div>
-                    <a class="orion-button orion-button-outline w-full mt-auto" asp-controller="Cars" asp-action="Details" asp-route-id="@car.Id">View Details</a>
+                    <a class="orion-button orion-button-outline w-full mt-auto" asp-controller="Cars" asp-action="Details" asp-route-id="@car.Id">Detayları Gör</a>
                 </div>
             </article>
         }
