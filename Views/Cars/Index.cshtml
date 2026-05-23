@@ -1,4 +1,4 @@
-@model List<RentACarService.Models.Car>
+@model RentACarService.ViewModels.CarsIndexViewModel
 
 @{
     ViewData["Title"] = "Available Cars";
@@ -19,36 +19,36 @@
     </div>
 
     <div class="orion-card p-gap-md mb-gap-lg">
-        <form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-gap-sm">
+        <form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-gap-sm" asp-controller="Cars" asp-action="Index" method="get">
             <div>
                 <label class="block text-caption text-text-secondary mb-2" for="brand">Brand</label>
-                <input class="orion-input" id="brand" name="brand" placeholder="Toyota" type="text" />
+                <input class="orion-input" id="brand" name="brand" placeholder="Toyota" type="text" value="@Model.Brand" />
             </div>
             <div>
                 <label class="block text-caption text-text-secondary mb-2" for="type">Car type</label>
                 <select class="orion-input" id="type" name="type">
-                    <option>All types</option>
-                    <option>Sedan</option>
-                    <option>SUV</option>
-                    <option>Hatchback</option>
-                    <option>Van</option>
+                    <option value="">All types</option>
+                    <option value="Sedan" selected="@(Model.Type == "Sedan" ? "selected" : null)">Sedan</option>
+                    <option value="SUV" selected="@(Model.Type == "SUV" ? "selected" : null)">SUV</option>
+                    <option value="Hatchback" selected="@(Model.Type == "Hatchback" ? "selected" : null)">Hatchback</option>
+                    <option value="Van" selected="@(Model.Type == "Van" ? "selected" : null)">Van</option>
                 </select>
             </div>
             <div>
                 <label class="block text-caption text-text-secondary mb-2" for="transmission">Transmission</label>
                 <select class="orion-input" id="transmission" name="transmission">
-                    <option>Any</option>
-                    <option>Automatic</option>
-                    <option>Manual</option>
+                    <option value="">Any</option>
+                    <option value="Automatic" selected="@(Model.Transmission == "Automatic" ? "selected" : null)">Automatic</option>
+                    <option value="Manual" selected="@(Model.Transmission == "Manual" ? "selected" : null)">Manual</option>
                 </select>
             </div>
             <div>
                 <label class="block text-caption text-text-secondary mb-2" for="priceRange">Price range</label>
                 <select class="orion-input" id="priceRange" name="priceRange">
-                    <option>Any price</option>
-                    <option>$0 - $50</option>
-                    <option>$50 - $80</option>
-                    <option>$80+</option>
+                    <option value="">Any price</option>
+                    <option value="0-50" selected="@(Model.PriceRange == "0-50" ? "selected" : null)">$0 - $50</option>
+                    <option value="50-80" selected="@(Model.PriceRange == "50-80" ? "selected" : null)">$50 - $80</option>
+                    <option value="80+" selected="@(Model.PriceRange == "80+" ? "selected" : null)">$80+</option>
                 </select>
             </div>
             <div class="flex items-end">
@@ -60,10 +60,18 @@
         </form>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-gap-md">
-        @for (var i = 0; i < Model.Count; i++)
+    @if (Model.Cars.Count == 0)
+    {
+        <div class="orion-card p-gap-md text-text-secondary">
+            No cars match the selected filters.
+        </div>
+    }
+    else
+    {
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-gap-md">
+        @for (var i = 0; i < Model.Cars.Count; i++)
         {
-            var car = Model[i];
+            var car = Model.Cars[i];
             var image = carImages[i % carImages.Length];
             <article class="orion-card overflow-hidden flex flex-col group hover:border-primary transition-colors">
                 <div class="h-56 bg-surface-raised relative overflow-hidden">
@@ -90,5 +98,6 @@
                 </div>
             </article>
         }
-    </div>
+        </div>
+    }
 </section>

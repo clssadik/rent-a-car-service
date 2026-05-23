@@ -105,6 +105,36 @@ public class SampleDataService
         return _cars;
     }
 
+    public List<Car> GetFilteredCars(string? brand, string? type, string? transmission, string? priceRange)
+    {
+        var cars = _cars.AsEnumerable();
+
+        if (!string.IsNullOrWhiteSpace(brand))
+        {
+            cars = cars.Where(car => car.Brand.Contains(brand, StringComparison.OrdinalIgnoreCase));
+        }
+
+        if (!string.IsNullOrWhiteSpace(type))
+        {
+            cars = cars.Where(car => car.Type.Equals(type, StringComparison.OrdinalIgnoreCase));
+        }
+
+        if (!string.IsNullOrWhiteSpace(transmission))
+        {
+            cars = cars.Where(car => car.Transmission.Equals(transmission, StringComparison.OrdinalIgnoreCase));
+        }
+
+        cars = priceRange switch
+        {
+            "0-50" => cars.Where(car => car.DailyPrice <= 50),
+            "50-80" => cars.Where(car => car.DailyPrice > 50 && car.DailyPrice <= 80),
+            "80+" => cars.Where(car => car.DailyPrice > 80),
+            _ => cars
+        };
+
+        return cars.ToList();
+    }
+
     public List<Car> GetFeaturedCars()
     {
         return _cars.Take(3).ToList();

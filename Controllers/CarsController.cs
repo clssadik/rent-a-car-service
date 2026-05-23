@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using RentACarService.Services;
+using RentACarService.ViewModels;
 
 namespace RentACarService.Controllers;
 
@@ -12,11 +13,20 @@ public class CarsController : Controller
         _sampleDataService = sampleDataService;
     }
 
-    public IActionResult Index()
+    public IActionResult Index(string? brand, string? type, string? carType, string? transmission, string? priceRange)
     {
-        var cars = _sampleDataService.GetCars();
+        var selectedType = string.IsNullOrWhiteSpace(type) ? carType : type;
+        var cars = _sampleDataService.GetFilteredCars(brand, selectedType, transmission, priceRange);
+        var viewModel = new CarsIndexViewModel
+        {
+            Cars = cars,
+            Brand = brand,
+            Type = selectedType,
+            Transmission = transmission,
+            PriceRange = priceRange
+        };
 
-        return View(cars);
+        return View(viewModel);
     }
 
     public IActionResult Details(int id = 1)
