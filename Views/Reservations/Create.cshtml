@@ -1,0 +1,79 @@
+@{
+    ViewData["Title"] = "Create Reservation";
+}
+
+<section class="page-section">
+    <div class="container">
+        <div class="page-title-row">
+            <div>
+                <span class="section-label">Reservation form</span>
+                <h1>Create Reservation</h1>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <form class="form-panel">
+                    <h5>Customer Information</h5>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label" for="fullName">Full name</label>
+                            <input class="form-control" id="fullName" type="text" placeholder="Enter full name" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="email">Email</label>
+                            <input class="form-control" id="email" type="email" placeholder="name@example.com" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="phone">Phone number</label>
+                            <input class="form-control" id="phone" type="tel" placeholder="+90 555 000 00 00" />
+                        </div>
+                    </div>
+
+                    <h5>Reservation Details</h5>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label" for="pickupDate">Pickup date</label>
+                            <input class="form-control" id="pickupDate" type="date" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="returnDate">Return date</label>
+                            <input class="form-control" id="returnDate" type="date" />
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label" for="pickupLocation">Pickup location</label>
+                            <input class="form-control" id="pickupLocation" type="text" placeholder="Rental office or city" />
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary mt-4" type="submit">Confirm Reservation</button>
+                </form>
+            </div>
+            <div class="col-lg-4">
+                <div class="summary-card mb-4">
+                    <h5>Selected Car</h5>
+                    <div class="car-image-placeholder small-placeholder">Car Image</div>
+                    <h6 class="mt-3 mb-1">Toyota Corolla</h6>
+                    <p class="text-muted mb-0">Automatic, Gasoline, 2022</p>
+                </div>
+
+                <div class="summary-card">
+                    <h5>Total Price</h5>
+                    <div class="summary-line">
+                        <span>Daily price</span>
+                        <strong>$45</strong>
+                    </div>
+                    <div class="summary-line">
+                        <span>Rental days</span>
+                        <strong>3</strong>
+                    </div>
+                    <hr />
+                    <div class="summary-line total">
+                        <span>Total</span>
+                        <strong>$135</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

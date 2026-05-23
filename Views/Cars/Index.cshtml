@@ -1,0 +1,93 @@
+@{
+    ViewData["Title"] = "Available Cars";
+
+    var cars = new[]
+    {
+        new { Brand = "Toyota", Model = "Corolla", Year = 2022, Fuel = "Gasoline", Transmission = "Automatic", Type = "Sedan", Price = 45, Available = true },
+        new { Brand = "Volkswagen", Model = "Golf", Year = 2021, Fuel = "Diesel", Transmission = "Manual", Type = "Hatchback", Price = 50, Available = true },
+        new { Brand = "Hyundai", Model = "Tucson", Year = 2023, Fuel = "Hybrid", Transmission = "Automatic", Type = "SUV", Price = 75, Available = false },
+        new { Brand = "Renault", Model = "Clio", Year = 2020, Fuel = "Gasoline", Transmission = "Manual", Type = "Hatchback", Price = 38, Available = true },
+        new { Brand = "Ford", Model = "Focus", Year = 2022, Fuel = "Diesel", Transmission = "Automatic", Type = "Sedan", Price = 55, Available = true },
+        new { Brand = "Mercedes", Model = "Vito", Year = 2021, Fuel = "Diesel", Transmission = "Automatic", Type = "Van", Price = 90, Available = false }
+    };
+}
+
+<section class="page-section">
+    <div class="container">
+        <div class="page-title-row">
+            <div>
+                <span class="section-label">Choose your vehicle</span>
+                <h1>Available Cars</h1>
+            </div>
+        </div>
+
+        <div class="filter-box mb-4">
+            <form>
+                <div class="row g-3 align-items-end">
+                    <div class="col-md-6 col-lg-3">
+                        <label class="form-label" for="brand">Brand</label>
+                        <input class="form-control" id="brand" type="text" placeholder="Toyota" />
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <label class="form-label" for="type">Car type</label>
+                        <select class="form-select" id="type">
+                            <option selected>All types</option>
+                            <option>Sedan</option>
+                            <option>SUV</option>
+                            <option>Hatchback</option>
+                            <option>Van</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <label class="form-label" for="transmission">Transmission</label>
+                        <select class="form-select" id="transmission">
+                            <option selected>Any</option>
+                            <option>Automatic</option>
+                            <option>Manual</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <label class="form-label" for="priceRange">Price range</label>
+                        <select class="form-select" id="priceRange">
+                            <option selected>Any price</option>
+                            <option>$0 - $50</option>
+                            <option>$50 - $80</option>
+                            <option>$80+</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="row g-4">
+            @foreach (var car in cars)
+            {
+                <div class="col-md-6 col-xl-4">
+                    <div class="car-card card h-100">
+                        <div class="car-image-placeholder">Car Image</div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start gap-3 mb-2">
+                                <div>
+                                    <h5 class="card-title mb-1">@car.Brand @car.Model</h5>
+                                    <p class="text-muted mb-0">@car.Type</p>
+                                </div>
+                                <span class="badge @(car.Available ? "text-bg-success" : "text-bg-secondary")">
+                                    @(car.Available ? "Available" : "Unavailable")
+                                </span>
+                            </div>
+                            <div class="spec-list">
+                                <span>@car.Year</span>
+                                <span>@car.Fuel</span>
+                                <span>@car.Transmission</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <span class="price-text">$@car.Price/day</span>
+                                <a class="btn btn-outline-primary btn-sm" asp-controller="Cars" asp-action="Details">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

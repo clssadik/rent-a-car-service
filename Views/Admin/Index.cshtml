@@ -1,0 +1,79 @@
+@{
+    ViewData["Title"] = "Admin Dashboard";
+
+    var reservations = new[]
+    {
+        new { Customer = "Ayse Yilmaz", Car = "Toyota Corolla", Pickup = "2026-06-01", Return = "2026-06-04", Status = "Confirmed" },
+        new { Customer = "Mehmet Demir", Car = "Volkswagen Golf", Pickup = "2026-06-03", Return = "2026-06-05", Status = "Pending" },
+        new { Customer = "Elif Kaya", Car = "Hyundai Tucson", Pickup = "2026-06-07", Return = "2026-06-10", Status = "Completed" }
+    };
+}
+
+<section class="page-section">
+    <div class="container">
+        <div class="page-title-row">
+            <div>
+                <span class="section-label">Management</span>
+                <h1>Admin Dashboard</h1>
+            </div>
+        </div>
+
+        <div class="row g-4 mb-4">
+            <div class="col-md-6 col-xl-3">
+                <div class="stat-card">
+                    <span>Total Cars</span>
+                    <strong>24</strong>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-3">
+                <div class="stat-card">
+                    <span>Active Reservations</span>
+                    <strong>8</strong>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-3">
+                <div class="stat-card">
+                    <span>Customers</span>
+                    <strong>56</strong>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-3">
+                <div class="stat-card">
+                    <span>Total Revenue</span>
+                    <strong>$4,820</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-panel">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="mb-0">Recent Reservations</h5>
+            </div>
+            <div class="table-responsive">
+                <table class="table align-middle">
+                    <thead>
+                        <tr>
+                            <th>Customer name</th>
+                            <th>Car</th>
+                            <th>Pickup date</th>
+                            <th>Return date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var reservation in reservations)
+                        {
+                            <tr>
+                                <td>@reservation.Customer</td>
+                                <td>@reservation.Car</td>
+                                <td>@reservation.Pickup</td>
+                                <td>@reservation.Return</td>
+                                <td><span class="badge text-bg-light border">@reservation.Status</span></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

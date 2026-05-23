@@ -1,0 +1,75 @@
+@{
+    ViewData["Title"] = "Car Details";
+
+    var car = new
+    {
+        Brand = "Toyota",
+        Model = "Corolla",
+        Year = 2022,
+        Fuel = "Gasoline",
+        Transmission = "Automatic",
+        SeatCount = 5,
+        Mileage = "24,000 km",
+        DailyPrice = 45,
+        Available = true,
+        Description = "A comfortable sedan with low fuel consumption, practical luggage space, and smooth automatic transmission. Suitable for city driving and short trips."
+    };
+}
+
+<section class="page-section">
+    <div class="container">
+        <div class="row g-4 align-items-start">
+            <div class="col-lg-6">
+                <div class="detail-image-placeholder">Car Image</div>
+            </div>
+            <div class="col-lg-6">
+                <div class="detail-panel">
+                    <span class="badge @(car.Available ? "text-bg-success" : "text-bg-secondary") mb-3">
+                        @(car.Available ? "Available" : "Unavailable")
+                    </span>
+                    <h1>@car.Brand @car.Model</h1>
+                    <p class="price-text fs-4 mb-4">$@car.DailyPrice/day</p>
+
+                    <h5>Car Specifications</h5>
+                    <div class="row g-3 mb-4">
+                        <div class="col-6">
+                            <div class="spec-box">
+                                <span>Year</span>
+                                <strong>@car.Year</strong>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="spec-box">
+                                <span>Fuel type</span>
+                                <strong>@car.Fuel</strong>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="spec-box">
+                                <span>Transmission</span>
+                                <strong>@car.Transmission</strong>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="spec-box">
+                                <span>Seat count</span>
+                                <strong>@car.SeatCount</strong>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="spec-box">
+                                <span>Mileage</span>
+                                <strong>@car.Mileage</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5>Description</h5>
+                    <p class="text-muted">@car.Description</p>
+
+                    <a class="btn btn-primary btn-lg mt-2" asp-controller="Reservations" asp-action="Create">Rent This Car</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

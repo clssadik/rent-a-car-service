@@ -1,0 +1,117 @@
+@{
+    ViewData["Title"] = "Car Management";
+
+    var cars = new[]
+    {
+        new { Brand = "Toyota", Model = "Corolla", Year = 2022, Price = 45, Available = true },
+        new { Brand = "Volkswagen", Model = "Golf", Year = 2021, Price = 50, Available = true },
+        new { Brand = "Hyundai", Model = "Tucson", Year = 2023, Price = 75, Available = false }
+    };
+}
+
+<section class="page-section">
+    <div class="container">
+        <div class="page-title-row flex-column flex-md-row align-items-md-center">
+            <div>
+                <span class="section-label">Fleet setup</span>
+                <h1>Car Management</h1>
+            </div>
+            <button class="btn btn-primary" type="button">Add New Car</button>
+        </div>
+
+        <div class="table-panel mb-4">
+            <div class="table-responsive">
+                <table class="table align-middle">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Brand</th>
+                            <th>Model</th>
+                            <th>Year</th>
+                            <th>Daily price</th>
+                            <th>Availability</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var car in cars)
+                        {
+                            <tr>
+                                <td><div class="table-image-placeholder">Image</div></td>
+                                <td>@car.Brand</td>
+                                <td>@car.Model</td>
+                                <td>@car.Year</td>
+                                <td>$@car.Price</td>
+                                <td>
+                                    <span class="badge @(car.Available ? "text-bg-success" : "text-bg-secondary")">
+                                        @(car.Available ? "Available" : "Unavailable")
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-sm btn-outline-primary" type="button">Edit</button>
+                                        <button class="btn btn-sm btn-outline-danger" type="button">Delete</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="form-panel">
+            <h5>Add / Edit Car</h5>
+            <form>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label" for="brand">Brand</label>
+                        <input class="form-control" id="brand" type="text" placeholder="Toyota" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="model">Model</label>
+                        <input class="form-control" id="model" type="text" placeholder="Corolla" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label" for="year">Year</label>
+                        <input class="form-control" id="year" type="number" placeholder="2022" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label" for="fuelType">Fuel type</label>
+                        <select class="form-select" id="fuelType">
+                            <option selected>Gasoline</option>
+                            <option>Diesel</option>
+                            <option>Hybrid</option>
+                            <option>Electric</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label" for="transmission">Transmission</label>
+                        <select class="form-select" id="transmission">
+                            <option selected>Automatic</option>
+                            <option>Manual</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="dailyPrice">Daily price</label>
+                        <input class="form-control" id="dailyPrice" type="number" placeholder="45" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="imageUrl">Image URL</label>
+                        <input class="form-control" id="imageUrl" type="url" placeholder="https://example.com/car.jpg" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label" for="availability">Availability</label>
+                        <select class="form-select" id="availability">
+                            <option selected>Available</option>
+                            <option>Unavailable</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-primary" type="submit">Save Car</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

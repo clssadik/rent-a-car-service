@@ -1,0 +1,111 @@
+@{
+    ViewData["Title"] = "Home";
+
+    var featuredCars = new[]
+    {
+        new { Brand = "Toyota", Model = "Corolla", Type = "Sedan", Price = 45 },
+        new { Brand = "Volkswagen", Model = "Golf", Type = "Hatchback", Price = 50 },
+        new { Brand = "Hyundai", Model = "Tucson", Type = "SUV", Price = 75 }
+    };
+}
+
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-6">
+                <span class="section-label">Rent a car easily</span>
+                <h1 class="hero-title">Find Your Perfect Rental Car</h1>
+                <p class="hero-text">Choose a reliable vehicle, set your dates, and start your trip with a simple and fast rental process.</p>
+            </div>
+            <div class="col-lg-6">
+                <div class="search-card">
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label" for="pickupLocation">Pickup location</label>
+                                <input class="form-control" id="pickupLocation" type="text" placeholder="City or office" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="carType">Car type</label>
+                                <select class="form-select" id="carType">
+                                    <option selected>Any type</option>
+                                    <option>Sedan</option>
+                                    <option>SUV</option>
+                                    <option>Hatchback</option>
+                                    <option>Van</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="pickupDate">Pickup date</label>
+                                <input class="form-control" id="pickupDate" type="date" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="returnDate">Return date</label>
+                                <input class="form-control" id="returnDate" type="date" />
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100" type="submit">Search Cars</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="page-section">
+    <div class="container">
+        <div class="section-heading">
+            <span class="section-label">Popular choices</span>
+            <h2>Featured Cars</h2>
+        </div>
+        <div class="row g-4">
+            @foreach (var car in featuredCars)
+            {
+                <div class="col-md-6 col-lg-4">
+                    <div class="car-card card h-100">
+                        <div class="car-image-placeholder">Car Image</div>
+                        <div class="card-body">
+                            <h5 class="card-title">@car.Brand @car.Model</h5>
+                            <p class="text-muted mb-3">@car.Type</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="price-text">$@car.Price/day</span>
+                                <a class="btn btn-outline-primary btn-sm" asp-controller="Cars" asp-action="Details">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="page-section pt-0">
+    <div class="container">
+        <div class="section-heading">
+            <span class="section-label">Service benefits</span>
+            <h2>Why Choose Us</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="benefit-card">
+                    <h5>Affordable Prices</h5>
+                    <p>Fair daily rental prices with simple sample pricing for every car class.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="benefit-card">
+                    <h5>Easy Reservation</h5>
+                    <p>Clean forms and a short reservation flow make booking quick and clear.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="benefit-card">
+                    <h5>Reliable Vehicles</h5>
+                    <p>Organized car details help customers choose a suitable and dependable vehicle.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
