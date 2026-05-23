@@ -1,4 +1,4 @@
-@model List<RentACarService.Models.Car>
+@model RentACarService.ViewModels.AdminCarsViewModel
 
 @{
     ViewData["Title"] = "Car Management";
@@ -17,6 +17,13 @@
         </button>
     </div>
 
+    @if (TempData["SuccessMessage"] is string successMessage)
+    {
+        <div class="mb-gap-md bg-success/10 border border-success text-success p-gap-sm rounded" role="alert">
+            @successMessage
+        </div>
+    }
+
     <div class="orion-card overflow-hidden mb-gap-lg">
         <div class="overflow-x-auto">
             <table class="w-full text-left">
@@ -32,7 +39,7 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-border">
-                    @foreach (var car in Model)
+                    @foreach (var car in Model.Cars)
                     {
                         <tr class="hover:bg-surface-raised/60 transition-colors">
                             <td class="px-gap-sm py-gap-sm">
@@ -64,48 +71,71 @@
 
     <div class="orion-card p-gap-md">
         <h2 class="text-h3 font-semibold mb-gap-sm">Add / Edit Car</h2>
-        <form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gap-sm">
+        <form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gap-sm" asp-controller="Admin" asp-action="Cars" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-error md:col-span-2 lg:col-span-3"></div>
             <div>
-                <label class="block text-caption text-text-secondary mb-2" for="brand">Brand</label>
-                <input class="orion-input" id="brand" type="text" placeholder="Toyota" />
+                <label class="block text-caption text-text-secondary mb-2" asp-for="Form.Brand">Brand</label>
+                <input class="orion-input" asp-for="Form.Brand" placeholder="Toyota" />
+                <span class="text-error text-caption" asp-validation-for="Form.Brand"></span>
             </div>
             <div>
-                <label class="block text-caption text-text-secondary mb-2" for="model">Model</label>
-                <input class="orion-input" id="model" type="text" placeholder="Corolla" />
+                <label class="block text-caption text-text-secondary mb-2" asp-for="Form.Model">Model</label>
+                <input class="orion-input" asp-for="Form.Model" placeholder="Corolla" />
+                <span class="text-error text-caption" asp-validation-for="Form.Model"></span>
             </div>
             <div>
-                <label class="block text-caption text-text-secondary mb-2" for="year">Year</label>
-                <input class="orion-input" id="year" type="number" placeholder="2022" />
+                <label class="block text-caption text-text-secondary mb-2" asp-for="Form.Year">Year</label>
+                <input class="orion-input" asp-for="Form.Year" placeholder="2022" />
+                <span class="text-error text-caption" asp-validation-for="Form.Year"></span>
             </div>
             <div>
-                <label class="block text-caption text-text-secondary mb-2" for="fuelType">Fuel type</label>
-                <select class="orion-input" id="fuelType">
+                <label class="block text-caption text-text-secondary mb-2" asp-for="Form.FuelType">Fuel type</label>
+                <select class="orion-input" asp-for="Form.FuelType">
                     <option>Gasoline</option>
                     <option>Diesel</option>
                     <option>Hybrid</option>
                     <option>Electric</option>
                 </select>
+                <span class="text-error text-caption" asp-validation-for="Form.FuelType"></span>
             </div>
             <div>
-                <label class="block text-caption text-text-secondary mb-2" for="transmission">Transmission</label>
-                <select class="orion-input" id="transmission">
+                <label class="block text-caption text-text-secondary mb-2" asp-for="Form.Transmission">Transmission</label>
+                <select class="orion-input" asp-for="Form.Transmission">
                     <option>Automatic</option>
                     <option>Manual</option>
                 </select>
+                <span class="text-error text-caption" asp-validation-for="Form.Transmission"></span>
             </div>
             <div>
-                <label class="block text-caption text-text-secondary mb-2" for="dailyPrice">Daily price</label>
-                <input class="orion-input" id="dailyPrice" type="number" placeholder="45" />
+                <label class="block text-caption text-text-secondary mb-2" asp-for="Form.Type">Car type</label>
+                <select class="orion-input" asp-for="Form.Type">
+                    <option>Sedan</option>
+                    <option>SUV</option>
+                    <option>Hatchback</option>
+                    <option>Van</option>
+                </select>
+                <span class="text-error text-caption" asp-validation-for="Form.Type"></span>
+            </div>
+            <div>
+                <label class="block text-caption text-text-secondary mb-2" asp-for="Form.SeatCount">Seat count</label>
+                <input class="orion-input" asp-for="Form.SeatCount" placeholder="5" />
+                <span class="text-error text-caption" asp-validation-for="Form.SeatCount"></span>
+            </div>
+            <div>
+                <label class="block text-caption text-text-secondary mb-2" asp-for="Form.DailyPrice">Daily price</label>
+                <input class="orion-input" asp-for="Form.DailyPrice" placeholder="45" />
+                <span class="text-error text-caption" asp-validation-for="Form.DailyPrice"></span>
             </div>
             <div class="lg:col-span-2">
-                <label class="block text-caption text-text-secondary mb-2" for="imageUrl">Image URL</label>
-                <input class="orion-input" id="imageUrl" type="url" placeholder="https://example.com/car.jpg" />
+                <label class="block text-caption text-text-secondary mb-2" asp-for="Form.ImageUrl">Image URL</label>
+                <input class="orion-input" asp-for="Form.ImageUrl" placeholder="https://example.com/car.jpg" />
+                <span class="text-error text-caption" asp-validation-for="Form.ImageUrl"></span>
             </div>
             <div>
-                <label class="block text-caption text-text-secondary mb-2" for="availability">Availability</label>
-                <select class="orion-input" id="availability">
-                    <option>Available</option>
-                    <option>Unavailable</option>
+                <label class="block text-caption text-text-secondary mb-2" asp-for="Form.IsAvailable">Availability</label>
+                <select class="orion-input" asp-for="Form.IsAvailable">
+                    <option value="true">Available</option>
+                    <option value="false">Unavailable</option>
                 </select>
             </div>
             <div class="md:col-span-2 lg:col-span-3">
@@ -114,3 +144,7 @@
         </form>
     </div>
 </section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -32,8 +32,30 @@ public class AdminController : Controller
 
     public IActionResult Cars()
     {
-        var cars = _sampleDataService.GetCars();
+        return View(CreateAdminCarsViewModel());
+    }
 
-        return View(cars);
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Cars(AdminCarsViewModel viewModel)
+    {
+        if (!ModelState.IsValid)
+        {
+            viewModel.Cars = _sampleDataService.GetCars();
+
+            return View(viewModel);
+        }
+
+        TempData["SuccessMessage"] = "Car saved successfully.";
+
+        return RedirectToAction(nameof(Cars));
+    }
+
+    private AdminCarsViewModel CreateAdminCarsViewModel()
+    {
+        return new AdminCarsViewModel
+        {
+            Cars = _sampleDataService.GetCars()
+        };
     }
 }
