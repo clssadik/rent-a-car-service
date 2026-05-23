@@ -2,84 +2,93 @@
 
 @{
     ViewData["Title"] = "Available Cars";
+
+    var carImages = new[]
+    {
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuCNeJXyBcbJXLDM39fmyW6HBJpkBLdFpYSkuZmInxxcvF6-RdQInqAS83ZyotB3JZ4CtLRXETr0mCYPwUfa-FaNFpwm77dw0ZmSpqCyWfV_Xg_3vqM3lXXzMz7JfGnk4y3tewGNQvWiawEm8kqYjMuVwfJa1Dxd7VFmZqSTWbslmjjyL69M49Swg08FVEEZbS9I05i4_hJuYCN5_fU7m_lXNF1KeFUJgXylf7Mt27AYzqyYo1JiXuIYmty-Jlt1pLS7g6zRbWab8Tk",
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuAmzmVcS_8aKFQjfV_6DpwpltRXSI5C16aWteXTXEodxMabdSm4zSwP5fD1HbRKS2PyYkSUS1ZHcfZ2ynFMfDLleaOE9XtMMRuT9DX8fOWqZBHR1rndErP_t5TwEwX1Zi1QWoK7qegi-BfLCsT1CJohikinqlVziqZdlhKRscqQLjzDZRf4uNT4ywLSXhPxapyN2JoJSP1N_UzaGLfjyLSf9EK8oHdl5uCwBLrhWmCwwxBofUi1l8FSQMcEpxVS-WPVYRS5meXfIOU",
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuB-p8cQtb7f3i4gOI-S1bRvYY32xOkTjVBfgW0UXSjLqsPgF8tSnrYSZT_VXLdm1LQD7eYOOeNavuP5TKOHaJsQ5SfUUhgnou13HjNw0SD83EMiAeiTYOgcb7qPmhDq5zaOsBKRd2zeWxicvsJWkMXoFhXl6CkFYcvUcDhMB2qIq-cbo4aRDk86S3YStVlPNc6Tx_WPhv_LebPHz7hGOUeyZAxWhpZmM5czG5R24L-CzyGJTRP1A5FZE_GBUfQqyZKm3OmIzYARQa8"
+    };
 }
 
-<section class="page-section">
-    <div class="container">
-        <div class="page-title-row">
+<section class="max-w-container-max mx-auto px-gutter py-section-md">
+    <div class="flex flex-col gap-gap-xs mb-gap-lg">
+        <span class="text-primary font-bold uppercase tracking-wide text-caption">Browse Fleet</span>
+        <h1 class="text-h1 font-bold text-text-primary">Available Cars</h1>
+        <p class="text-text-secondary max-w-2xl">Filter premium vehicles by brand, type, transmission and daily budget.</p>
+    </div>
+
+    <div class="orion-card p-gap-md mb-gap-lg">
+        <form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-gap-sm">
             <div>
-                <span class="section-label">Choose your vehicle</span>
-                <h1>Available Cars</h1>
+                <label class="block text-caption text-text-secondary mb-2" for="brand">Brand</label>
+                <input class="orion-input" id="brand" name="brand" placeholder="Toyota" type="text" />
             </div>
-        </div>
+            <div>
+                <label class="block text-caption text-text-secondary mb-2" for="type">Car type</label>
+                <select class="orion-input" id="type" name="type">
+                    <option>All types</option>
+                    <option>Sedan</option>
+                    <option>SUV</option>
+                    <option>Hatchback</option>
+                    <option>Van</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-caption text-text-secondary mb-2" for="transmission">Transmission</label>
+                <select class="orion-input" id="transmission" name="transmission">
+                    <option>Any</option>
+                    <option>Automatic</option>
+                    <option>Manual</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-caption text-text-secondary mb-2" for="priceRange">Price range</label>
+                <select class="orion-input" id="priceRange" name="priceRange">
+                    <option>Any price</option>
+                    <option>$0 - $50</option>
+                    <option>$50 - $80</option>
+                    <option>$80+</option>
+                </select>
+            </div>
+            <div class="flex items-end">
+                <button class="orion-button orion-button-primary w-full" type="submit">
+                    <span class="material-symbols-outlined">tune</span>
+                    Filter
+                </button>
+            </div>
+        </form>
+    </div>
 
-        <div class="filter-box mb-4">
-            <form>
-                <div class="row g-3 align-items-end">
-                    <div class="col-md-6 col-lg-3">
-                        <label class="form-label" for="brand">Brand</label>
-                        <input class="form-control" id="brand" type="text" placeholder="Toyota" />
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <label class="form-label" for="type">Car type</label>
-                        <select class="form-select" id="type">
-                            <option selected>All types</option>
-                            <option>Sedan</option>
-                            <option>SUV</option>
-                            <option>Hatchback</option>
-                            <option>Van</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <label class="form-label" for="transmission">Transmission</label>
-                        <select class="form-select" id="transmission">
-                            <option selected>Any</option>
-                            <option>Automatic</option>
-                            <option>Manual</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6 col-lg-3">
-                        <label class="form-label" for="priceRange">Price range</label>
-                        <select class="form-select" id="priceRange">
-                            <option selected>Any price</option>
-                            <option>$0 - $50</option>
-                            <option>$50 - $80</option>
-                            <option>$80+</option>
-                        </select>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-gap-md">
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            var car = Model[i];
+            var image = carImages[i % carImages.Length];
+            <article class="orion-card overflow-hidden flex flex-col group hover:border-primary transition-colors">
+                <div class="h-56 bg-surface-raised relative overflow-hidden">
+                    <img alt="@car.Brand @car.Model" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="@image" />
+                    <div class="absolute top-3 right-3 @(car.IsAvailable ? "bg-success" : "bg-text-muted") text-bg-app text-caption px-2 py-1 rounded font-bold">
+                        @(car.IsAvailable ? "AVAILABLE" : "UNAVAILABLE")
                     </div>
                 </div>
-            </form>
-        </div>
-
-        <div class="row g-4">
-            @foreach (var car in Model)
-            {
-                <div class="col-md-6 col-xl-4">
-                    <div class="car-card card h-100">
-                        <div class="car-image-placeholder">Car Image</div>
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start gap-3 mb-2">
-                                <div>
-                                    <h5 class="card-title mb-1">@car.Brand @car.Model</h5>
-                                    <p class="text-muted mb-0">@car.Type</p>
-                                </div>
-                                <span class="badge @(car.IsAvailable ? "text-bg-success" : "text-bg-secondary")">
-                                    @(car.IsAvailable ? "Available" : "Unavailable")
-                                </span>
-                            </div>
-                            <div class="spec-list">
-                                <span>@car.Year</span>
-                                <span>@car.FuelType</span>
-                                <span>@car.Transmission</span>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <span class="price-text">$@car.DailyPrice/day</span>
-                                <a class="btn btn-outline-primary btn-sm" asp-controller="Cars" asp-action="Details" asp-route-id="@car.Id">View Details</a>
-                            </div>
+                <div class="p-gap-sm flex flex-col gap-gap-sm flex-grow">
+                    <div class="flex justify-between items-start gap-gap-sm">
+                        <div>
+                            <h2 class="text-h3 font-semibold text-text-primary">@car.Brand @car.Model</h2>
+                            <p class="text-text-secondary">@car.Type</p>
                         </div>
+                        <span class="font-code text-primary font-bold whitespace-nowrap">$@car.DailyPrice/d</span>
                     </div>
+                    <div class="grid grid-cols-2 gap-2 text-caption text-text-muted">
+                        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">calendar_month</span>@car.Year</div>
+                        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">settings</span>@car.Transmission</div>
+                        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">local_gas_station</span>@car.FuelType</div>
+                        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">airline_seat_recline_normal</span>@car.SeatCount Seats</div>
+                    </div>
+                    <a class="orion-button orion-button-outline w-full mt-auto" asp-controller="Cars" asp-action="Details" asp-route-id="@car.Id">View Details</a>
                 </div>
-            }
-        </div>
+            </article>
+        }
     </div>
 </section>

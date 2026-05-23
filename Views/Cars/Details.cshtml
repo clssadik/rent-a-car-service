@@ -2,60 +2,75 @@
 
 @{
     ViewData["Title"] = "Car Details";
+    var detailImage = "https://lh3.googleusercontent.com/aida-public/AB6AXuA6h3uOi4kCTSpHFkJZ6-r4DXwuWzU_EImY_NOpLZ2DoiFfe_Qg0uoikWaZdXx3wna4mhnNHfrHI_LhxMG4Wg_fP5HCU1jAyUPPCyUUN_Ef2-Iir4WBSdr0pSDVhFJTt3mltGKfWwCm06lkaGwJ27f7fAKhc3QhAjGwiF__4suSCSojQXB_m7YIuqhYV0jJ2B0zW67IerCLYW8NBiBS6e4cDq5hm7pt4J2uh62dgQqsv6TjYgavXPx1bCxW1OBkJjYMOCYf8yhHzI";
 }
 
-<section class="page-section">
-    <div class="container">
-        <div class="row g-4 align-items-start">
-            <div class="col-lg-6">
-                <div class="detail-image-placeholder">Car Image</div>
+<section class="max-w-container-max mx-auto px-gutter py-section-md">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-gap-lg items-start">
+        <div class="flex flex-col gap-gap-md">
+            <div class="orion-card overflow-hidden">
+                <img alt="@Model.Brand @Model.Model" class="w-full h-[520px] object-cover" src="@detailImage" />
             </div>
-            <div class="col-lg-6">
-                <div class="detail-panel">
-                    <span class="badge @(Model.IsAvailable ? "text-bg-success" : "text-bg-secondary") mb-3">
-                        @(Model.IsAvailable ? "Available" : "Unavailable")
+            <div class="grid grid-cols-3 gap-gap-sm">
+                <div class="h-28 bg-surface-raised border border-border rounded overflow-hidden"><img alt="Car preview" class="w-full h-full object-cover opacity-80" src="@detailImage" /></div>
+                <div class="h-28 bg-surface-raised border border-border rounded overflow-hidden"><img alt="Car preview" class="w-full h-full object-cover opacity-80" src="@detailImage" /></div>
+                <div class="h-28 bg-surface-raised border border-primary rounded overflow-hidden"><img alt="Car preview" class="w-full h-full object-cover" src="@detailImage" /></div>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-gap-md">
+            <div>
+                <div class="flex items-center gap-gap-sm mb-gap-sm">
+                    <span class="@(Model.IsAvailable ? "bg-success text-bg-app" : "bg-text-muted text-bg-app") text-caption px-2 py-1 rounded font-bold">
+                        @(Model.IsAvailable ? "AVAILABLE NOW" : "UNAVAILABLE")
                     </span>
-                    <h1>@Model.Brand @Model.Model</h1>
-                    <p class="price-text fs-4 mb-4">$@Model.DailyPrice/day</p>
+                    <span class="text-text-secondary">@Model.Type</span>
+                </div>
+                <h1 class="text-display font-extrabold text-text-primary">@Model.Brand @Model.Model</h1>
+                <p class="text-text-secondary mt-gap-sm max-w-xl">@Model.Description</p>
+            </div>
 
-                    <h5>Car Specifications</h5>
-                    <div class="row g-3 mb-4">
-                        <div class="col-6">
-                            <div class="spec-box">
-                                <span>Year</span>
-                                <strong>@Model.Year</strong>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="spec-box">
-                                <span>Fuel type</span>
-                                <strong>@Model.FuelType</strong>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="spec-box">
-                                <span>Transmission</span>
-                                <strong>@Model.Transmission</strong>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="spec-box">
-                                <span>Seat count</span>
-                                <strong>@Model.SeatCount</strong>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="spec-box">
-                                <span>Car type</span>
-                                <strong>@Model.Type</strong>
-                            </div>
-                        </div>
-                    </div>
+            <div class="orion-card p-gap-md flex items-center justify-between">
+                <div>
+                    <p class="text-text-secondary text-caption">Daily rental price</p>
+                    <p class="font-code text-primary text-h1 font-bold">$@Model.DailyPrice</p>
+                </div>
+                <a class="orion-button orion-button-primary" asp-controller="Reservations" asp-action="Create" asp-route-carId="@Model.Id">
+                    Rent This Car
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                </a>
+            </div>
 
-                    <h5>Description</h5>
-                    <p class="text-muted">@Model.Description</p>
-
-                    <a class="btn btn-primary btn-lg mt-2" asp-controller="Reservations" asp-action="Create" asp-route-carId="@Model.Id">Rent This Car</a>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-gap-sm">
+                <div class="orion-card p-gap-sm">
+                    <span class="material-symbols-outlined text-primary mb-2">calendar_month</span>
+                    <p class="text-text-secondary text-caption">Year</p>
+                    <strong>@Model.Year</strong>
+                </div>
+                <div class="orion-card p-gap-sm">
+                    <span class="material-symbols-outlined text-primary mb-2">local_gas_station</span>
+                    <p class="text-text-secondary text-caption">Fuel type</p>
+                    <strong>@Model.FuelType</strong>
+                </div>
+                <div class="orion-card p-gap-sm">
+                    <span class="material-symbols-outlined text-primary mb-2">settings</span>
+                    <p class="text-text-secondary text-caption">Transmission</p>
+                    <strong>@Model.Transmission</strong>
+                </div>
+                <div class="orion-card p-gap-sm">
+                    <span class="material-symbols-outlined text-primary mb-2">airline_seat_recline_normal</span>
+                    <p class="text-text-secondary text-caption">Seat count</p>
+                    <strong>@Model.SeatCount</strong>
+                </div>
+                <div class="orion-card p-gap-sm">
+                    <span class="material-symbols-outlined text-primary mb-2">speed</span>
+                    <p class="text-text-secondary text-caption">Mileage</p>
+                    <strong>24,000 km</strong>
+                </div>
+                <div class="orion-card p-gap-sm">
+                    <span class="material-symbols-outlined text-primary mb-2">verified</span>
+                    <p class="text-text-secondary text-caption">Status</p>
+                    <strong>@(Model.IsAvailable ? "Ready" : "Booked")</strong>
                 </div>
             </div>
         </div>

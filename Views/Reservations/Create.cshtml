@@ -2,98 +2,104 @@
 
 @{
     ViewData["Title"] = "Create Reservation";
+    var carImage = "https://lh3.googleusercontent.com/aida-public/AB6AXuA6h3uOi4kCTSpHFkJZ6-r4DXwuWzU_EImY_NOpLZ2DoiFfe_Qg0uoikWaZdXx3wna4mhnNHfrHI_LhxMG4Wg_fP5HCU1jAyUPPCyUUN_Ef2-Iir4WBSdr0pSDVhFJTt3mltGKfWwCm06lkaGwJ27f7fAKhc3QhAjGwiF__4suSCSojQXB_m7YIuqhYV0jJ2B0zW67IerCLYW8NBiBS6e4cDq5hm7pt4J2uh62dgQqsv6TjYgavXPx1bCxW1OBkJjYMOCYf8yhHzI";
 }
 
-<section class="page-section">
-    <div class="container">
-        <div class="page-title-row">
+<section class="max-w-container-max mx-auto px-gutter py-section-md">
+    <div class="mb-gap-lg">
+        <span class="text-primary font-bold uppercase tracking-wide text-caption">Reservation</span>
+        <h1 class="text-h1 font-bold text-text-primary mt-2">Confirm Reservation</h1>
+        <p class="text-text-secondary max-w-2xl">Review the selected car, enter customer details and confirm the rental request.</p>
+    </div>
+
+    @if (TempData["SuccessMessage"] is string successMessage)
+    {
+        <div class="mb-gap-md bg-success/10 border border-success text-success p-gap-sm rounded" role="alert">
+            @successMessage
+        </div>
+    }
+
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-gap-lg items-start">
+        <form class="orion-card p-gap-md" asp-controller="Reservations" asp-action="Create" method="post">
+            <input asp-for="SelectedCarId" type="hidden" />
+            <input asp-for="RentalDays" type="hidden" />
+
+            <div asp-validation-summary="ModelOnly" class="text-error mb-gap-sm"></div>
+
+            <div class="mb-gap-md">
+                <h2 class="text-h3 font-semibold mb-gap-sm">Customer Information</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-gap-sm">
+                    <div>
+                        <label class="block text-caption text-text-secondary mb-2" asp-for="FullName">Full name</label>
+                        <input class="orion-input" asp-for="FullName" placeholder="Enter full name" />
+                        <span class="text-error text-caption" asp-validation-for="FullName"></span>
+                    </div>
+                    <div>
+                        <label class="block text-caption text-text-secondary mb-2" asp-for="Email">Email</label>
+                        <input class="orion-input" asp-for="Email" placeholder="name@example.com" />
+                        <span class="text-error text-caption" asp-validation-for="Email"></span>
+                    </div>
+                    <div>
+                        <label class="block text-caption text-text-secondary mb-2" asp-for="PhoneNumber">Phone number</label>
+                        <input class="orion-input" asp-for="PhoneNumber" placeholder="+90 555 000 00 00" />
+                        <span class="text-error text-caption" asp-validation-for="PhoneNumber"></span>
+                    </div>
+                </div>
+            </div>
+
             <div>
-                <span class="section-label">Reservation form</span>
-                <h1>Create Reservation</h1>
-            </div>
-        </div>
-
-        @if (TempData["SuccessMessage"] is string successMessage)
-        {
-            <div class="alert alert-success" role="alert">
-                @successMessage
-            </div>
-        }
-
-        <div class="row g-4">
-            <div class="col-lg-8">
-                <form class="form-panel" asp-controller="Reservations" asp-action="Create" method="post">
-                    <input asp-for="SelectedCarId" type="hidden" />
-                    <input asp-for="RentalDays" type="hidden" />
-
-                    <h5>Customer Information</h5>
-                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-                    <div class="row g-3 mb-4">
-                        <div class="col-md-6">
-                            <label class="form-label" asp-for="FullName">Full name</label>
-                            <input class="form-control" asp-for="FullName" placeholder="Enter full name" />
-                            <span class="text-danger small" asp-validation-for="FullName"></span>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label" asp-for="Email">Email</label>
-                            <input class="form-control" asp-for="Email" placeholder="name@example.com" />
-                            <span class="text-danger small" asp-validation-for="Email"></span>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label" asp-for="PhoneNumber">Phone number</label>
-                            <input class="form-control" asp-for="PhoneNumber" placeholder="+90 555 000 00 00" />
-                            <span class="text-danger small" asp-validation-for="PhoneNumber"></span>
-                        </div>
+                <h2 class="text-h3 font-semibold mb-gap-sm">Reservation Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-gap-sm">
+                    <div>
+                        <label class="block text-caption text-text-secondary mb-2" asp-for="PickupDate">Pickup date</label>
+                        <input class="orion-input" asp-for="PickupDate" />
+                        <span class="text-error text-caption" asp-validation-for="PickupDate"></span>
                     </div>
-
-                    <h5>Reservation Details</h5>
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label" asp-for="PickupDate">Pickup date</label>
-                            <input class="form-control" asp-for="PickupDate" />
-                            <span class="text-danger small" asp-validation-for="PickupDate"></span>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label" asp-for="ReturnDate">Return date</label>
-                            <input class="form-control" asp-for="ReturnDate" />
-                            <span class="text-danger small" asp-validation-for="ReturnDate"></span>
-                        </div>
-                        <div class="col-12">
-                            <label class="form-label" asp-for="PickupLocation">Pickup location</label>
-                            <input class="form-control" asp-for="PickupLocation" placeholder="Rental office or city" />
-                            <span class="text-danger small" asp-validation-for="PickupLocation"></span>
-                        </div>
+                    <div>
+                        <label class="block text-caption text-text-secondary mb-2" asp-for="ReturnDate">Return date</label>
+                        <input class="orion-input" asp-for="ReturnDate" />
+                        <span class="text-error text-caption" asp-validation-for="ReturnDate"></span>
                     </div>
-
-                    <button class="btn btn-primary mt-4" type="submit">Confirm Reservation</button>
-                </form>
-            </div>
-            <div class="col-lg-4">
-                <div class="summary-card mb-4">
-                    <h5>Selected Car</h5>
-                    <div class="car-image-placeholder small-placeholder">Car Image</div>
-                    <h6 class="mt-3 mb-1">@Model.SelectedCar.Brand @Model.SelectedCar.Model</h6>
-                    <p class="text-muted mb-0">@Model.SelectedCar.Transmission, @Model.SelectedCar.FuelType, @Model.SelectedCar.Year</p>
-                </div>
-
-                <div class="summary-card">
-                    <h5>Total Price</h5>
-                    <div class="summary-line">
-                        <span>Daily price</span>
-                        <strong>$@Model.SelectedCar.DailyPrice</strong>
-                    </div>
-                    <div class="summary-line">
-                        <span>Rental days</span>
-                        <strong>@Model.RentalDays</strong>
-                    </div>
-                    <hr />
-                    <div class="summary-line total">
-                        <span>Total</span>
-                        <strong>$@Model.TotalPrice</strong>
+                    <div class="md:col-span-2">
+                        <label class="block text-caption text-text-secondary mb-2" asp-for="PickupLocation">Pickup location</label>
+                        <input class="orion-input" asp-for="PickupLocation" placeholder="Rental office or city" />
+                        <span class="text-error text-caption" asp-validation-for="PickupLocation"></span>
                     </div>
                 </div>
             </div>
-        </div>
+
+            <button class="orion-button orion-button-primary mt-gap-md w-full md:w-auto" type="submit">
+                Confirm Reservation
+                <span class="material-symbols-outlined">check_circle</span>
+            </button>
+        </form>
+
+        <aside class="flex flex-col gap-gap-md">
+            <div class="orion-card overflow-hidden">
+                <img alt="@Model.SelectedCar.Brand @Model.SelectedCar.Model" class="w-full h-56 object-cover" src="@carImage" />
+                <div class="p-gap-sm">
+                    <p class="text-text-secondary text-caption">Selected car</p>
+                    <h2 class="text-h3 font-semibold">@Model.SelectedCar.Brand @Model.SelectedCar.Model</h2>
+                    <p class="text-text-secondary">@Model.SelectedCar.Transmission, @Model.SelectedCar.FuelType, @Model.SelectedCar.Year</p>
+                </div>
+            </div>
+
+            <div class="orion-card p-gap-md">
+                <h2 class="text-h3 font-semibold mb-gap-sm">Price Summary</h2>
+                <div class="flex justify-between text-text-secondary mb-gap-xs">
+                    <span>Daily price</span>
+                    <strong class="text-text-primary">$@Model.SelectedCar.DailyPrice</strong>
+                </div>
+                <div class="flex justify-between text-text-secondary mb-gap-sm">
+                    <span>Rental days</span>
+                    <strong class="text-text-primary">@Model.RentalDays</strong>
+                </div>
+                <div class="border-t border-border pt-gap-sm flex justify-between items-center">
+                    <span class="text-text-primary font-semibold">Total</span>
+                    <strong class="font-code text-primary text-h2">$@Model.TotalPrice</strong>
+                </div>
+            </div>
+        </aside>
     </div>
 </section>
 

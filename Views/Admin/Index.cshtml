@@ -4,71 +4,81 @@
     ViewData["Title"] = "Admin Dashboard";
 }
 
-<section class="page-section">
-    <div class="container">
-        <div class="page-title-row">
-            <div>
-                <span class="section-label">Management</span>
-                <h1>Admin Dashboard</h1>
-            </div>
+<section class="max-w-container-max mx-auto px-gutter py-section-md">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-gap-md mb-gap-lg">
+        <div>
+            <span class="text-primary font-bold uppercase tracking-wide text-caption">Control Center</span>
+            <h1 class="text-h1 font-bold text-text-primary mt-2">Admin Dashboard</h1>
+            <p class="text-text-secondary max-w-2xl">Track fleet status, reservation activity and revenue summary.</p>
         </div>
+        <a class="orion-button orion-button-primary" asp-controller="Admin" asp-action="Cars">
+            <span class="material-symbols-outlined">directions_car</span>
+            Manage Cars
+        </a>
+    </div>
 
-        <div class="row g-4 mb-4">
-            <div class="col-md-6 col-xl-3">
-                <div class="stat-card">
-                    <span>Total Cars</span>
-                    <strong>@Model.TotalCars</strong>
-                </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gap-md mb-gap-lg">
+        <div class="orion-card p-gap-md">
+            <div class="flex justify-between items-start">
+                <span class="text-text-secondary">Total Cars</span>
+                <span class="material-symbols-outlined text-primary">directions_car</span>
             </div>
-            <div class="col-md-6 col-xl-3">
-                <div class="stat-card">
-                    <span>Active Reservations</span>
-                    <strong>@Model.ActiveReservations</strong>
-                </div>
-            </div>
-            <div class="col-md-6 col-xl-3">
-                <div class="stat-card">
-                    <span>Customers</span>
-                    <strong>@Model.Customers</strong>
-                </div>
-            </div>
-            <div class="col-md-6 col-xl-3">
-                <div class="stat-card">
-                    <span>Total Revenue</span>
-                    <strong>$@Model.TotalRevenue.ToString("N0")</strong>
-                </div>
-            </div>
+            <strong class="block text-h1 font-bold mt-gap-sm">@Model.TotalCars</strong>
         </div>
-
-        <div class="table-panel">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h5 class="mb-0">Recent Reservations</h5>
+        <div class="orion-card p-gap-md">
+            <div class="flex justify-between items-start">
+                <span class="text-text-secondary">Active Reservations</span>
+                <span class="material-symbols-outlined text-primary">event_available</span>
             </div>
-            <div class="table-responsive">
-                <table class="table align-middle">
-                    <thead>
-                        <tr>
-                            <th>Customer name</th>
-                            <th>Car</th>
-                            <th>Pickup date</th>
-                            <th>Return date</th>
-                            <th>Status</th>
+            <strong class="block text-h1 font-bold mt-gap-sm">@Model.ActiveReservations</strong>
+        </div>
+        <div class="orion-card p-gap-md">
+            <div class="flex justify-between items-start">
+                <span class="text-text-secondary">Customers</span>
+                <span class="material-symbols-outlined text-primary">groups</span>
+            </div>
+            <strong class="block text-h1 font-bold mt-gap-sm">@Model.Customers</strong>
+        </div>
+        <div class="orion-card p-gap-md">
+            <div class="flex justify-between items-start">
+                <span class="text-text-secondary">Total Revenue</span>
+                <span class="material-symbols-outlined text-primary">payments</span>
+            </div>
+            <strong class="block text-h1 font-bold mt-gap-sm">$@Model.TotalRevenue.ToString("N0")</strong>
+        </div>
+    </div>
+
+    <div class="orion-card overflow-hidden">
+        <div class="p-gap-md border-b border-border flex justify-between items-center">
+            <h2 class="text-h3 font-semibold">Recent Reservations</h2>
+            <span class="text-text-secondary text-caption">@Model.RecentReservations.Count records</span>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead class="bg-surface-raised text-text-secondary text-caption uppercase">
+                    <tr>
+                        <th class="px-gap-sm py-gap-sm">Customer name</th>
+                        <th class="px-gap-sm py-gap-sm">Car</th>
+                        <th class="px-gap-sm py-gap-sm">Pickup date</th>
+                        <th class="px-gap-sm py-gap-sm">Return date</th>
+                        <th class="px-gap-sm py-gap-sm">Status</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-border">
+                    @foreach (var reservation in Model.RecentReservations)
+                    {
+                        <tr class="hover:bg-surface-raised/60 transition-colors">
+                            <td class="px-gap-sm py-gap-sm">@reservation.CustomerName</td>
+                            <td class="px-gap-sm py-gap-sm text-text-secondary">@reservation.CarName</td>
+                            <td class="px-gap-sm py-gap-sm text-text-secondary">@reservation.PickupDate.ToString("yyyy-MM-dd")</td>
+                            <td class="px-gap-sm py-gap-sm text-text-secondary">@reservation.ReturnDate.ToString("yyyy-MM-dd")</td>
+                            <td class="px-gap-sm py-gap-sm">
+                                <span class="border border-border bg-surface-raised rounded px-2 py-1 text-caption">@reservation.Status</span>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var reservation in Model.RecentReservations)
-                        {
-                            <tr>
-                                <td>@reservation.CustomerName</td>
-                                <td>@reservation.CarName</td>
-                                <td>@reservation.PickupDate.ToString("yyyy-MM-dd")</td>
-                                <td>@reservation.ReturnDate.ToString("yyyy-MM-dd")</td>
-                                <td><span class="badge text-bg-light border">@reservation.Status</span></td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+                    }
+                </tbody>
+            </table>
         </div>
     </div>
 </section>

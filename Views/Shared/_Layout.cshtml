@@ -1,53 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="dark" lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - RentCar</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <title>@ViewData["Title"] - MEU RENT</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "bg-app": "#0D0D0D",
+                        "surface": "#1A1A1A",
+                        "surface-raised": "#242424",
+                        "border": "#2E2E2E",
+                        "primary": "#FF7000",
+                        "orange-light": "#FF9440",
+                        "text-primary": "#F2F2F2",
+                        "text-secondary": "#8A8A8A",
+                        "text-muted": "#5A5A5A",
+                        "success": "#22C55E",
+                        "warning": "#F59E0B",
+                        "info": "#60A5FA",
+                        "error": "#EF4444"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.125rem",
+                        lg: "0.25rem",
+                        xl: "0.5rem",
+                        full: "0.75rem"
+                    },
+                    spacing: {
+                        gutter: "24px",
+                        "gap-xs": "8px",
+                        "gap-sm": "16px",
+                        "gap-md": "24px",
+                        "gap-lg": "32px",
+                        "section-sm": "48px",
+                        "section-md": "64px",
+                        "section-lg": "96px",
+                        "container-max": "1200px"
+                    },
+                    fontFamily: {
+                        body: ["Inter", "system-ui", "sans-serif"],
+                        display: ["Inter", "system-ui", "sans-serif"],
+                        code: ["JetBrains Mono", "monospace"]
+                    },
+                    fontSize: {
+                        body: ["17px", { lineHeight: "1.65", letterSpacing: "0", fontWeight: "400" }],
+                        caption: ["14px", { lineHeight: "1.5", letterSpacing: "0", fontWeight: "400" }],
+                        h3: ["22px", { lineHeight: "1.3", letterSpacing: "0", fontWeight: "600" }],
+                        h2: ["32px", { lineHeight: "1.2", letterSpacing: "0", fontWeight: "700" }],
+                        h1: ["44px", { lineHeight: "1.1", letterSpacing: "0", fontWeight: "700" }],
+                        display: ["60px", { lineHeight: "1.05", letterSpacing: "0", fontWeight: "800" }]
+                    }
+                }
+            }
+        }
+    </script>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top">
-            <div class="container">
-                <a class="navbar-brand fw-bold text-primary" asp-controller="Home" asp-action="Index">RentCar</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="mainNavbar">
-                    <ul class="navbar-nav ms-auto gap-lg-2">
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Cars" asp-action="Index">Cars</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Reservations" asp-action="Create">Reservations</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Admin" asp-action="Index">Admin</a>
-                        </li>
-                    </ul>
-                </div>
+<body class="bg-bg-app text-text-primary font-body antialiased min-h-screen flex flex-col">
+    <header class="fixed top-0 w-full h-16 border-b border-border bg-bg-app z-50">
+        <div class="flex justify-between items-center px-gutter max-w-container-max mx-auto h-full">
+            <div class="flex items-center gap-gap-md">
+                <a class="text-h3 font-black text-primary" asp-controller="Home" asp-action="Index">MEU RENT</a>
+                <nav class="hidden md:flex gap-gap-md ml-gap-lg">
+                    <a class="text-text-secondary hover:text-primary transition-colors duration-200" asp-controller="Home" asp-action="Index">Home</a>
+                    <a class="text-text-secondary hover:text-primary transition-colors duration-200" asp-controller="Cars" asp-action="Index">Cars</a>
+                    <a class="text-text-secondary hover:text-primary transition-colors duration-200" asp-controller="Reservations" asp-action="Create">Reservations</a>
+                    <a class="text-text-secondary hover:text-primary transition-colors duration-200" asp-controller="Admin" asp-action="Index">Admin</a>
+                </nav>
             </div>
-        </nav>
+            <div class="flex items-center gap-gap-sm">
+                <a class="hidden sm:flex text-text-secondary hover:text-text-primary transition-colors" asp-controller="Admin" asp-action="Cars">Manage Fleet</a>
+                <a class="bg-primary hover:bg-orange-light text-white h-10 px-5 rounded flex items-center justify-center font-semibold transition-colors" asp-controller="Cars" asp-action="Index">Browse</a>
+            </div>
+        </div>
     </header>
 
-    <main role="main">
+    <main class="flex-grow pt-16">
         @RenderBody()
     </main>
 
-    <footer class="site-footer">
-        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
-            <span>&copy; @DateTime.Now.Year RentCar</span>
-            <span>Simple car rental service for fast reservations.</span>
+    <footer class="border-t border-border bg-bg-app">
+        <div class="max-w-container-max mx-auto px-gutter py-gap-lg flex flex-col md:flex-row justify-between gap-gap-sm text-text-secondary text-caption">
+            <span>&copy; @DateTime.Now.Year MEU RENT</span>
+            <span>Modern car rental experience for fast reservations.</span>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

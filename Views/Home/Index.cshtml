@@ -2,105 +2,109 @@
 
 @{
     ViewData["Title"] = "Home";
+
+    var heroImage = "https://lh3.googleusercontent.com/aida-public/AB6AXuDw5UhX9FjYVVUg0G8XTcv2rTx2-tkznzx_wR4RpuEpeCWHQCiiWPHnQLPYMYQB9GtDuPxmbNKFR4OBGOUH_2slmeekbbC-PoD7LUSH22CWwLDkOIKzlRaccgPPpO8Ni_n86LB9UXO54W1bu3x_L3WsCCXuVkf35Un0_w5DpLaqVPn7Yi-_8ecl5nskeqO3kIzfFNc3wyEB53D4RDeAzi2VaYfDmd_wHBgxpWJu5e0qI7qpg_aZYBCBUedGzbR8QJ46DMz_s8wl8v8";
+    var carImages = new[]
+    {
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuAmzmVcS_8aKFQjfV_6DpwpltRXSI5C16aWteXTXEodxMabdSm4zSwP5fD1HbRKS2PyYkSUS1ZHcfZ2ynFMfDLleaOE9XtMMRuT9DX8fOWqZBHR1rndErP_t5TwEwX1Zi1QWoK7qegi-BfLCsT1CJohikinqlVziqZdlhKRscqQLjzDZRf4uNT4ywLSXhPxapyN2JoJSP1N_UzaGLfjyLSf9EK8oHdl5uCwBLrhWmCwwxBofUi1l8FSQMcEpxVS-WPVYRS5meXfIOU",
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuB-p8cQtb7f3i4gOI-S1bRvYY32xOkTjVBfgW0UXSjLqsPgF8tSnrYSZT_VXLdm1LQD7eYOOeNavuP5TKOHaJsQ5SfUUhgnou13HjNw0SD83EMiAeiTYOgcb7qPmhDq5zaOsBKRd2zeWxicvsJWkMXoFhXl6CkFYcvUcDhMB2qIq-cbo4aRDk86S3YStVlPNc6Tx_WPhv_LebPHz7hGOUeyZAxWhpZmM5czG5R24L-CzyGJTRP1A5FZE_GBUfQqyZKm3OmIzYARQa8",
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuD6MF7Ul26V5gy0NttjKlw_R_EofYlyDu3TYoT7yp6nMjj5Cw0uFSvGbnW-FSEpCdgSIcjGoZ2dpqGnR07eGSzNu6VJqz4ogf0hWIk8UhbhUW4hWkDINxNaNNMTRU5hdxSrwuj6vS_KGpfhLDBch3xqhLwFzLWJK2TK-DZd66s-r0eXAlouAc4v3vTLUCB9lEyTH7jRJTBdmEEXZVLUt-2z7RAEoWhi96dX6fqfD07smb9Qotjjt5QcrIghCmwAah5WEohwcMaN83o"
+    };
 }
 
-<section class="hero-section">
-    <div class="container">
-        <div class="row align-items-center g-4">
-            <div class="col-lg-6">
-                <span class="section-label">Rent a car easily</span>
-                <h1 class="hero-title">Find Your Perfect Rental Car</h1>
-                <p class="hero-text">Choose a reliable vehicle, set your dates, and start your trip with a simple and fast rental process.</p>
+<section class="w-full relative py-section-lg flex flex-col items-center justify-center min-h-[716px] hero-pattern px-gutter overflow-hidden">
+    <div class="max-w-container-max w-full mx-auto relative z-10 text-center flex flex-col items-center gap-gap-md">
+        <h1 class="font-display text-display text-text-primary max-w-4xl text-center">Find your perfect car with MEU RENT</h1>
+        <p class="text-body text-text-secondary max-w-2xl text-center">Experience precision engineering and seamless performance. Fast booking, zero friction.</p>
+
+        <form class="mt-gap-lg bg-surface border border-border rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.6)] p-gap-sm w-full max-w-5xl flex flex-col md:flex-row gap-gap-sm items-center" asp-controller="Cars" asp-action="Index" method="get">
+            <div class="flex-1 w-full relative">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">location_on</span>
+                <input class="orion-input pl-10" name="location" placeholder="Pick-up location" type="text" />
             </div>
-            <div class="col-lg-6">
-                <div class="search-card">
-                    <form>
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label" for="pickupLocation">Pickup location</label>
-                                <input class="form-control" id="pickupLocation" type="text" placeholder="City or office" />
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label" for="carType">Car type</label>
-                                <select class="form-select" id="carType">
-                                    <option selected>Any type</option>
-                                    <option>Sedan</option>
-                                    <option>SUV</option>
-                                    <option>Hatchback</option>
-                                    <option>Van</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label" for="pickupDate">Pickup date</label>
-                                <input class="form-control" id="pickupDate" type="date" />
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label" for="returnDate">Return date</label>
-                                <input class="form-control" id="returnDate" type="date" />
-                            </div>
-                            <div class="col-12">
-                                <button class="btn btn-primary w-100" type="submit">Search Cars</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+            <div class="flex-1 w-full relative">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">calendar_today</span>
+                <input class="orion-input pl-10" name="pickupDate" type="date" />
             </div>
-        </div>
+            <div class="flex-1 w-full relative">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">calendar_month</span>
+                <input class="orion-input pl-10" name="returnDate" type="date" />
+            </div>
+            <div class="flex-1 w-full relative">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">directions_car</span>
+                <select class="orion-input pl-10 appearance-none cursor-pointer" name="carType">
+                    <option value="">Car type</option>
+                    <option value="Sedan">Sedan</option>
+                    <option value="SUV">SUV</option>
+                    <option value="Hatchback">Hatchback</option>
+                    <option value="Van">Van</option>
+                </select>
+            </div>
+            <button class="orion-button orion-button-primary w-full md:w-auto flex-shrink-0" type="submit">
+                <span class="material-symbols-outlined">search</span>
+                Search
+            </button>
+        </form>
     </div>
+    <div class="absolute inset-0 z-0 opacity-20 bg-cover bg-center" style="background-image: url('@heroImage');"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-bg-app via-transparent to-transparent z-0"></div>
 </section>
 
-<section class="page-section">
-    <div class="container">
-        <div class="section-heading">
-            <span class="section-label">Popular choices</span>
-            <h2>Featured Cars</h2>
-        </div>
-        <div class="row g-4">
-            @foreach (var car in Model)
-            {
-                <div class="col-md-6 col-lg-4">
-                    <div class="car-card card h-100">
-                        <div class="car-image-placeholder">Car Image</div>
-                        <div class="card-body">
-                            <h5 class="card-title">@car.Brand @car.Model</h5>
-                            <p class="text-muted mb-3">@car.Type</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="price-text">$@car.DailyPrice/day</span>
-                                <a class="btn btn-outline-primary btn-sm" asp-controller="Cars" asp-action="Details" asp-route-id="@car.Id">View Details</a>
-                            </div>
-                        </div>
+<section class="w-full max-w-container-max mx-auto px-gutter py-section-lg flex flex-col gap-gap-lg">
+    <div class="flex flex-col sm:flex-row justify-between gap-gap-md sm:items-end">
+        <h2 class="text-h1 text-text-primary font-bold">Featured Fleet</h2>
+        <a class="text-body text-primary hover:text-orange-light flex items-center gap-1 transition-colors" asp-controller="Cars" asp-action="Index">
+            View all <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gap-md">
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            var car = Model[i];
+            var image = carImages[i % carImages.Length];
+            <article class="orion-card overflow-hidden flex flex-col group hover:border-primary transition-colors">
+                <div class="h-48 bg-surface-raised relative overflow-hidden">
+                    <img alt="@car.Brand @car.Model" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="@image" />
+                    <div class="absolute top-3 right-3 bg-primary text-white text-caption px-2 py-1 rounded font-bold">FEATURED</div>
+                </div>
+                <div class="p-gap-sm flex flex-col gap-gap-xs flex-grow">
+                    <div class="flex justify-between items-start gap-gap-sm">
+                        <h3 class="text-h3 text-text-primary font-semibold">@car.Brand @car.Model</h3>
+                        <span class="font-code text-primary font-bold whitespace-nowrap">$@car.DailyPrice/d</span>
+                    </div>
+                    <p class="text-text-secondary text-sm">@car.Type</p>
+                    <div class="grid grid-cols-2 gap-2 mt-4 text-caption text-text-muted">
+                        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">airline_seat_recline_normal</span> 5 Seats</div>
+                        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">settings</span> Auto</div>
+                        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">speed</span> Ready</div>
+                        <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">local_gas_station</span> Fuel</div>
                     </div>
                 </div>
-            }
-        </div>
+                <div class="p-gap-sm pt-0">
+                    <a class="orion-button orion-button-outline w-full" asp-controller="Cars" asp-action="Details" asp-route-id="@car.Id">Reserve</a>
+                </div>
+            </article>
+        }
     </div>
 </section>
 
-<section class="page-section pt-0">
-    <div class="container">
-        <div class="section-heading">
-            <span class="section-label">Service benefits</span>
-            <h2>Why Choose Us</h2>
+<section class="w-full border-t border-border bg-surface/40">
+    <div class="max-w-container-max mx-auto px-gutter py-section-md grid grid-cols-1 md:grid-cols-3 gap-gap-md">
+        <div class="orion-card p-gap-md">
+            <span class="material-symbols-outlined text-primary text-4xl mb-gap-sm">payments</span>
+            <h3 class="text-h3 font-semibold mb-2">Affordable Prices</h3>
+            <p class="text-text-secondary">Transparent daily prices and simple rental summaries.</p>
         </div>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="benefit-card">
-                    <h5>Affordable Prices</h5>
-                    <p>Fair daily rental prices with simple sample pricing for every car class.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="benefit-card">
-                    <h5>Easy Reservation</h5>
-                    <p>Clean forms and a short reservation flow make booking quick and clear.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="benefit-card">
-                    <h5>Reliable Vehicles</h5>
-                    <p>Organized car details help customers choose a suitable and dependable vehicle.</p>
-                </div>
-            </div>
+        <div class="orion-card p-gap-md">
+            <span class="material-symbols-outlined text-primary text-4xl mb-gap-sm">event_available</span>
+            <h3 class="text-h3 font-semibold mb-2">Easy Reservation</h3>
+            <p class="text-text-secondary">Choose a car and complete a reservation form in minutes.</p>
+        </div>
+        <div class="orion-card p-gap-md">
+            <span class="material-symbols-outlined text-primary text-4xl mb-gap-sm">verified</span>
+            <h3 class="text-h3 font-semibold mb-2">Reliable Vehicles</h3>
+            <p class="text-text-secondary">Organized vehicle details help customers rent with confidence.</p>
         </div>
     </div>
 </section>

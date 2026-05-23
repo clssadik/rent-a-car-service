@@ -4,109 +4,113 @@
     ViewData["Title"] = "Car Management";
 }
 
-<section class="page-section">
-    <div class="container">
-        <div class="page-title-row flex-column flex-md-row align-items-md-center">
-            <div>
-                <span class="section-label">Fleet setup</span>
-                <h1>Car Management</h1>
-            </div>
-            <button class="btn btn-primary" type="button">Add New Car</button>
+<section class="max-w-container-max mx-auto px-gutter py-section-md">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-gap-md mb-gap-lg">
+        <div>
+            <span class="text-primary font-bold uppercase tracking-wide text-caption">Fleet Setup</span>
+            <h1 class="text-h1 font-bold text-text-primary mt-2">Car Management</h1>
+            <p class="text-text-secondary max-w-2xl">Manage sample fleet data before the Entity Framework database layer is added.</p>
         </div>
+        <button class="orion-button orion-button-primary" type="button">
+            <span class="material-symbols-outlined">add</span>
+            Add New Car
+        </button>
+    </div>
 
-        <div class="table-panel mb-4">
-            <div class="table-responsive">
-                <table class="table align-middle">
-                    <thead>
-                        <tr>
-                            <th>Image</th>
-                            <th>Brand</th>
-                            <th>Model</th>
-                            <th>Year</th>
-                            <th>Daily price</th>
-                            <th>Availability</th>
-                            <th>Actions</th>
+    <div class="orion-card overflow-hidden mb-gap-lg">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead class="bg-surface-raised text-text-secondary text-caption uppercase">
+                    <tr>
+                        <th class="px-gap-sm py-gap-sm">Image</th>
+                        <th class="px-gap-sm py-gap-sm">Brand</th>
+                        <th class="px-gap-sm py-gap-sm">Model</th>
+                        <th class="px-gap-sm py-gap-sm">Year</th>
+                        <th class="px-gap-sm py-gap-sm">Daily price</th>
+                        <th class="px-gap-sm py-gap-sm">Availability</th>
+                        <th class="px-gap-sm py-gap-sm">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-border">
+                    @foreach (var car in Model)
+                    {
+                        <tr class="hover:bg-surface-raised/60 transition-colors">
+                            <td class="px-gap-sm py-gap-sm">
+                                <div class="w-20 h-12 bg-surface-raised border border-border rounded flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-text-muted">directions_car</span>
+                                </div>
+                            </td>
+                            <td class="px-gap-sm py-gap-sm">@car.Brand</td>
+                            <td class="px-gap-sm py-gap-sm text-text-secondary">@car.Model</td>
+                            <td class="px-gap-sm py-gap-sm text-text-secondary">@car.Year</td>
+                            <td class="px-gap-sm py-gap-sm font-code text-primary">$@car.DailyPrice</td>
+                            <td class="px-gap-sm py-gap-sm">
+                                <span class="@(car.IsAvailable ? "bg-success text-bg-app" : "bg-text-muted text-bg-app") rounded px-2 py-1 text-caption font-bold">
+                                    @(car.IsAvailable ? "Available" : "Unavailable")
+                                </span>
+                            </td>
+                            <td class="px-gap-sm py-gap-sm">
+                                <div class="flex gap-gap-xs">
+                                    <button class="border border-border rounded px-3 py-2 text-caption hover:border-primary hover:text-primary transition-colors" type="button">Edit</button>
+                                    <button class="border border-error text-error rounded px-3 py-2 text-caption hover:bg-error hover:text-white transition-colors" type="button">Delete</button>
+                                </div>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var car in Model)
-                        {
-                            <tr>
-                                <td><div class="table-image-placeholder">Image</div></td>
-                                <td>@car.Brand</td>
-                                <td>@car.Model</td>
-                                <td>@car.Year</td>
-                                <td>$@car.DailyPrice</td>
-                                <td>
-                                    <span class="badge @(car.IsAvailable ? "text-bg-success" : "text-bg-secondary")">
-                                        @(car.IsAvailable ? "Available" : "Unavailable")
-                                    </span>
-                                </td>
-                                <td>
-                                    <div class="d-flex gap-2">
-                                        <button class="btn btn-sm btn-outline-primary" type="button">Edit</button>
-                                        <button class="btn btn-sm btn-outline-danger" type="button">Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+                    }
+                </tbody>
+            </table>
         </div>
+    </div>
 
-        <div class="form-panel">
-            <h5>Add / Edit Car</h5>
-            <form>
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label class="form-label" for="brand">Brand</label>
-                        <input class="form-control" id="brand" type="text" placeholder="Toyota" />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label" for="model">Model</label>
-                        <input class="form-control" id="model" type="text" placeholder="Corolla" />
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label" for="year">Year</label>
-                        <input class="form-control" id="year" type="number" placeholder="2022" />
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label" for="fuelType">Fuel type</label>
-                        <select class="form-select" id="fuelType">
-                            <option selected>Gasoline</option>
-                            <option>Diesel</option>
-                            <option>Hybrid</option>
-                            <option>Electric</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label" for="transmission">Transmission</label>
-                        <select class="form-select" id="transmission">
-                            <option selected>Automatic</option>
-                            <option>Manual</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label" for="dailyPrice">Daily price</label>
-                        <input class="form-control" id="dailyPrice" type="number" placeholder="45" />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label" for="imageUrl">Image URL</label>
-                        <input class="form-control" id="imageUrl" type="url" placeholder="https://example.com/car.jpg" />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label" for="availability">Availability</label>
-                        <select class="form-select" id="availability">
-                            <option selected>Available</option>
-                            <option>Unavailable</option>
-                        </select>
-                    </div>
-                    <div class="col-12">
-                        <button class="btn btn-primary" type="submit">Save Car</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+    <div class="orion-card p-gap-md">
+        <h2 class="text-h3 font-semibold mb-gap-sm">Add / Edit Car</h2>
+        <form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gap-sm">
+            <div>
+                <label class="block text-caption text-text-secondary mb-2" for="brand">Brand</label>
+                <input class="orion-input" id="brand" type="text" placeholder="Toyota" />
+            </div>
+            <div>
+                <label class="block text-caption text-text-secondary mb-2" for="model">Model</label>
+                <input class="orion-input" id="model" type="text" placeholder="Corolla" />
+            </div>
+            <div>
+                <label class="block text-caption text-text-secondary mb-2" for="year">Year</label>
+                <input class="orion-input" id="year" type="number" placeholder="2022" />
+            </div>
+            <div>
+                <label class="block text-caption text-text-secondary mb-2" for="fuelType">Fuel type</label>
+                <select class="orion-input" id="fuelType">
+                    <option>Gasoline</option>
+                    <option>Diesel</option>
+                    <option>Hybrid</option>
+                    <option>Electric</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-caption text-text-secondary mb-2" for="transmission">Transmission</label>
+                <select class="orion-input" id="transmission">
+                    <option>Automatic</option>
+                    <option>Manual</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-caption text-text-secondary mb-2" for="dailyPrice">Daily price</label>
+                <input class="orion-input" id="dailyPrice" type="number" placeholder="45" />
+            </div>
+            <div class="lg:col-span-2">
+                <label class="block text-caption text-text-secondary mb-2" for="imageUrl">Image URL</label>
+                <input class="orion-input" id="imageUrl" type="url" placeholder="https://example.com/car.jpg" />
+            </div>
+            <div>
+                <label class="block text-caption text-text-secondary mb-2" for="availability">Availability</label>
+                <select class="orion-input" id="availability">
+                    <option>Available</option>
+                    <option>Unavailable</option>
+                </select>
+            </div>
+            <div class="md:col-span-2 lg:col-span-3">
+                <button class="orion-button orion-button-primary" type="submit">Save Car</button>
+            </div>
+        </form>
     </div>
 </section>
