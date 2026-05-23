@@ -1,3 +1,5 @@
+@model RentACarService.ViewModels.ReservationCreateViewModel
+
 @{
     ViewData["Title"] = "Create Reservation";
 }
@@ -53,24 +55,24 @@
                 <div class="summary-card mb-4">
                     <h5>Selected Car</h5>
                     <div class="car-image-placeholder small-placeholder">Car Image</div>
-                    <h6 class="mt-3 mb-1">Toyota Corolla</h6>
-                    <p class="text-muted mb-0">Automatic, Gasoline, 2022</p>
+                    <h6 class="mt-3 mb-1">@Model.SelectedCar.Brand @Model.SelectedCar.Model</h6>
+                    <p class="text-muted mb-0">@Model.SelectedCar.Transmission, @Model.SelectedCar.FuelType, @Model.SelectedCar.Year</p>
                 </div>
 
                 <div class="summary-card">
                     <h5>Total Price</h5>
                     <div class="summary-line">
                         <span>Daily price</span>
-                        <strong>$45</strong>
+                        <strong>$@Model.SelectedCar.DailyPrice</strong>
                     </div>
                     <div class="summary-line">
                         <span>Rental days</span>
-                        <strong>3</strong>
+                        <strong>@Model.RentalDays</strong>
                     </div>
                     <hr />
                     <div class="summary-line total">
                         <span>Total</span>
-                        <strong>$135</strong>
+                        <strong>$@Model.TotalPrice</strong>
                     </div>
                 </div>
             </div>

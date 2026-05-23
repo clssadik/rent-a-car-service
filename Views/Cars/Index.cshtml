@@ -1,15 +1,7 @@
+@model List<RentACarService.Models.Car>
+
 @{
     ViewData["Title"] = "Available Cars";
-
-    var cars = new[]
-    {
-        new { Brand = "Toyota", Model = "Corolla", Year = 2022, Fuel = "Gasoline", Transmission = "Automatic", Type = "Sedan", Price = 45, Available = true },
-        new { Brand = "Volkswagen", Model = "Golf", Year = 2021, Fuel = "Diesel", Transmission = "Manual", Type = "Hatchback", Price = 50, Available = true },
-        new { Brand = "Hyundai", Model = "Tucson", Year = 2023, Fuel = "Hybrid", Transmission = "Automatic", Type = "SUV", Price = 75, Available = false },
-        new { Brand = "Renault", Model = "Clio", Year = 2020, Fuel = "Gasoline", Transmission = "Manual", Type = "Hatchback", Price = 38, Available = true },
-        new { Brand = "Ford", Model = "Focus", Year = 2022, Fuel = "Diesel", Transmission = "Automatic", Type = "Sedan", Price = 55, Available = true },
-        new { Brand = "Mercedes", Model = "Vito", Year = 2021, Fuel = "Diesel", Transmission = "Automatic", Type = "Van", Price = 90, Available = false }
-    };
 }
 
 <section class="page-section">
@@ -60,7 +52,7 @@
         </div>
 
         <div class="row g-4">
-            @foreach (var car in cars)
+            @foreach (var car in Model)
             {
                 <div class="col-md-6 col-xl-4">
                     <div class="car-card card h-100">
@@ -71,18 +63,18 @@
                                     <h5 class="card-title mb-1">@car.Brand @car.Model</h5>
                                     <p class="text-muted mb-0">@car.Type</p>
                                 </div>
-                                <span class="badge @(car.Available ? "text-bg-success" : "text-bg-secondary")">
-                                    @(car.Available ? "Available" : "Unavailable")
+                                <span class="badge @(car.IsAvailable ? "text-bg-success" : "text-bg-secondary")">
+                                    @(car.IsAvailable ? "Available" : "Unavailable")
                                 </span>
                             </div>
                             <div class="spec-list">
                                 <span>@car.Year</span>
-                                <span>@car.Fuel</span>
+                                <span>@car.FuelType</span>
                                 <span>@car.Transmission</span>
                             </div>
                             <div class="d-flex justify-content-between align-items-center mt-3">
-                                <span class="price-text">$@car.Price/day</span>
-                                <a class="btn btn-outline-primary btn-sm" asp-controller="Cars" asp-action="Details">View Details</a>
+                                <span class="price-text">$@car.DailyPrice/day</span>
+                                <a class="btn btn-outline-primary btn-sm" asp-controller="Cars" asp-action="Details" asp-route-id="@car.Id">View Details</a>
                             </div>
                         </div>
                     </div>

@@ -1,12 +1,7 @@
+@model List<RentACarService.Models.Car>
+
 @{
     ViewData["Title"] = "Home";
-
-    var featuredCars = new[]
-    {
-        new { Brand = "Toyota", Model = "Corolla", Type = "Sedan", Price = 45 },
-        new { Brand = "Volkswagen", Model = "Golf", Type = "Hatchback", Price = 50 },
-        new { Brand = "Hyundai", Model = "Tucson", Type = "SUV", Price = 75 }
-    };
 }
 
 <section class="hero-section">
@@ -61,7 +56,7 @@
             <h2>Featured Cars</h2>
         </div>
         <div class="row g-4">
-            @foreach (var car in featuredCars)
+            @foreach (var car in Model)
             {
                 <div class="col-md-6 col-lg-4">
                     <div class="car-card card h-100">
@@ -70,8 +65,8 @@
                             <h5 class="card-title">@car.Brand @car.Model</h5>
                             <p class="text-muted mb-3">@car.Type</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <span class="price-text">$@car.Price/day</span>
-                                <a class="btn btn-outline-primary btn-sm" asp-controller="Cars" asp-action="Details">View Details</a>
+                                <span class="price-text">$@car.DailyPrice/day</span>
+                                <a class="btn btn-outline-primary btn-sm" asp-controller="Cars" asp-action="Details" asp-route-id="@car.Id">View Details</a>
                             </div>
                         </div>
                     </div>

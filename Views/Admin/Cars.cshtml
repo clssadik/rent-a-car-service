@@ -1,12 +1,7 @@
+@model List<RentACarService.Models.Car>
+
 @{
     ViewData["Title"] = "Car Management";
-
-    var cars = new[]
-    {
-        new { Brand = "Toyota", Model = "Corolla", Year = 2022, Price = 45, Available = true },
-        new { Brand = "Volkswagen", Model = "Golf", Year = 2021, Price = 50, Available = true },
-        new { Brand = "Hyundai", Model = "Tucson", Year = 2023, Price = 75, Available = false }
-    };
 }
 
 <section class="page-section">
@@ -34,17 +29,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var car in cars)
+                        @foreach (var car in Model)
                         {
                             <tr>
                                 <td><div class="table-image-placeholder">Image</div></td>
                                 <td>@car.Brand</td>
                                 <td>@car.Model</td>
                                 <td>@car.Year</td>
-                                <td>$@car.Price</td>
+                                <td>$@car.DailyPrice</td>
                                 <td>
-                                    <span class="badge @(car.Available ? "text-bg-success" : "text-bg-secondary")">
-                                        @(car.Available ? "Available" : "Unavailable")
+                                    <span class="badge @(car.IsAvailable ? "text-bg-success" : "text-bg-secondary")">
+                                        @(car.IsAvailable ? "Available" : "Unavailable")
                                     </span>
                                 </td>
                                 <td>

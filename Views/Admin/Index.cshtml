@@ -1,12 +1,7 @@
+@model RentACarService.ViewModels.AdminDashboardViewModel
+
 @{
     ViewData["Title"] = "Admin Dashboard";
-
-    var reservations = new[]
-    {
-        new { Customer = "Ayse Yilmaz", Car = "Toyota Corolla", Pickup = "2026-06-01", Return = "2026-06-04", Status = "Confirmed" },
-        new { Customer = "Mehmet Demir", Car = "Volkswagen Golf", Pickup = "2026-06-03", Return = "2026-06-05", Status = "Pending" },
-        new { Customer = "Elif Kaya", Car = "Hyundai Tucson", Pickup = "2026-06-07", Return = "2026-06-10", Status = "Completed" }
-    };
 }
 
 <section class="page-section">
@@ -22,25 +17,25 @@
             <div class="col-md-6 col-xl-3">
                 <div class="stat-card">
                     <span>Total Cars</span>
-                    <strong>24</strong>
+                    <strong>@Model.TotalCars</strong>
                 </div>
             </div>
             <div class="col-md-6 col-xl-3">
                 <div class="stat-card">
                     <span>Active Reservations</span>
-                    <strong>8</strong>
+                    <strong>@Model.ActiveReservations</strong>
                 </div>
             </div>
             <div class="col-md-6 col-xl-3">
                 <div class="stat-card">
                     <span>Customers</span>
-                    <strong>56</strong>
+                    <strong>@Model.Customers</strong>
                 </div>
             </div>
             <div class="col-md-6 col-xl-3">
                 <div class="stat-card">
                     <span>Total Revenue</span>
-                    <strong>$4,820</strong>
+                    <strong>$@Model.TotalRevenue.ToString("N0")</strong>
                 </div>
             </div>
         </div>
@@ -61,13 +56,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var reservation in reservations)
+                        @foreach (var reservation in Model.RecentReservations)
                         {
                             <tr>
-                                <td>@reservation.Customer</td>
-                                <td>@reservation.Car</td>
-                                <td>@reservation.Pickup</td>
-                                <td>@reservation.Return</td>
+                                <td>@reservation.CustomerName</td>
+                                <td>@reservation.CarName</td>
+                                <td>@reservation.PickupDate.ToString("yyyy-MM-dd")</td>
+                                <td>@reservation.ReturnDate.ToString("yyyy-MM-dd")</td>
                                 <td><span class="badge text-bg-light border">@reservation.Status</span></td>
                             </tr>
                         }
