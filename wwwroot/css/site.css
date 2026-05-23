@@ -44,13 +44,32 @@ body {
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+input.orion-input,
+select.orion-input,
+textarea.orion-input {
+    background-color: #242424;
+    border-color: #2E2E2E;
+    color: #F2F2F2;
+    color-scheme: dark;
+}
+
 .orion-input:focus {
     border-color: #FF7000;
     box-shadow: 0 0 0 1px #FF7000;
 }
 
 .orion-input::placeholder {
-    color: #5A5A5A;
+    color: #FFFFFF;
+    opacity: 1;
+}
+
+.orion-search-form .material-symbols-outlined {
+    color: #FFFFFF;
+}
+
+input.orion-input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    cursor: pointer;
 }
 
 .orion-card {
