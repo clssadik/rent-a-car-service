@@ -159,9 +159,23 @@ Bu bolum, proje gelistirme surecinde tamamlanan ve henuz yapilmayan adimlari tak
 - Statik arac verileri controllerlardan ayrilip `SampleDataService` icinde tek kaynak haline getirildi.
 - Home, Cars, Reservations ve Admin controllerlari ornek verileri `SampleDataService` uzerinden kullanacak sekilde guncellendi.
 - Rezervasyon sayfasinda secili arac bilgisi artik `carId` degerine gore ortak veri servisinden alinacak hale getirildi.
+- Ana sayfa arama formundaki `carType` alani `Cars/Index` filtreleme akisina baglandi.
+- `Cars/Index` sayfasinda brand, type, transmission ve price range filtreleri calisir hale getirildi.
+- Filtre sonucunda eslesen arac yoksa kullaniciya sonuc bulunamadi mesaji gosterildi.
+- Admin arac yonetimi formu gercek MVC POST akisina baglandi.
+- Admin arac formu icin server-side validation eklendi.
+- Admin arac ekleme islemi gecici `SampleDataService` uzerinden calisir hale getirildi.
+- Admin arac silme islemi POST ve antiforgery ile calisir hale getirildi.
+- Admin arac duzenleme islemi `editId` ile form doldurma ve POST ile guncelleme seklinde calisir hale getirildi.
+- Gecici `SampleDataService` uzerinde temel admin CRUD akisi tamamlandi: add, edit, delete.
 - Yapilan degisiklikler iki ayri commit ile GitHub `main` dalina push edildi:
   - `876eadd` - `Move sample data into MVC models`
   - `bddebc0` - `Add reservation form submission flow`
+  - `25f7b24` - `Add car filtering flow`
+  - `c71449b` - `Add admin car form submission`
+  - `41fa9ef` - `Add sample car creation`
+  - `18047cc` - `Add sample car deletion`
+  - `64bdde5` - `Add sample car editing`
 
 ### Henuz Yapilmayanlar
 
@@ -171,7 +185,6 @@ Bu bolum, proje gelistirme surecinde tamamlanan ve henuz yapilmayan adimlari tak
 - Migration islemleri yapilmadi.
 - Arac verileri veritabanindan okunmuyor.
 - Rezervasyonlar veritabanina kaydedilmiyor.
-- Admin arac ekleme, duzenleme ve silme islemleri gercek CRUD olarak calismiyor.
 - Login ve register sayfalari eklenmedi.
 - Kullanici yetkilendirme sistemi eklenmedi.
 - Admin ekranlari icin gercek yetki kontrolu yok.
@@ -179,25 +192,21 @@ Bu bolum, proje gelistirme surecinde tamamlanan ve henuz yapilmayan adimlari tak
 - Harita entegrasyonu eklenmedi.
 - Gelismis raporlama ekranlari eklenmedi.
 - Form verileri kalici olarak saklanmiyor.
-- Arac filtreleme formu henuz gercek filtreleme yapmiyor.
-- Ana sayfadaki arac arama formu henuz gercek arama yapmiyor.
+- Ana sayfadaki location ve tarih alanlari henuz gercek rezervasyon uygunluk kontrolu yapmiyor.
 - Arac gorselleri su an dis URL'ler ile gosteriliyor; lokal proje assetleri olarak henuz duzenlenmedi.
 - Birim testi veya otomatik test yapisi eklenmedi.
 
 ### Siradaki Onerilen Adimlar
 
-1. Ana sayfa arama formu ve `Cars/Index` filtreleme alanini calisir hale getirmek.
-2. Admin arac yonetimi formunu POST akisina baglamak.
-3. Admin arac ekleme, duzenleme ve silme islemlerini gecici servis uzerinden calisir hale getirmek.
-4. Arac ekleme ve duzenleme icin basit validasyonlar eklemek.
-5. Rezervasyon basari ekranini ayri bir `Success` view olarak duzenlemek.
-6. Arac gorsellerini `wwwroot/images/cars/` altinda lokal asset olarak duzenlemek.
-7. Entity Framework Core paketlerini eklemek.
-8. `ApplicationDbContext` sinifini olusturmak.
-9. `Car`, `Customer` ve `Reservation` modellerini veritabani iliskilerine hazir hale getirmek.
-10. Connection string eklemek.
-11. Ilk migration islemini yapmak.
-12. Arac verilerini veritabanindan okumak.
-13. Rezervasyonlari veritabanina kaydetmek.
-14. Admin dashboard sayilarini veritabanindan hesaplamak.
-15. Son asamada sayfalari responsive olarak tekrar kontrol etmek ve `dotnet build` ile dogrulamak.
+1. Rezervasyon basari ekranini ayri bir `Success` view olarak duzenlemek.
+2. Arac gorsellerini `wwwroot/images/cars/` altinda lokal asset olarak duzenlemek.
+3. Entity Framework Core paketlerini eklemek.
+4. `ApplicationDbContext` sinifini olusturmak.
+5. `Car`, `Customer` ve `Reservation` modellerini veritabani iliskilerine hazir hale getirmek.
+6. Connection string eklemek.
+7. Ilk migration islemini yapmak.
+8. Arac verilerini veritabanindan okumak.
+9. Rezervasyonlari veritabanina kaydetmek.
+10. Admin dashboard sayilarini veritabanindan hesaplamak.
+11. Ana sayfadaki location ve tarih alanlarini rezervasyon uygunluk akisi ile iliskilendirmek.
+12. Son asamada sayfalari responsive olarak tekrar kontrol etmek ve `dotnet build` ile dogrulamak.
