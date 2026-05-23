@@ -1,0 +1,71 @@
+@model RentACarService.ViewModels.ReservationSuccessViewModel
+
+@{
+    ViewData["Title"] = "Reservation Confirmed";
+}
+
+<section class="max-w-container-max mx-auto px-gutter py-section-md">
+    <div class="max-w-2xl mx-auto text-center mb-gap-lg">
+        <span class="material-symbols-outlined text-success text-6xl">check_circle</span>
+        <h1 class="text-h1 font-bold text-text-primary mt-gap-sm">Reservation Confirmed</h1>
+        <p class="text-text-secondary mt-2">Your reservation has been created successfully. An email confirmation will be sent to you shortly.</p>
+    </div>
+
+    <div class="orion-card p-gap-md max-w-2xl mx-auto">
+        <h2 class="text-h3 font-semibold mb-gap-sm">Reservation Details</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-gap-sm">
+            <div>
+                <p class="text-caption text-text-secondary">Reservation ID</p>
+                <p class="font-code text-text-primary font-semibold">#@Model.ReservationId</p>
+            </div>
+            <div>
+                <p class="text-caption text-text-secondary">Status</p>
+                <span class="inline-block bg-success/10 text-success text-caption px-2 py-1 rounded font-bold">@Model.Status</span>
+            </div>
+            <div>
+                <p class="text-caption text-text-secondary">Customer Name</p>
+                <p class="text-text-primary">@Model.CustomerName</p>
+            </div>
+            <div>
+                <p class="text-caption text-text-secondary">Email</p>
+                <p class="text-text-primary">@Model.CustomerEmail</p>
+            </div>
+            <div>
+                <p class="text-caption text-text-secondary">Car</p>
+                <p class="text-text-primary font-semibold">@Model.CarBrand @Model.CarModel</p>
+            </div>
+            <div>
+                <p class="text-caption text-text-secondary">Pickup Location</p>
+                <p class="text-text-primary">@Model.PickupLocation</p>
+            </div>
+            <div>
+                <p class="text-caption text-text-secondary">Pickup Date</p>
+                <p class="text-text-primary">@Model.PickupDate.ToString("MMM dd, yyyy")</p>
+            </div>
+            <div>
+                <p class="text-caption text-text-secondary">Return Date</p>
+                <p class="text-text-primary">@Model.ReturnDate.ToString("MMM dd, yyyy")</p>
+            </div>
+            <div>
+                <p class="text-caption text-text-secondary">Rental Days</p>
+                <p class="text-text-primary">@Model.RentalDays days</p>
+            </div>
+            <div>
+                <p class="text-caption text-text-secondary">Total Price</p>
+                <p class="font-code text-primary text-h2 font-bold">$@Model.TotalPrice</p>
+            </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-gap-sm mt-gap-md pt-gap-md border-t border-border">
+            <a class="orion-button orion-button-outline flex-1 text-center" asp-controller="Home" asp-action="Index">
+                <span class="material-symbols-outlined">home</span>
+                Back to Home
+            </a>
+            <a class="orion-button orion-button-primary flex-1 text-center" asp-controller="Reservations" asp-action="Create">
+                <span class="material-symbols-outlined">add_circle</span>
+                New Reservation
+            </a>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,91 @@
+@model RentACarService.ViewModels.AdminReservationsViewModel
+
+@{
+    ViewData["Title"] = "Reservation Management";
+}
+
+@{
+    string StatusBadgeClass(string status) => status switch
+    {
+        "Pending" => "bg-warning/15 text-warning border border-warning/30",
+        "Confirmed" => "bg-primary/15 text-primary border border-primary/30",
+        "Completed" => "bg-info/15 text-info border border-info/30",
+        "Cancelled" => "bg-error/15 text-error border border-error/30",
+        _ => "bg-text-muted/15 text-text-muted border border-text-muted/30"
+    };
+}
+
+<section class="max-w-container-max mx-auto px-gutter py-section-md">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-gap-md mb-gap-lg">
+        <div>
+            <span class="text-primary font-bold uppercase tracking-wide text-caption">Reservation Control</span>
+            <h1 class="text-h1 font-bold text-text-primary mt-2">Reservation Management</h1>
+            <p class="text-text-secondary max-w-2xl">View and manage all customer reservations across the fleet.</p>
+        </div>
+        <a class="orion-button orion-button-outline" asp-controller="Admin" asp-action="Index">
+            <span class="material-symbols-outlined">arrow_back</span>
+            Admin Dashboard
+        </a>
+    </div>
+
+    @if (TempData["SuccessMessage"] is string successMessage)
+    {
+        <div class="mb-gap-md bg-success/10 border border-success text-success p-gap-sm rounded" role="alert">
+            @successMessage
+        </div>
+    }
+
+    <div class="orion-card overflow-hidden">
+        <div class="p-gap-md border-b border-border flex justify-between items-center">
+            <h2 class="text-h3 font-semibold">All Reservations</h2>
+            <span class="text-text-secondary text-caption">@Model.Reservations.Count records</span>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead class="bg-surface-raised text-text-secondary text-caption uppercase">
+                    <tr>
+                        <th class="px-gap-sm py-gap-sm">ID</th>
+                        <th class="px-gap-sm py-gap-sm">Customer</th>
+                        <th class="px-gap-sm py-gap-sm">Car</th>
+                        <th class="px-gap-sm py-gap-sm">Pickup Date</th>
+                        <th class="px-gap-sm py-gap-sm">Return Date</th>
+                        <th class="px-gap-sm py-gap-sm">Location</th>
+                        <th class="px-gap-sm py-gap-sm">Total Price</th>
+                        <th class="px-gap-sm py-gap-sm">Status</th>
+                        <th class="px-gap-sm py-gap-sm">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-border">
+                    @foreach (var reservation in Model.Reservations)
+                    {
+                        <tr class="hover:bg-surface-raised/60 transition-colors">
+                            <td class="px-gap-sm py-gap-sm font-code">#@reservation.Id</td>
+                            <td class="px-gap-sm py-gap-sm">@reservation.CustomerName</td>
+                            <td class="px-gap-sm py-gap-sm text-text-secondary">@reservation.CarName</td>
+                            <td class="px-gap-sm py-gap-sm text-text-secondary">@reservation.PickupDate.ToString("yyyy-MM-dd")</td>
+                            <td class="px-gap-sm py-gap-sm text-text-secondary">@reservation.ReturnDate.ToString("yyyy-MM-dd")</td>
+                            <td class="px-gap-sm py-gap-sm text-text-secondary">@reservation.PickupLocation</td>
+                            <td class="px-gap-sm py-gap-sm font-code text-primary">$@reservation.TotalPrice.ToString("N0")</td>
+                            <td class="px-gap-sm py-gap-sm">
+                                <span class="inline-block rounded px-2 py-1 text-caption font-semibold @StatusBadgeClass(reservation.Status)">
+                                    @reservation.Status
+                                </span>
+                            </td>
+                            <td class="px-gap-sm py-gap-sm">
+                                <form asp-controller="Admin" asp-action="UpdateReservationStatus" method="post" class="flex items-center gap-gap-xs">
+                                    <input name="id" type="hidden" value="@reservation.Id" />
+                                    <select name="status" class="bg-surface-raised border border-border text-text-primary text-caption rounded px-2 py-1 focus:border-primary focus:outline-none" onchange="this.form.submit()">
+                                        <option selected="@(reservation.Status == "Pending")" value="Pending">Pending</option>
+                                        <option selected="@(reservation.Status == "Confirmed")" value="Confirmed">Confirmed</option>
+                                        <option selected="@(reservation.Status == "Completed")" value="Completed">Completed</option>
+                                        <option selected="@(reservation.Status == "Cancelled")" value="Cancelled">Cancelled</option>
+                                    </select>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

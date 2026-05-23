@@ -40,26 +40,26 @@
 
 ### Veritabani
 
-- `Customer` ve `Reservation` modelleri veritabanina bagli degil.
-- Rezervasyonlar veritabanina kaydedilmiyor.
-- Migration yapisi yok.
-- Connection string sifresi `appsettings.json` icinde acik duruyor.
+- ~~`Customer` ve `Reservation` modelleri veritabanina bagli degil.~~ COZULDU
+- ~~Rezervasyonlar veritabanina kaydedilmiyor.~~ COZULDU
+- ~~Migration yapisi yok.~~ COZULDU
+- ~~Connection string sifresi `appsettings.json` icinde acik duruyor.~~ COZULDU (User Secrets kullaniyor)
 
 ### Rezervasyon
 
-- Gercek rezervasyon kaydi olusturulmuyor.
-- Musteri kaydi olusturulmuyor.
-- Ayni tarih araliginda cakisan rezervasyon kontrolu yok.
-- Musait olmayan arac icin rezervasyon engeli yok.
-- Rezervasyon basari/detay sayfasi yok.
+- ~~Gercek rezervasyon kaydi olusturulmuyor.~~ COZULDU
+- ~~Musteri kaydi olusturulmuyor.~~ COZULDU
+- ~~Ayni tarih araliginda cakisan rezervasyon kontrolu yok.~~ COZULDU
+- ~~Musait olmayan arac icin rezervasyon engeli yok.~~ COZULDU
+- ~~Rezervasyon basari/detay sayfasi yok.~~ COZULDU
 
 ### Admin Paneli
 
-- Dashboard'daki rezervasyon, musteri ve gelir sayilari gercek veriden gelmiyor.
-- Son rezervasyonlar tablosu ornek veri kullaniyor.
-- Rezervasyon yonetim ekrani yok.
-- Musteri yonetim ekrani yok.
-- Arac silme icin onay mekanizmasi yok.
+- ~~Dashboard'daki rezervasyon, musteri ve gelir sayilari gercek veriden gelmiyor.~~ COZULDU
+- ~~Son rezervasyonlar tablosu ornek veri kullaniyor.~~ COZULDU
+- ~~Rezervasyon yonetim ekrani yok.~~ COZULDU
+- ~~Musteri yonetim ekrani yok.~~ COZULDU
+- ~~Arac silme icin onay mekanizmasi yok.~~ COZULDU
 
 ### Guvenlik
 

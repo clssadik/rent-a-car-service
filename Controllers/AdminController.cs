@@ -22,9 +22,9 @@ public class AdminController : Controller
         var dashboard = new AdminDashboardViewModel
         {
             TotalCars = cars.Count,
-            ActiveReservations = 8,
-            Customers = 56,
-            TotalRevenue = 4820,
+            ActiveReservations = _sampleDataService.GetTotalReservations(),
+            Customers = _sampleDataService.GetTotalCustomers(),
+            TotalRevenue = _sampleDataService.GetTotalRevenue(),
             RecentReservations = recentReservations
         };
 
@@ -34,6 +34,15 @@ public class AdminController : Controller
     public IActionResult Cars(int? editId)
     {
         return View(CreateAdminCarsViewModel(editId));
+    }
+
+    public IActionResult Customers()
+    {
+        var viewModel = new AdminCustomersViewModel
+        {
+            Customers = _sampleDataService.GetAllCustomers()
+        };
+        return View(viewModel);
     }
 
     [HttpPost]
@@ -104,6 +113,24 @@ public class AdminController : Controller
         }
 
         return viewModel;
+    }
+
+    public IActionResult Reservations()
+    {
+        var viewModel = new AdminReservationsViewModel
+        {
+            Reservations = _sampleDataService.GetAllReservations()
+        };
+        return View(viewModel);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult UpdateReservationStatus(int id, string status)
+    {
+        var updated = _sampleDataService.UpdateReservationStatus(id, status);
+        TempData["SuccessMessage"] = updated ? "Reservation status updated." : "Reservation not found.";
+        return RedirectToAction(nameof(Reservations));
     }
 
     private static Car CreateCarFromForm(AdminCarFormViewModel form)

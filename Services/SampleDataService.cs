@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using RentACarService.Models;
 using RentACarService.Data;
 using RentACarService.ViewModels;
@@ -112,8 +113,121 @@ public class SampleDataService
         return _dbContext.Cars.FirstOrDefault(car => car.Id == id);
     }
 
+    public Customer CreateCustomer(Customer customer)
+    {
+        _dbContext.Customers.Add(customer);
+        _dbContext.SaveChanges();
+        return customer;
+    }
+
+    public Customer? GetCustomerByEmail(string email)
+    {
+        return _dbContext.Customers.FirstOrDefault(c => c.Email == email);
+    }
+
+    public Reservation CreateReservation(Reservation reservation)
+    {
+        _dbContext.Reservations.Add(reservation);
+        _dbContext.SaveChanges();
+        return reservation;
+    }
+
     public List<ReservationSummaryViewModel> GetRecentReservations()
     {
-        return _recentReservations;
+        return _dbContext.Reservations
+            .OrderByDescending(r => r.PickupDate)
+            .Take(5)
+            .Select(r => new ReservationSummaryViewModel
+            {
+                CustomerName = r.Customer != null ? r.Customer.FullName : "",
+                CarName = r.Car != null ? r.Car.Brand + " " + r.Car.Model : "",
+                PickupDate = r.PickupDate,
+                ReturnDate = r.ReturnDate,
+                Status = r.Status
+            })
+            .ToList();
+    }
+
+    public int GetTotalReservations()
+    {
+        return _dbContext.Reservations.Count();
+    }
+
+    public int GetTotalCustomers()
+    {
+        return _dbContext.Customers.Count();
+    }
+
+    public Reservation? GetReservationById(int id)
+    {
+        return _dbContext.Reservations
+            .Include(r => r.Car)
+            .Include(r => r.Customer)
+            .FirstOrDefault(r => r.Id == id);
+    }
+
+    public decimal GetTotalRevenue()
+    {
+        return _dbContext.Reservations
+            .Where(r => r.Status == "Confirmed" || r.Status == "Completed")
+            .Sum(r => r.TotalPrice);
+    }
+
+    public bool HasOverlappingReservation(int carId, DateTime pickupDate, DateTime returnDate)
+    {
+        return _dbContext.Reservations.Any(r =>
+            r.CarId == carId &&
+            r.Status != "Cancelled" &&
+            pickupDate < r.ReturnDate && returnDate > r.PickupDate);
+    }
+
+    public bool IsCarAvailable(int carId)
+    {
+        var car = _dbContext.Cars.FirstOrDefault(c => c.Id == carId);
+        return car != null && car.IsAvailable;
+    }
+
+    public List<AdminReservationItem> GetAllReservations()
+    {
+        return _dbContext.Reservations
+            .Include(r => r.Car)
+            .Include(r => r.Customer)
+            .OrderByDescending(r => r.PickupDate)
+            .Select(r => new AdminReservationItem
+            {
+                Id = r.Id,
+                CustomerName = r.Customer != null ? r.Customer.FullName : "",
+                CarName = r.Car != null ? r.Car.Brand + " " + r.Car.Model : "",
+                PickupDate = r.PickupDate,
+                ReturnDate = r.ReturnDate,
+                PickupLocation = r.PickupLocation,
+                Status = r.Status,
+                TotalPrice = r.TotalPrice
+            })
+            .ToList();
+    }
+
+    public bool UpdateReservationStatus(int id, string status)
+    {
+        var reservation = _dbContext.Reservations.FirstOrDefault(r => r.Id == id);
+        if (reservation == null) return false;
+        reservation.Status = status;
+        _dbContext.SaveChanges();
+        return true;
+    }
+
+    public List<AdminCustomerItem> GetAllCustomers()
+    {
+        return _dbContext.Customers
+            .OrderBy(c => c.FullName)
+            .Select(c => new AdminCustomerItem
+            {
+                Id = c.Id,
+                FullName = c.FullName,
+                Email = c.Email,
+                PhoneNumber = c.PhoneNumber,
+                ReservationCount = c.Reservations.Count
+            })
+            .ToList();
     }
 }

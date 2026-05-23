@@ -40,14 +40,73 @@ public class ReservationsController : Controller
             ModelState.AddModelError(nameof(reservation.ReturnDate), "Return date must be after pickup date.");
         }
 
+        if (!_sampleDataService.IsCarAvailable(reservation.SelectedCarId))
+        {
+            ModelState.AddModelError(nameof(reservation.SelectedCarId), "Selected car is not available.");
+        }
+
+        if (reservation.PickupDate.HasValue && reservation.ReturnDate.HasValue &&
+            _sampleDataService.HasOverlappingReservation(reservation.SelectedCarId, reservation.PickupDate.Value, reservation.ReturnDate.Value))
+        {
+            ModelState.AddModelError(nameof(reservation.PickupDate), "The selected car is already reserved for these dates.");
+        }
+
         if (!ModelState.IsValid)
         {
             return View(reservation);
         }
 
-        TempData["SuccessMessage"] = "Reservation created successfully.";
+        var customer = _sampleDataService.GetCustomerByEmail(reservation.Email);
+
+        if (customer == null)
+        {
+            customer = _sampleDataService.CreateCustomer(new Customer
+            {
+                FullName = reservation.FullName,
+                Email = reservation.Email,
+                PhoneNumber = reservation.PhoneNumber
+            });
+        }
+
+        if (reservation.PickupDate.HasValue && reservation.ReturnDate.HasValue)
+        {
+            var newReservation = _sampleDataService.CreateReservation(new Reservation
+            {
+                CarId = reservation.SelectedCarId,
+                CustomerId = customer.Id,
+                PickupDate = reservation.PickupDate.Value,
+                ReturnDate = reservation.ReturnDate.Value,
+                PickupLocation = reservation.PickupLocation,
+                Status = "Pending",
+                TotalPrice = reservation.TotalPrice
+            });
+
+            return RedirectToAction(nameof(Success), new { id = newReservation.Id });
+        }
 
         return RedirectToAction(nameof(Create), new { carId = reservation.SelectedCarId });
+    }
+
+    public IActionResult Success(int id)
+    {
+        var reservation = _sampleDataService.GetReservationById(id);
+        if (reservation == null) return RedirectToAction(nameof(Create));
+
+        var viewModel = new ReservationSuccessViewModel
+        {
+            ReservationId = reservation.Id,
+            CustomerName = reservation.Customer?.FullName ?? "",
+            CustomerEmail = reservation.Customer?.Email ?? "",
+            CarBrand = reservation.Car?.Brand ?? "",
+            CarModel = reservation.Car?.Model ?? "",
+            PickupDate = reservation.PickupDate,
+            ReturnDate = reservation.ReturnDate,
+            PickupLocation = reservation.PickupLocation,
+            RentalDays = (reservation.ReturnDate.Date - reservation.PickupDate.Date).Days,
+            TotalPrice = reservation.TotalPrice,
+            Status = reservation.Status
+        };
+        return View(viewModel);
     }
 
     private Car GetSelectedCar(int carId)
