@@ -68,6 +68,16 @@ public class AdminController : Controller
         return RedirectToAction(nameof(Cars));
     }
 
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult DeleteCar(int id)
+    {
+        var deleted = _sampleDataService.DeleteCar(id);
+        TempData["SuccessMessage"] = deleted ? "Car deleted successfully." : "Car could not be found.";
+
+        return RedirectToAction(nameof(Cars));
+    }
+
     private AdminCarsViewModel CreateAdminCarsViewModel()
     {
         return new AdminCarsViewModel

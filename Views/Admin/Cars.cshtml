@@ -59,7 +59,10 @@
                             <td class="px-gap-sm py-gap-sm">
                                 <div class="flex gap-gap-xs">
                                     <button class="border border-border rounded px-3 py-2 text-caption hover:border-primary hover:text-primary transition-colors" type="button">Edit</button>
-                                    <button class="border border-error text-error rounded px-3 py-2 text-caption hover:bg-error hover:text-white transition-colors" type="button">Delete</button>
+                                    <form asp-controller="Admin" asp-action="DeleteCar" method="post">
+                                        <input name="id" type="hidden" value="@car.Id" />
+                                        <button class="border border-error text-error rounded px-3 py-2 text-caption hover:bg-error hover:text-white transition-colors" type="submit">Delete</button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>

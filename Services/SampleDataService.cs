@@ -111,6 +111,20 @@ public class SampleDataService
         _cars.Add(car);
     }
 
+    public bool DeleteCar(int id)
+    {
+        var car = GetCarById(id);
+
+        if (car == null)
+        {
+            return false;
+        }
+
+        _cars.Remove(car);
+
+        return true;
+    }
+
     public List<Car> GetFilteredCars(string? brand, string? type, string? transmission, string? priceRange)
     {
         var cars = _cars.AsEnumerable();
