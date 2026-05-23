@@ -19,4 +19,8 @@ public class HomeController : Controller
         return View(featuredCars);
     }
 
+    public IActionResult About()
+    {
+        return View();
+    }
 }
