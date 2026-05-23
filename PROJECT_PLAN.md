@@ -1,18 +1,19 @@
-# Rent A Car MVC Proje Planı
+# MEU RENT MVC Proje Planı
 
 ## Proje Amacı
 
-Bu proje, üniversite Internet Programming dersi için geliştirilecek basit bir Rent A Car web uygulamasıdır. Amaç, ASP.NET Core MVC mimarisini kullanarak araç listeleme, araç detay görüntüleme, rezervasyon formu ve temel admin ekranları olan temiz ve anlaşılır bir web arayüzü oluşturmaktır.
+Bu proje, üniversite Internet Programming dersi için geliştirilecek basit bir Rent A Car web uygulamasıdır. Proje adı MEU RENT olarak belirlenmiştir. Amaç, ASP.NET Core MVC mimarisini kullanarak araç listeleme, araç detay görüntüleme, rezervasyon formu ve temel admin ekranları olan temiz ve anlaşılır bir web arayüzü oluşturmaktır.
 
 Proje başlangıçta statik örnek verilerle hazırlanacaktır. Daha sonraki aşamalarda Entity Framework kullanılarak veritabanı işlemleri eklenecektir.
 
 ## Kullanılacak Mimari ve Teknolojiler
 
 - ASP.NET Core MVC
+- .NET 10
 - Razor Views
 - HTML
 - CSS
-- Bootstrap uyumlu sayfa yapısı
+- Tailwind CDN destekli modern Razor sayfa yapısı
 - İlerleyen aşamalarda Entity Framework
 
 Proje MVC yapısına uygun olarak Controller, Model ve View katmanlarına ayrılacaktır. İlk aşamada ağırlık View dosyaları ve kullanıcı arayüzü üzerinde olacaktır.
@@ -75,7 +76,7 @@ Bu ekranlar ilk aşamada sadece arayüz tasarımı olarak hazırlanacaktır.
 
 ## Tasarım Prensipleri
 
-Projenin arayüzü sade, modern ve responsive olacak şekilde tasarlanacaktır.
+Projenin arayüzü sade, modern, dark theme ve responsive olacak şekilde tasarlanacaktır.
 
 Temel tasarım yaklaşımı:
 
@@ -84,7 +85,7 @@ Temel tasarım yaklaşımı:
 - Okunabilir yazı tipleri
 - Rounded card yapıları
 - Soft shadow kullanımı
-- Bootstrap uyumlu grid sistemi
+- Tailwind uyumlu grid sistemi
 - Desktop, tablet ve mobil ekranlara uyum
 - Sayfalar arasında tutarlı renk, buton ve kart tasarımı
 
@@ -123,6 +124,7 @@ Bu bolum, proje gelistirme surecinde tamamlanan ve henuz yapilmayan adimlari tak
 ### Tamamlanan Adimlar
 
 - Proje dosyasi olusturuldu: `rent-a-car-service.csproj`
+- Proje hedef framework surumu `net10.0` olarak guncellendi.
 - ASP.NET Core MVC uygulama girisi olusturuldu: `Program.cs`
 - MVC routing yapisi eklendi.
 - Static dosyalar icin `wwwroot` kullanimi aktif hale getirildi.
@@ -147,6 +149,13 @@ Bu bolum, proje gelistirme surecinde tamamlanan ve henuz yapilmayan adimlari tak
 - Return date, pickup date ile ayni veya daha once olursa hata verecek kontrol eklendi.
 - Client-side validation script partial dosyasi eklendi: `_ValidationScriptsPartial.cshtml`
 - Ana sayfa, arac listesi, arac detay, rezervasyon, admin dashboard ve admin arac yonetimi sayfalari tarayicida kontrol edildi.
+- Yeni frontend design dosyalari incelendi.
+- ORION DRIVE dark theme tasarimi MVC Razor view dosyalarina entegre edildi.
+- Proje marka adi MEU RENT olarak guncellendi.
+- Layout dosyasina Tailwind CDN, Inter fontu ve Material Symbols ikon destegi eklendi.
+- `site.css` dosyasi yeni dark theme yardimci classlari ile guncellendi.
+- Ana sayfa, arac listesi, arac detay, rezervasyon, admin dashboard ve admin arac yonetimi sayfalari yeni tasarimla uyumlu hale getirildi.
+- Proje `dotnet build` ile `net10.0` hedefinde hatasiz derlenebilir hale getirildi.
 - Yapilan degisiklikler iki ayri commit ile GitHub `main` dalina push edildi:
   - `876eadd` - `Move sample data into MVC models`
   - `bddebc0` - `Add reservation form submission flow`
@@ -169,13 +178,24 @@ Bu bolum, proje gelistirme surecinde tamamlanan ve henuz yapilmayan adimlari tak
 - Form verileri kalici olarak saklanmiyor.
 - Arac filtreleme formu henuz gercek filtreleme yapmiyor.
 - Ana sayfadaki arac arama formu henuz gercek arama yapmiyor.
-- Arac gorselleri henuz gercek resim dosyalari veya URL'leri ile baglanmadi.
+- Arac gorselleri su an dis URL'ler ile gosteriliyor; lokal proje assetleri olarak henuz duzenlenmedi.
 - Birim testi veya otomatik test yapisi eklenmedi.
 
 ### Siradaki Onerilen Adimlar
 
-1. Statik arac verilerini tek bir ornek veri servisine tasimak.
-2. Admin arac yonetimi formunu POST akisina baglamak.
-3. Arac ekleme ve duzenleme icin basit validasyonlar eklemek.
-4. Rezervasyon basari ekranini ayri bir `Success` view olarak duzenlemek.
-5. Daha sonra Entity Framework Core ve veritabani katmanina gecmek.
+1. Statik arac verilerini controllerlardan ayirip tek bir basit ornek veri servisine tasimak.
+2. Ana sayfa arama formu ve `Cars/Index` filtreleme alanini calisir hale getirmek.
+3. Admin arac yonetimi formunu POST akisina baglamak.
+4. Admin arac ekleme, duzenleme ve silme islemlerini gecici servis uzerinden calisir hale getirmek.
+5. Arac ekleme ve duzenleme icin basit validasyonlar eklemek.
+6. Rezervasyon basari ekranini ayri bir `Success` view olarak duzenlemek.
+7. Arac gorsellerini `wwwroot/images/cars/` altinda lokal asset olarak duzenlemek.
+8. Entity Framework Core paketlerini eklemek.
+9. `ApplicationDbContext` sinifini olusturmak.
+10. `Car`, `Customer` ve `Reservation` modellerini veritabani iliskilerine hazir hale getirmek.
+11. Connection string eklemek.
+12. Ilk migration islemini yapmak.
+13. Arac verilerini veritabanindan okumak.
+14. Rezervasyonlari veritabanina kaydetmek.
+15. Admin dashboard sayilarini veritabanindan hesaplamak.
+16. Son asamada sayfalari responsive olarak tekrar kontrol etmek ve `dotnet build` ile dogrulamak.
