@@ -1,11 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
 using RentACarService.Models;
+using RentACarService.Services;
 using RentACarService.ViewModels;
 
 namespace RentACarService.Controllers;
 
 public class ReservationsController : Controller
 {
+    private readonly SampleDataService _sampleDataService;
+
+    public ReservationsController(SampleDataService sampleDataService)
+    {
+        _sampleDataService = sampleDataService;
+    }
+
     public IActionResult Create(int carId = 1)
     {
         var reservation = new ReservationCreateViewModel
@@ -42,18 +50,9 @@ public class ReservationsController : Controller
         return RedirectToAction(nameof(Create), new { carId = reservation.SelectedCarId });
     }
 
-    private static Car GetSelectedCar(int carId)
+    private Car GetSelectedCar(int carId)
     {
-        return new Car
-        {
-            Id = carId,
-            Brand = "Toyota",
-            Model = "Corolla",
-            Year = 2022,
-            FuelType = "Gasoline",
-            Transmission = "Automatic",
-            DailyPrice = 45
-        };
+        return _sampleDataService.GetCarById(carId) ?? _sampleDataService.GetCars().First();
     }
 
     private static int CalculateRentalDays(DateTime? pickupDate, DateTime? returnDate)

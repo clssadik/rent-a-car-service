@@ -1,20 +1,27 @@
 using Microsoft.AspNetCore.Mvc;
-using RentACarService.Models;
+using RentACarService.Services;
 
 namespace RentACarService.Controllers;
 
 public class CarsController : Controller
 {
+    private readonly SampleDataService _sampleDataService;
+
+    public CarsController(SampleDataService sampleDataService)
+    {
+        _sampleDataService = sampleDataService;
+    }
+
     public IActionResult Index()
     {
-        var cars = GetSampleCars();
+        var cars = _sampleDataService.GetCars();
 
         return View(cars);
     }
 
     public IActionResult Details(int id = 1)
     {
-        var car = GetSampleCars().FirstOrDefault(car => car.Id == id);
+        var car = _sampleDataService.GetCarById(id);
 
         if (car == null)
         {
@@ -22,96 +29,5 @@ public class CarsController : Controller
         }
 
         return View(car);
-    }
-
-    private static List<Car> GetSampleCars()
-    {
-        return new List<Car>
-        {
-            new()
-            {
-                Id = 1,
-                Brand = "Toyota",
-                Model = "Corolla",
-                Year = 2022,
-                FuelType = "Gasoline",
-                Transmission = "Automatic",
-                Type = "Sedan",
-                SeatCount = 5,
-                DailyPrice = 45,
-                IsAvailable = true,
-                Description = "A comfortable sedan with low fuel consumption, practical luggage space, and smooth automatic transmission. Suitable for city driving and short trips."
-            },
-            new()
-            {
-                Id = 2,
-                Brand = "Volkswagen",
-                Model = "Golf",
-                Year = 2021,
-                FuelType = "Diesel",
-                Transmission = "Manual",
-                Type = "Hatchback",
-                SeatCount = 5,
-                DailyPrice = 50,
-                IsAvailable = true,
-                Description = "A compact hatchback with practical handling and efficient fuel usage."
-            },
-            new()
-            {
-                Id = 3,
-                Brand = "Hyundai",
-                Model = "Tucson",
-                Year = 2023,
-                FuelType = "Hybrid",
-                Transmission = "Automatic",
-                Type = "SUV",
-                SeatCount = 5,
-                DailyPrice = 75,
-                IsAvailable = false,
-                Description = "A modern SUV with a comfortable interior and hybrid efficiency."
-            },
-            new()
-            {
-                Id = 4,
-                Brand = "Renault",
-                Model = "Clio",
-                Year = 2020,
-                FuelType = "Gasoline",
-                Transmission = "Manual",
-                Type = "Hatchback",
-                SeatCount = 5,
-                DailyPrice = 38,
-                IsAvailable = true,
-                Description = "A budget-friendly hatchback for city trips."
-            },
-            new()
-            {
-                Id = 5,
-                Brand = "Ford",
-                Model = "Focus",
-                Year = 2022,
-                FuelType = "Diesel",
-                Transmission = "Automatic",
-                Type = "Sedan",
-                SeatCount = 5,
-                DailyPrice = 55,
-                IsAvailable = true,
-                Description = "A reliable sedan with balanced comfort and performance."
-            },
-            new()
-            {
-                Id = 6,
-                Brand = "Mercedes",
-                Model = "Vito",
-                Year = 2021,
-                FuelType = "Diesel",
-                Transmission = "Automatic",
-                Type = "Van",
-                SeatCount = 8,
-                DailyPrice = 90,
-                IsAvailable = false,
-                Description = "A spacious van suitable for family and group travel."
-            }
-        };
     }
 }

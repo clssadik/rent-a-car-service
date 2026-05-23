@@ -1,5 +1,6 @@
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSingleton<RentACarService.Services.SampleDataService>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

@@ -1,25 +1,30 @@
 using Microsoft.AspNetCore.Mvc;
-using RentACarService.Models;
+using RentACarService.Services;
 using RentACarService.ViewModels;
 
 namespace RentACarService.Controllers;
 
 public class AdminController : Controller
 {
+    private readonly SampleDataService _sampleDataService;
+
+    public AdminController(SampleDataService sampleDataService)
+    {
+        _sampleDataService = sampleDataService;
+    }
+
     public IActionResult Index()
     {
+        var cars = _sampleDataService.GetCars();
+        var recentReservations = _sampleDataService.GetRecentReservations();
+
         var dashboard = new AdminDashboardViewModel
         {
-            TotalCars = 24,
+            TotalCars = cars.Count,
             ActiveReservations = 8,
             Customers = 56,
             TotalRevenue = 4820,
-            RecentReservations = new List<ReservationSummaryViewModel>
-            {
-                new() { CustomerName = "Ayse Yilmaz", CarName = "Toyota Corolla", PickupDate = new DateTime(2026, 6, 1), ReturnDate = new DateTime(2026, 6, 4), Status = "Confirmed" },
-                new() { CustomerName = "Mehmet Demir", CarName = "Volkswagen Golf", PickupDate = new DateTime(2026, 6, 3), ReturnDate = new DateTime(2026, 6, 5), Status = "Pending" },
-                new() { CustomerName = "Elif Kaya", CarName = "Hyundai Tucson", PickupDate = new DateTime(2026, 6, 7), ReturnDate = new DateTime(2026, 6, 10), Status = "Completed" }
-            }
+            RecentReservations = recentReservations
         };
 
         return View(dashboard);
@@ -27,12 +32,7 @@ public class AdminController : Controller
 
     public IActionResult Cars()
     {
-        var cars = new List<Car>
-        {
-            new() { Id = 1, Brand = "Toyota", Model = "Corolla", Year = 2022, DailyPrice = 45, IsAvailable = true },
-            new() { Id = 2, Brand = "Volkswagen", Model = "Golf", Year = 2021, DailyPrice = 50, IsAvailable = true },
-            new() { Id = 3, Brand = "Hyundai", Model = "Tucson", Year = 2023, DailyPrice = 75, IsAvailable = false }
-        };
+        var cars = _sampleDataService.GetCars();
 
         return View(cars);
     }
