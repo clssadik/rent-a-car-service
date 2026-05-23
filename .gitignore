@@ -37,11 +37,6 @@ package-lock.json
 *.log
 Logs/
 
-## Local database
-*.db
-*.db-shm
-*.db-wal
-
 ## Secrets
 appsettings.Secrets.json
 secrets.json
