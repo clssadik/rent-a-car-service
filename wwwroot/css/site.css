@@ -64,7 +64,12 @@ textarea.orion-input {
 }
 
 .orion-search-form .material-symbols-outlined {
-    color: #FFFFFF !important;
+    color: #FF7000 !important;
+    opacity: 1;
+}
+
+form[action="/Cars"] > div > .material-symbols-outlined {
+    color: #FF7000 !important;
     opacity: 1;
 }
 
