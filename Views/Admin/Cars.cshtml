@@ -58,7 +58,7 @@
                             </td>
                             <td class="px-gap-sm py-gap-sm">
                                 <div class="flex gap-gap-xs">
-                                    <button class="border border-border rounded px-3 py-2 text-caption hover:border-primary hover:text-primary transition-colors" type="button">Edit</button>
+                                    <a class="border border-border rounded px-3 py-2 text-caption hover:border-primary hover:text-primary transition-colors" asp-controller="Admin" asp-action="Cars" asp-route-editId="@car.Id">Edit</a>
                                     <form asp-controller="Admin" asp-action="DeleteCar" method="post">
                                         <input name="id" type="hidden" value="@car.Id" />
                                         <button class="border border-error text-error rounded px-3 py-2 text-caption hover:bg-error hover:text-white transition-colors" type="submit">Delete</button>
@@ -75,6 +75,7 @@
     <div class="orion-card p-gap-md">
         <h2 class="text-h3 font-semibold mb-gap-sm">Add / Edit Car</h2>
         <form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gap-sm" asp-controller="Admin" asp-action="Cars" method="post">
+            <input asp-for="Form.Id" type="hidden" />
             <div asp-validation-summary="ModelOnly" class="text-error md:col-span-2 lg:col-span-3"></div>
             <div>
                 <label class="block text-caption text-text-secondary mb-2" asp-for="Form.Brand">Brand</label>

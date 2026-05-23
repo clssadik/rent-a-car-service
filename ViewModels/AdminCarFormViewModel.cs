@@ -4,6 +4,8 @@ namespace RentACarService.ViewModels;
 
 public class AdminCarFormViewModel
 {
+    public int Id { get; set; }
+
     [Required(ErrorMessage = "Brand is required.")]
     public string Brand { get; set; } = string.Empty;
 

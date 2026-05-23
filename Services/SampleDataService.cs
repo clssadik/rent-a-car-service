@@ -125,6 +125,30 @@ public class SampleDataService
         return true;
     }
 
+    public bool UpdateCar(Car updatedCar)
+    {
+        var car = GetCarById(updatedCar.Id);
+
+        if (car == null)
+        {
+            return false;
+        }
+
+        car.Brand = updatedCar.Brand;
+        car.Model = updatedCar.Model;
+        car.Year = updatedCar.Year;
+        car.FuelType = updatedCar.FuelType;
+        car.Transmission = updatedCar.Transmission;
+        car.Type = updatedCar.Type;
+        car.SeatCount = updatedCar.SeatCount;
+        car.DailyPrice = updatedCar.DailyPrice;
+        car.ImageUrl = updatedCar.ImageUrl;
+        car.IsAvailable = updatedCar.IsAvailable;
+        car.Description = updatedCar.Description;
+
+        return true;
+    }
+
     public List<Car> GetFilteredCars(string? brand, string? type, string? transmission, string? priceRange)
     {
         var cars = _cars.AsEnumerable();

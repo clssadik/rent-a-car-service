@@ -31,9 +31,9 @@ public class AdminController : Controller
         return View(dashboard);
     }
 
-    public IActionResult Cars()
+    public IActionResult Cars(int? editId)
     {
-        return View(CreateAdminCarsViewModel());
+        return View(CreateAdminCarsViewModel(editId));
     }
 
     [HttpPost]
@@ -47,23 +47,18 @@ public class AdminController : Controller
             return View(viewModel);
         }
 
-        var car = new Car
-        {
-            Brand = viewModel.Form.Brand,
-            Model = viewModel.Form.Model,
-            Year = viewModel.Form.Year,
-            FuelType = viewModel.Form.FuelType,
-            Transmission = viewModel.Form.Transmission,
-            Type = viewModel.Form.Type,
-            SeatCount = viewModel.Form.SeatCount,
-            DailyPrice = viewModel.Form.DailyPrice,
-            ImageUrl = viewModel.Form.ImageUrl,
-            IsAvailable = viewModel.Form.IsAvailable,
-            Description = $"{viewModel.Form.Brand} {viewModel.Form.Model} is available in the sample fleet."
-        };
+        var car = CreateCarFromForm(viewModel.Form);
 
-        _sampleDataService.AddCar(car);
-        TempData["SuccessMessage"] = "Car added successfully.";
+        if (viewModel.Form.Id > 0)
+        {
+            var updated = _sampleDataService.UpdateCar(car);
+            TempData["SuccessMessage"] = updated ? "Car updated successfully." : "Car could not be found.";
+        }
+        else
+        {
+            _sampleDataService.AddCar(car);
+            TempData["SuccessMessage"] = "Car added successfully.";
+        }
 
         return RedirectToAction(nameof(Cars));
     }
@@ -78,11 +73,55 @@ public class AdminController : Controller
         return RedirectToAction(nameof(Cars));
     }
 
-    private AdminCarsViewModel CreateAdminCarsViewModel()
+    private AdminCarsViewModel CreateAdminCarsViewModel(int? editId = null)
     {
-        return new AdminCarsViewModel
+        var viewModel = new AdminCarsViewModel
         {
             Cars = _sampleDataService.GetCars()
+        };
+
+        if (editId.HasValue)
+        {
+            var car = _sampleDataService.GetCarById(editId.Value);
+
+            if (car != null)
+            {
+                viewModel.Form = new AdminCarFormViewModel
+                {
+                    Id = car.Id,
+                    Brand = car.Brand,
+                    Model = car.Model,
+                    Year = car.Year,
+                    FuelType = car.FuelType,
+                    Transmission = car.Transmission,
+                    Type = car.Type,
+                    SeatCount = car.SeatCount,
+                    DailyPrice = car.DailyPrice,
+                    ImageUrl = car.ImageUrl,
+                    IsAvailable = car.IsAvailable
+                };
+            }
+        }
+
+        return viewModel;
+    }
+
+    private static Car CreateCarFromForm(AdminCarFormViewModel form)
+    {
+        return new Car
+        {
+            Id = form.Id,
+            Brand = form.Brand,
+            Model = form.Model,
+            Year = form.Year,
+            FuelType = form.FuelType,
+            Transmission = form.Transmission,
+            Type = form.Type,
+            SeatCount = form.SeatCount,
+            DailyPrice = form.DailyPrice,
+            ImageUrl = form.ImageUrl,
+            IsAvailable = form.IsAvailable,
+            Description = $"{form.Brand} {form.Model} is available in the sample fleet."
         };
     }
 }
