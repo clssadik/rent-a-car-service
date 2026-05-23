@@ -4,13 +4,13 @@ using RentACarService.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
 if (builder.Environment.IsDevelopment())
 {
     builder.Configuration.AddUserSecrets<Program>();
 }
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<RentACarService.Services.SampleDataService>();
 builder.Services.AddControllersWithViews();
 
@@ -19,10 +19,6 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    if (builder.Environment.IsDevelopment())
-    {
-        dbContext.Database.EnsureDeleted();
-    }
     dbContext.Database.Migrate();
 
     if (!dbContext.Cars.Any())
