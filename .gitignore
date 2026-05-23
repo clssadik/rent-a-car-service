@@ -1,3 +1,9 @@
 ## .NET
 bin/
 obj/
+
+## Local files
+.DS_Store
+*.db
+*.db-shm
+*.db-wal
