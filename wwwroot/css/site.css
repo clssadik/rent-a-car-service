@@ -64,7 +64,8 @@ textarea.orion-input {
 }
 
 .orion-search-form .material-symbols-outlined {
-    color: #FFFFFF;
+    color: #FFFFFF !important;
+    opacity: 1;
 }
 
 input.orion-input[type="date"]::-webkit-calendar-picker-indicator {

@@ -18,19 +18,19 @@
 
         <form class="orion-search-form mt-gap-lg bg-surface border border-border rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.6)] p-gap-sm w-full max-w-5xl flex flex-col md:flex-row gap-gap-sm items-center" asp-controller="Cars" asp-action="Index" method="get">
             <div class="flex-1 w-full relative">
-                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">location_on</span>
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-white">location_on</span>
                 <input class="orion-input pl-10" name="location" placeholder="Alış lokasyonu" type="text" />
             </div>
             <div class="flex-1 w-full relative">
-                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">calendar_today</span>
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-white">calendar_today</span>
                 <input class="orion-input pl-10" name="pickupDate" placeholder="Alış tarihi" type="text" onfocus="this.type='date'; this.showPicker?.()" onblur="if (!this.value) this.type='text'" />
             </div>
             <div class="flex-1 w-full relative">
-                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">calendar_month</span>
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-white">calendar_month</span>
                 <input class="orion-input pl-10" name="returnDate" placeholder="İade tarihi" type="text" onfocus="this.type='date'; this.showPicker?.()" onblur="if (!this.value) this.type='text'" />
             </div>
             <div class="flex-1 w-full relative">
-                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">directions_car</span>
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-white">directions_car</span>
                 <select class="orion-input pl-10 appearance-none cursor-pointer" name="carType">
                     <option value="">Araç tipi</option>
                     <option value="Sedan">Sedan</option>
