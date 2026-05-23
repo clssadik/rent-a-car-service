@@ -105,6 +105,12 @@ public class SampleDataService
         return _cars;
     }
 
+    public void AddCar(Car car)
+    {
+        car.Id = _cars.Count == 0 ? 1 : _cars.Max(existingCar => existingCar.Id) + 1;
+        _cars.Add(car);
+    }
+
     public List<Car> GetFilteredCars(string? brand, string? type, string? transmission, string? priceRange)
     {
         var cars = _cars.AsEnumerable();

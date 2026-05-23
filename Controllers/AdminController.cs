@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using RentACarService.Models;
 using RentACarService.Services;
 using RentACarService.ViewModels;
 
@@ -46,7 +47,23 @@ public class AdminController : Controller
             return View(viewModel);
         }
 
-        TempData["SuccessMessage"] = "Car saved successfully.";
+        var car = new Car
+        {
+            Brand = viewModel.Form.Brand,
+            Model = viewModel.Form.Model,
+            Year = viewModel.Form.Year,
+            FuelType = viewModel.Form.FuelType,
+            Transmission = viewModel.Form.Transmission,
+            Type = viewModel.Form.Type,
+            SeatCount = viewModel.Form.SeatCount,
+            DailyPrice = viewModel.Form.DailyPrice,
+            ImageUrl = viewModel.Form.ImageUrl,
+            IsAvailable = viewModel.Form.IsAvailable,
+            Description = $"{viewModel.Form.Brand} {viewModel.Form.Model} is available in the sample fleet."
+        };
+
+        _sampleDataService.AddCar(car);
+        TempData["SuccessMessage"] = "Car added successfully.";
 
         return RedirectToAction(nameof(Cars));
     }
