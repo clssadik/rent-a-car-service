@@ -115,3 +115,67 @@ Proje başarılı kabul edilmesi için aşağıdaki kriterleri karşılamalıdı
 - Gereksiz sayfa, özellik veya karmaşık yapı eklenmemelidir.
 - View dosyaları ileride Entity Framework modellerine kolayca bağlanabilecek şekilde düzenli olmalıdır.
 - Tasarım tüm sayfalarda görsel olarak tutarlı olmalıdır.
+
+## Guncel Durum
+
+Bu bolum, proje gelistirme surecinde tamamlanan ve henuz yapilmayan adimlari takip etmek icin eklenmistir.
+
+### Tamamlanan Adimlar
+
+- Proje dosyasi olusturuldu: `rent-a-car-service.csproj`
+- ASP.NET Core MVC uygulama girisi olusturuldu: `Program.cs`
+- MVC routing yapisi eklendi.
+- Static dosyalar icin `wwwroot` kullanimi aktif hale getirildi.
+- Home controller olusturuldu.
+- Cars controller olusturuldu.
+- Reservations controller olusturuldu.
+- Admin controller olusturuldu.
+- Temel model siniflari eklendi: `Car`, `Customer`, `Reservation`
+- Mevcut Razor View dosyalari controller actionlari ile calisir hale getirildi.
+- Proje `dotnet build` ile hatasiz derlenebilir hale getirildi.
+- Uygulama `http://localhost:5000` adresinde calistirildi ve ana sayfa dogrulandi.
+- View dosyalarindaki statik ornek veriler controller tarafina tasindi.
+- View dosyalari `@model` kullanacak sekilde duzenlendi.
+- Admin dashboard icin ViewModel yapisi eklendi: `AdminDashboardViewModel`, `ReservationSummaryViewModel`
+- Rezervasyon sayfasi icin ViewModel yapisi eklendi: `ReservationCreateViewModel`
+- Arac detay linkleri id ile calisacak hale getirildi.
+- Rezervasyon sayfasi secili arac bilgisini modelden alacak hale getirildi.
+- Rezervasyon formu gercek MVC POST akisina baglandi.
+- Rezervasyon formu icin server-side validation eklendi.
+- Bos form gonderiminde validasyon mesajlari gosterildi.
+- Basarili form gonderiminde basari mesaji gosterildi.
+- Return date, pickup date ile ayni veya daha once olursa hata verecek kontrol eklendi.
+- Client-side validation script partial dosyasi eklendi: `_ValidationScriptsPartial.cshtml`
+- Ana sayfa, arac listesi, arac detay, rezervasyon, admin dashboard ve admin arac yonetimi sayfalari tarayicida kontrol edildi.
+- Yapilan degisiklikler iki ayri commit ile GitHub `main` dalina push edildi:
+  - `876eadd` - `Move sample data into MVC models`
+  - `bddebc0` - `Add reservation form submission flow`
+
+### Henuz Yapilmayanlar
+
+- Entity Framework Core eklenmedi.
+- Veritabani baglantisi eklenmedi.
+- DbContext sinifi olusturulmadi.
+- Migration islemleri yapilmadi.
+- Arac verileri veritabanindan okunmuyor.
+- Rezervasyonlar veritabanina kaydedilmiyor.
+- Admin arac ekleme, duzenleme ve silme islemleri gercek CRUD olarak calismiyor.
+- Login ve register sayfalari eklenmedi.
+- Kullanici yetkilendirme sistemi eklenmedi.
+- Admin ekranlari icin gercek yetki kontrolu yok.
+- Odeme sistemi eklenmedi.
+- Harita entegrasyonu eklenmedi.
+- Gelismis raporlama ekranlari eklenmedi.
+- Form verileri kalici olarak saklanmiyor.
+- Arac filtreleme formu henuz gercek filtreleme yapmiyor.
+- Ana sayfadaki arac arama formu henuz gercek arama yapmiyor.
+- Arac gorselleri henuz gercek resim dosyalari veya URL'leri ile baglanmadi.
+- Birim testi veya otomatik test yapisi eklenmedi.
+
+### Siradaki Onerilen Adimlar
+
+1. Statik arac verilerini tek bir ornek veri servisine tasimak.
+2. Admin arac yonetimi formunu POST akisina baglamak.
+3. Arac ekleme ve duzenleme icin basit validasyonlar eklemek.
+4. Rezervasyon basari ekranini ayri bir `Success` view olarak duzenlemek.
+5. Daha sonra Entity Framework Core ve veritabani katmanina gecmek.
