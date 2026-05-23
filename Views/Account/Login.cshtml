@@ -1,0 +1,58 @@
+@model RentACarService.ViewModels.LoginViewModel
+
+@{
+    ViewData["Title"] = "Giriş Yap";
+}
+
+<section class="max-w-container-max mx-auto px-gutter py-section-lg">
+    <div class="max-w-md mx-auto">
+        <div class="text-center mb-gap-lg">
+            <span class="material-symbols-outlined text-5xl text-white mb-gap-sm">lock</span>
+            <h1 class="text-h1 font-bold text-text-primary">Giriş Yap</h1>
+            <p class="text-text-secondary mt-2">Admin paneline erişmek için hesabınızla giriş yapın.</p>
+        </div>
+
+        @if (TempData["SuccessMessage"] is string successMessage)
+        {
+            <div class="mb-gap-md bg-success/10 border border-success text-success p-gap-sm rounded" role="alert">
+                @successMessage
+            </div>
+        }
+
+        <div class="orion-card p-gap-md">
+            <form asp-controller="Account" asp-action="Login" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-error mb-gap-sm"></div>
+
+                <div class="mb-gap-sm">
+                    <label class="block text-caption text-text-secondary mb-2" asp-for="Email">E-posta</label>
+                    <input class="orion-input" asp-for="Email" placeholder="admin@meurent.com" />
+                    <span class="text-error text-caption" asp-validation-for="Email"></span>
+                </div>
+
+                <div class="mb-gap-sm">
+                    <label class="block text-caption text-text-secondary mb-2" asp-for="Password">Şifre</label>
+                    <input class="orion-input" asp-for="Password" placeholder="••••••" />
+                    <span class="text-error text-caption" asp-validation-for="Password"></span>
+                </div>
+
+                <div class="mb-gap-md flex items-center gap-gap-xs">
+                    <input class="w-4 h-4 accent-white" asp-for="RememberMe" type="checkbox" />
+                    <label class="text-caption text-text-secondary" asp-for="RememberMe">Beni hatırla</label>
+                </div>
+
+                <button class="orion-button orion-button-primary w-full" type="submit">
+                    <span class="material-symbols-outlined">login</span>
+                    Giriş Yap
+                </button>
+            </form>
+        </div>
+
+        <p class="text-center text-text-secondary text-caption mt-gap-md">
+            Demo hesap: <span class="text-white font-code">admin@meurent.com</span> / <span class="text-white font-code">123456</span>
+        </p>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

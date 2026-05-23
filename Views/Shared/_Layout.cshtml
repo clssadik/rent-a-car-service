@@ -71,12 +71,22 @@
                 <nav class="hidden md:flex gap-gap-md ml-gap-lg">
                     <a class="text-white hover:text-primary transition-colors duration-200" asp-controller="Home" asp-action="Index">Ana Sayfa</a>
                     <a class="text-white hover:text-primary transition-colors duration-200" asp-controller="Cars" asp-action="Index">Araçlar</a>
-                    <a class="text-white hover:text-primary transition-colors duration-200" asp-controller="Reservations" asp-action="Create">Rezervasyon</a>
-                    <a class="text-white hover:text-primary transition-colors duration-200" asp-controller="Admin" asp-action="Index">Admin</a>
                 </nav>
+                <div class="hidden md:flex items-center gap-gap-sm ml-gap-md pl-gap-md border-l border-border">
+                    @if (Context.Session.GetString("UserEmail") != null)
+                    {
+                        <span class="text-white text-caption">@Context.Session.GetString("UserEmail")</span>
+                        <form asp-controller="Account" asp-action="Logout" method="post" class="inline">
+                            <button class="text-white hover:text-primary transition-colors bg-transparent border-0 cursor-pointer text-caption" type="submit">Çıkış</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <a class="text-white hover:text-primary transition-colors" asp-controller="Account" asp-action="Login">Giriş Yap</a>
+                    }
+                </div>
             </div>
             <div class="flex items-center gap-gap-sm">
-                <a class="hidden sm:flex text-white hover:text-primary transition-colors" asp-controller="Admin" asp-action="Cars">Filoyu Yönet</a>
                 <a class="bg-white hover:bg-gray-300 text-black h-10 px-5 rounded flex items-center justify-center font-semibold transition-colors" asp-controller="Cars" asp-action="Index">Keşfet</a>
             </div>
         </div>
