@@ -31,7 +31,12 @@
 
                 <div class="mb-gap-sm">
                     <label class="block text-caption text-text-secondary mb-2" asp-for="Password">Şifre</label>
-                    <input class="orion-input" asp-for="Password" placeholder="••••••" />
+                    <div class="relative">
+                        <input class="orion-input pr-12" asp-for="Password" id="passwordInput" placeholder="••••••" />
+                        <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-white transition-colors" onclick="var p=document.getElementById('passwordInput'); var i=this.querySelector('span'); p.type=p.type==='password'?'text':'password'; i.textContent=p.type==='password'?'visibility_off':'visibility';">
+                            <span class="material-symbols-outlined">visibility_off</span>
+                        </button>
+                    </div>
                     <span class="text-error text-caption" asp-validation-for="Password"></span>
                 </div>
 
