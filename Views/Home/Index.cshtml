@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Ana Sayfa";
 
-    var heroImage = "https://lh3.googleusercontent.com/aida-public/AB6AXuDw5UhX9FjYVVUg0G8XTcv2rTx2-tkznzx_wR4RpuEpeCWHQCiiWPHnQLPYMYQB9GtDuPxmbNKFR4OBGOUH_2slmeekbbC-PoD7LUSH22CWwLDkOIKzlRaccgPPpO8Ni_n86LB9UXO54W1bu3x_L3WsCCXuVkf35Un0_w5DpLaqVPn7Yi-_8ecl5nskeqO3kIzfFNc3wyEB53D4RDeAzi2VaYfDmd_wHBgxpWJu5e0qI7qpg_aZYBCBUedGzbR8QJ46DMz_s8wl8v8";
+    var heroImage = "/images/hero-bg.jpg";
     var carImages = new[]
     {
         "https://lh3.googleusercontent.com/aida-public/AB6AXuAmzmVcS_8aKFQjfV_6DpwpltRXSI5C16aWteXTXEodxMabdSm4zSwP5fD1HbRKS2PyYkSUS1ZHcfZ2ynFMfDLleaOE9XtMMRuT9DX8fOWqZBHR1rndErP_t5TwEwX1Zi1QWoK7qegi-BfLCsT1CJohikinqlVziqZdlhKRscqQLjzDZRf4uNT4ywLSXhPxapyN2JoJSP1N_UzaGLfjyLSf9EK8oHdl5uCwBLrhWmCwwxBofUi1l8FSQMcEpxVS-WPVYRS5meXfIOU",
@@ -13,10 +13,13 @@
 }
 
 <section class="w-full relative py-section-lg flex flex-col items-center justify-center min-h-[716px] hero-pattern px-gutter overflow-hidden">
-    <div class="max-w-container-max w-full mx-auto relative z-10 text-center flex flex-col items-center gap-gap-md">
-        <h1 class="font-display text-display text-text-primary max-w-4xl text-center">Hayalinizdeki Yolculuk</h1>
+    <div class="max-w-5xl w-full mx-auto relative z-10 text-left flex flex-col items-start gap-gap-md">
+        <h1 class="font-serif italic font-light text-[80px] leading-none text-text-primary">
+            Hayalinizdeki<br />
+            <span class="font-serif font-bold not-italic">Yolculuk</span>
+        </h1>
 
-        <form class="orion-search-form mt-gap-lg bg-surface border border-border rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.6)] p-gap-sm w-full max-w-5xl flex flex-col md:flex-row gap-gap-sm items-center" asp-controller="Cars" asp-action="Index" method="get">
+        <form class="orion-search-form mt-[300px] bg-surface border border-border rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.6)] p-gap-sm w-full max-w-5xl flex flex-col md:flex-row gap-gap-sm items-center" asp-controller="Cars" asp-action="Index" method="get">
             <div class="flex-1 w-full relative">
                 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-white">location_on</span>
                 <input class="orion-input pl-10" name="location" placeholder="Alış lokasyonu" type="text" />
@@ -45,7 +48,7 @@
             </button>
         </form>
     </div>
-    <div class="absolute inset-0 z-0 opacity-20 bg-cover bg-center" style="background-image: url('@heroImage');"></div>
+    <div class="absolute inset-0 z-0 opacity-100 bg-cover bg-center" style="background-image: url('@heroImage');"></div>
     <div class="absolute inset-0 bg-gradient-to-t from-bg-app via-transparent to-transparent z-0"></div>
 </section>
 
