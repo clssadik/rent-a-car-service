@@ -2,6 +2,9 @@
 
 @{
     ViewData["Title"] = $"{Model.Brand} {Model.Model} — İnceleme";
+    var imageList = ViewBag.Images as List<string> ?? new List<string>();
+    var totalImages = imageList.Count;
+    var gridCols = totalImages <= 6 ? totalImages : 6;
 }
 
 <section class="max-w-container-max mx-auto px-gutter py-section-md">
@@ -12,21 +15,24 @@
     </div>
 
     <div class="relative orion-card overflow-hidden mb-gap-sm">
-        <img id="mainImage" alt="@Model.Brand @Model.Model" class="w-full h-[60vh] object-cover" src="/images/cars/porsche-911-turbo-s-1.jpg" />
+        <img id="mainImage" alt="@Model.Brand @Model.Model" class="w-full h-[60vh] object-cover" src="@(imageList.FirstOrDefault() ?? "/images/cars/porsche-911-turbo-s-1.jpg")" />
+        @if (totalImages > 1)
+        {
         <button class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white w-12 h-12 rounded-full flex items-center justify-center transition-colors" onclick="navigate(-1)">
             <span class="material-symbols-outlined text-3xl">chevron_left</span>
         </button>
         <button class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white w-12 h-12 rounded-full flex items-center justify-center transition-colors" onclick="navigate(1)">
             <span class="material-symbols-outlined text-3xl">chevron_right</span>
         </button>
-        <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/60 text-white px-3 py-1 rounded-full text-caption" id="imageCounter">1 / 6</div>
+        <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/60 text-white px-3 py-1 rounded-full text-caption" id="imageCounter">1 / @totalImages</div>
+        }
     </div>
 
-    <div class="grid grid-cols-6 gap-gap-xs mb-gap-lg">
-        @for (int i = 1; i <= 6; i++)
+    <div class="grid @($"grid-cols-{gridCols}") gap-gap-xs mb-gap-lg">
+        @for (int i = 0; i < totalImages; i++)
         {
             <div class="aspect-[4/3] bg-surface-raised border border-border rounded overflow-hidden cursor-pointer hover:border-white transition-colors" onclick="showImage(@i)">
-                <img alt="Porsche 911 Turbo S" class="w-full h-full object-cover" src="/images/cars/porsche-911-turbo-s-@(i).jpg" />
+                <img alt="@Model.Brand @Model.Model" class="w-full h-full object-cover" src="@imageList[i]" />
             </div>
         }
     </div>
@@ -46,19 +52,50 @@
         </div>
 
         <div class="orion-card p-gap-md">
-            <p class="text-text-secondary text-caption">Günlük kiralama fiyatı</p>
-            <p class="font-code text-white text-h1 font-bold mb-gap-md">$@Model.DailyPrice</p>
-            <a class="orion-button orion-button-primary w-full" asp-controller="Reservations" asp-action="Create" asp-route-carId="@Model.Id">
+            <table class="w-full mb-gap-md text-center border-separate border-spacing-0 rounded overflow-hidden">
+                <thead>
+                    <tr>
+                        <th class="text-caption text-text-secondary font-normal pb-gap-xs"><span class="material-symbols-outlined align-middle text-sm">sell</span> Günlük Fiyat</th>
+                        <th class="text-caption text-text-secondary font-normal pb-gap-xs"><span class="material-symbols-outlined align-middle text-sm">star</span> Değerlendirme</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-code text-white text-h2 font-bold py-gap-xs">$@Model.DailyPrice<span class="text-text-secondary text-body font-normal">/gün</span></td>
+                        <td class="text-warning py-gap-xs">
+                            <span class="material-symbols-outlined text-lg">star</span>
+                            <span class="text-white font-semibold">4.9</span>
+                            <p class="text-text-secondary text-caption">120+ değerlendirme</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <a class="orion-button orion-button-primary w-full mb-gap-sm" asp-controller="Reservations" asp-action="Create" asp-route-carId="@Model.Id">
                 <span class="material-symbols-outlined">shopping_cart</span>
                 Bu Aracı Kirala
             </a>
+            <div class="grid grid-cols-3 gap-gap-xs text-center pt-gap-sm border-t border-border/50">
+                <div class="bg-surface-raised p-gap-xs rounded">
+                    <span class="material-symbols-outlined text-primary text-lg block mb-1">check_circle</span>
+                    <p class="text-caption text-text-secondary">Sigorta</p>
+                </div>
+                <div class="bg-surface-raised p-gap-xs rounded">
+                    <span class="material-symbols-outlined text-primary text-lg block mb-1">route</span>
+                    <p class="text-caption text-text-secondary">Sınırsız KM</p>
+                </div>
+                <div class="bg-surface-raised p-gap-xs rounded">
+                    <span class="material-symbols-outlined text-primary text-lg block mb-1">support_agent</span>
+                    <p class="text-caption text-text-secondary">7/24 Destek</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
 <script>
-    var currentImage = 1;
-    var totalImages = 6;
+    var images = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(imageList));
+    var currentImage = 0;
+    var totalImages = images.length;
 
     function showImage(n) {
         currentImage = n;
@@ -67,13 +104,13 @@
 
     function navigate(direction) {
         currentImage += direction;
-        if (currentImage < 1) currentImage = totalImages;
-        if (currentImage > totalImages) currentImage = 1;
+        if (currentImage < 0) currentImage = totalImages - 1;
+        if (currentImage >= totalImages) currentImage = 0;
         updateImage();
     }
 
     function updateImage() {
-        document.getElementById('mainImage').src = '/images/cars/porsche-911-turbo-s-' + currentImage + '.jpg';
-        document.getElementById('imageCounter').textContent = currentImage + ' / ' + totalImages;
+        document.getElementById('mainImage').src = images[currentImage];
+        document.getElementById('imageCounter').textContent = (currentImage + 1) + ' / ' + totalImages;
     }
 </script>

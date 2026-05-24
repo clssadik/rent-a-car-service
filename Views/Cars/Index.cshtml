@@ -1,7 +1,18 @@
 @model RentACarService.ViewModels.CarsIndexViewModel
-
+@using System.IO
 @{
     ViewData["Title"] = "Mevcut Araçlar";
+    string GetCarImage(RentACarService.Models.Car car)
+    {
+        var prefix = $"{car.Brand}-{car.Model}".ToLower().Replace(" ", "-");
+        var dir = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "images", "cars");
+        if (System.IO.Directory.Exists(dir))
+        {
+            var first = System.IO.Directory.GetFiles(dir, $"{prefix}-*").Select(System.IO.Path.GetFileName).OrderBy(f => f).FirstOrDefault();
+            if (first != null) return $"/images/cars/{first}";
+        }
+        return "/images/cars/porsche-911-turbo-s-1.jpg";
+    }
 }
 
 <section class="max-w-container-max mx-auto px-gutter py-section-md">
@@ -67,7 +78,7 @@
             var car = Model.Cars[i];
             <article class="orion-card overflow-hidden flex flex-col group hover:border-primary transition-colors">
                 <div class="h-56 bg-surface-raised relative overflow-hidden">
-                    <img alt="@car.Brand @car.Model" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="/images/cars/porsche-911-turbo-s-1.jpg" />
+                    <img alt="@car.Brand @car.Model" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="@GetCarImage(car)" />
                     <div class="absolute top-3 right-3 @(car.IsAvailable ? "bg-success" : "bg-text-muted") text-bg-app text-caption px-2 py-1 rounded font-bold">
                         @(car.IsAvailable ? "MÜSAİT" : "MÜSAİT DEĞİL")
                     </div>

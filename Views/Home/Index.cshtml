@@ -1,9 +1,19 @@
 @model List<RentACarService.Models.Car>
-
+@using System.IO
 @{
     ViewData["Title"] = "Ana Sayfa";
-
     var heroImage = "/images/hero-bg.jpg";
+    string GetCarImage(RentACarService.Models.Car car)
+    {
+        var prefix = $"{car.Brand}-{car.Model}".ToLower().Replace(" ", "-");
+        var dir = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "images", "cars");
+        if (System.IO.Directory.Exists(dir))
+        {
+            var first = System.IO.Directory.GetFiles(dir, $"{prefix}-*").Select(System.IO.Path.GetFileName).OrderBy(f => f).FirstOrDefault();
+            if (first != null) return $"/images/cars/{first}";
+        }
+        return "/images/cars/porsche-911-turbo-s-1.jpg";
+    }
 }
 
 <section class="w-full relative -mt-16 py-section-lg flex flex-col items-center justify-center min-h-[716px] hero-pattern px-gutter overflow-hidden">
@@ -60,7 +70,7 @@
             var car = Model[i];
             <article class="orion-card overflow-hidden flex flex-col group hover:border-primary transition-colors">
                 <div class="h-48 bg-surface-raised relative overflow-hidden">
-                    <img alt="@car.Brand @car.Model" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="/images/cars/porsche-911-turbo-s-1.jpg" />
+                    <img alt="@car.Brand @car.Model" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="@GetCarImage(car)" />
                     <div class="absolute top-3 right-3 bg-primary text-white text-caption px-2 py-1 rounded font-bold">ÖNE ÇIKAN</div>
                 </div>
                 <div class="p-gap-sm flex flex-col gap-gap-xs flex-grow">

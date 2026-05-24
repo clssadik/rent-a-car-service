@@ -35,6 +35,21 @@ using (var scope = app.Services.CreateScope())
                 Description = "Porsche 911 Turbo S — 640 HP, 0-100 km/s 2.7 saniye, çift turbolu boxer motor. Üstün performans ve lüksün mükemmel birleşimi."
             });
 
+        dbContext.Cars.Add(
+            new Car
+            {
+                Brand = "Mercedes",
+                Model = "S Serisi",
+                Year = 2025,
+                FuelType = "Diesel",
+                Transmission = "Automatic",
+                Type = "Sedan",
+                SeatCount = 5,
+                DailyPrice = 480,
+                IsAvailable = true,
+                Description = "Mercedes-Benz S Serisi — lüks ve konforun zirvesi. En son teknoloji sürüş destek sistemleri, premium iç mekan ve üstün performans."
+            });
+
         dbContext.SaveChanges();
     }
 }

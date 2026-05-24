@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RentACarService.Services;
 using RentACarService.ViewModels;
+using System.IO;
 
 namespace RentACarService.Controllers;
 
@@ -49,6 +50,20 @@ public class CarsController : Controller
         {
             return NotFound();
         }
+
+        var prefix = $"{car.Brand}-{car.Model}".ToLower().Replace(" ", "-");
+        var dir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "cars");
+        var images = new List<string>();
+        if (Directory.Exists(dir))
+        {
+            var files = Directory.GetFiles(dir, $"{prefix}-*")
+                .Select(Path.GetFileName)
+                .OrderBy(f => f)
+                .ToList();
+            foreach (var f in files)
+                images.Add($"/images/cars/{f}");
+        }
+        ViewBag.Images = images;
 
         return View(car);
     }
