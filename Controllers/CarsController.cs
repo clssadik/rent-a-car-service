@@ -40,4 +40,16 @@ public class CarsController : Controller
 
         return View(car);
     }
+
+    public IActionResult Review(int id = 1)
+    {
+        var car = _sampleDataService.GetCarById(id);
+
+        if (car == null)
+        {
+            return NotFound();
+        }
+
+        return View(car);
+    }
 }

@@ -1,0 +1,65 @@
+@model RentACarService.Models.Car
+
+@{
+    ViewData["Title"] = $"{Model.Brand} {Model.Model} — İnceleme";
+}
+
+<section class="max-w-container-max mx-auto px-gutter py-section-md">
+    <div class="mb-gap-md">
+        <span class="text-white font-bold uppercase tracking-wide text-body">İnceleme</span>
+        <h1 class="text-h1 font-bold text-text-primary mt-2">@Model.Brand @Model.Model</h1>
+        <p class="text-text-secondary max-w-3xl mt-gap-sm">@Model.Description</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-gap-lg mb-gap-lg">
+        <div>
+            <div class="orion-card overflow-hidden mb-gap-sm">
+                <img id="mainImage" alt="@Model.Brand @Model.Model" class="w-full h-[420px] object-cover" src="/images/cars/porsche-911-turbo-s-1.jpg" />
+            </div>
+            <div class="grid grid-cols-6 gap-gap-xs">
+                <div class="aspect-[4/3] bg-surface-raised border border-border rounded overflow-hidden cursor-pointer hover:border-white transition-colors" onclick="document.getElementById('mainImage').src='/images/cars/porsche-911-turbo-s-1.jpg'">
+                    <img alt="Porsche 911 Turbo S" class="w-full h-full object-cover" src="/images/cars/porsche-911-turbo-s-1.jpg" />
+                </div>
+                <div class="aspect-[4/3] bg-surface-raised border border-border rounded overflow-hidden cursor-pointer hover:border-white transition-colors" onclick="document.getElementById('mainImage').src='/images/cars/porsche-911-turbo-s-2.jpg'">
+                    <img alt="Porsche 911 Turbo S" class="w-full h-full object-cover" src="/images/cars/porsche-911-turbo-s-2.jpg" />
+                </div>
+                <div class="aspect-[4/3] bg-surface-raised border border-border rounded overflow-hidden cursor-pointer hover:border-white transition-colors" onclick="document.getElementById('mainImage').src='/images/cars/porsche-911-turbo-s-3.jpg'">
+                    <img alt="Porsche 911 Turbo S" class="w-full h-full object-cover" src="/images/cars/porsche-911-turbo-s-3.jpg" />
+                </div>
+                <div class="aspect-[4/3] bg-surface-raised border border-border rounded overflow-hidden cursor-pointer hover:border-white transition-colors" onclick="document.getElementById('mainImage').src='/images/cars/porsche-911-turbo-s-4.jpg'">
+                    <img alt="Porsche 911 Turbo S" class="w-full h-full object-cover" src="/images/cars/porsche-911-turbo-s-4.jpg" />
+                </div>
+                <div class="aspect-[4/3] bg-surface-raised border border-border rounded overflow-hidden cursor-pointer hover:border-white transition-colors" onclick="document.getElementById('mainImage').src='/images/cars/porsche-911-turbo-s-5.jpg'">
+                    <img alt="Porsche 911 Turbo S" class="w-full h-full object-cover" src="/images/cars/porsche-911-turbo-s-5.jpg" />
+                </div>
+                <div class="aspect-[4/3] bg-surface-raised border border-border rounded overflow-hidden cursor-pointer hover:border-white transition-colors" onclick="document.getElementById('mainImage').src='/images/cars/porsche-911-turbo-s-6.jpg'">
+                    <img alt="Porsche 911 Turbo S" class="w-full h-full object-cover" src="/images/cars/porsche-911-turbo-s-6.jpg" />
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-gap-md">
+            <div class="orion-card p-gap-md">
+                <h2 class="text-h3 font-semibold mb-gap-sm">Teknik Özellikler</h2>
+                <div class="space-y-gap-xs text-text-secondary">
+                    <div class="flex justify-between py-1 border-b border-border/50"><span>Marka</span><span class="text-white">@Model.Brand</span></div>
+                    <div class="flex justify-between py-1 border-b border-border/50"><span>Model</span><span class="text-white">@Model.Model</span></div>
+                    <div class="flex justify-between py-1 border-b border-border/50"><span>Yıl</span><span class="text-white">@Model.Year</span></div>
+                    <div class="flex justify-between py-1 border-b border-border/50"><span>Yakıt</span><span class="text-white">@Model.FuelType</span></div>
+                    <div class="flex justify-between py-1 border-b border-border/50"><span>Vites</span><span class="text-white">@(Model.Transmission == "Automatic" ? "Otomatik" : "Manuel")</span></div>
+                    <div class="flex justify-between py-1 border-b border-border/50"><span>Kasa Tipi</span><span class="text-white">@Model.Type</span></div>
+                    <div class="flex justify-between py-1 border-b border-border/50"><span>Koltuk</span><span class="text-white">@Model.SeatCount</span></div>
+                </div>
+            </div>
+
+            <div class="orion-card p-gap-md">
+                <p class="text-text-secondary text-caption">Günlük kiralama fiyatı</p>
+                <p class="font-code text-white text-h1 font-bold mb-gap-md">$@Model.DailyPrice</p>
+                <a class="orion-button orion-button-primary w-full" asp-controller="Reservations" asp-action="Create" asp-route-carId="@Model.Id">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                    Bu Aracı Kirala
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

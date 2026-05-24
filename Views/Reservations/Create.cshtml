@@ -2,7 +2,6 @@
 
 @{
     ViewData["Title"] = "Rezervasyon Oluştur";
-    var carImage = "https://lh3.googleusercontent.com/aida-public/AB6AXuA6h3uOi4kCTSpHFkJZ6-r4DXwuWzU_EImY_NOpLZ2DoiFfe_Qg0uoikWaZdXx3wna4mhnNHfrHI_LhxMG4Wg_fP5HCU1jAyUPPCyUUN_Ef2-Iir4WBSdr0pSDVhFJTt3mltGKfWwCm06lkaGwJ27f7fAKhc3QhAjGwiF__4suSCSojQXB_m7YIuqhYV0jJ2B0zW67IerCLYW8NBiBS6e4cDq5hm7pt4J2uh62dgQqsv6TjYgavXPx1bCxW1OBkJjYMOCYf8yhHzI";
 }
 
 <section class="max-w-container-max mx-auto px-gutter py-section-md">
@@ -76,7 +75,7 @@
 
         <aside class="flex flex-col gap-gap-md">
             <div class="orion-card overflow-hidden">
-                <img alt="@Model.SelectedCar.Brand @Model.SelectedCar.Model" class="w-full h-56 object-cover" src="@carImage" />
+                <img alt="@Model.SelectedCar.Brand @Model.SelectedCar.Model" class="w-full h-56 object-cover" src="/images/cars/porsche-911-turbo-s-1.jpg" />
                 <div class="p-gap-sm">
                     <p class="text-text-secondary text-caption">Seçilen araç</p>
                     <h2 class="text-h3 font-semibold">@Model.SelectedCar.Brand @Model.SelectedCar.Model</h2>

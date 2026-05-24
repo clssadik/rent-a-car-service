@@ -20,84 +20,19 @@ using (var scope = app.Services.CreateScope())
 
     if (!dbContext.Cars.Any())
     {
-        dbContext.Cars.AddRange(
+        dbContext.Cars.Add(
             new Car
             {
-                Brand = "Toyota",
-                Model = "Corolla",
-                Year = 2022,
+                Brand = "Porsche",
+                Model = "911 Turbo S",
+                Year = 2024,
                 FuelType = "Gasoline",
                 Transmission = "Automatic",
-                Type = "Sedan",
-                SeatCount = 5,
-                DailyPrice = 45,
+                Type = "Coupe",
+                SeatCount = 4,
+                DailyPrice = 350,
                 IsAvailable = true,
-                Description = "A comfortable sedan with low fuel consumption, practical luggage space, and smooth automatic transmission. Suitable for city driving and short trips."
-            },
-            new Car
-            {
-                Brand = "Volkswagen",
-                Model = "Golf",
-                Year = 2021,
-                FuelType = "Diesel",
-                Transmission = "Manual",
-                Type = "Hatchback",
-                SeatCount = 5,
-                DailyPrice = 50,
-                IsAvailable = true,
-                Description = "A compact hatchback with practical handling and efficient fuel usage."
-            },
-            new Car
-            {
-                Brand = "Hyundai",
-                Model = "Tucson",
-                Year = 2023,
-                FuelType = "Hybrid",
-                Transmission = "Automatic",
-                Type = "SUV",
-                SeatCount = 5,
-                DailyPrice = 75,
-                IsAvailable = false,
-                Description = "A modern SUV with a comfortable interior and hybrid efficiency."
-            },
-            new Car
-            {
-                Brand = "Renault",
-                Model = "Clio",
-                Year = 2020,
-                FuelType = "Gasoline",
-                Transmission = "Manual",
-                Type = "Hatchback",
-                SeatCount = 5,
-                DailyPrice = 38,
-                IsAvailable = true,
-                Description = "A budget-friendly hatchback for city trips."
-            },
-            new Car
-            {
-                Brand = "Ford",
-                Model = "Focus",
-                Year = 2022,
-                FuelType = "Diesel",
-                Transmission = "Automatic",
-                Type = "Sedan",
-                SeatCount = 5,
-                DailyPrice = 55,
-                IsAvailable = true,
-                Description = "A reliable sedan with balanced comfort and performance."
-            },
-            new Car
-            {
-                Brand = "Mercedes",
-                Model = "Vito",
-                Year = 2021,
-                FuelType = "Diesel",
-                Transmission = "Automatic",
-                Type = "Van",
-                SeatCount = 8,
-                DailyPrice = 90,
-                IsAvailable = false,
-                Description = "A spacious van suitable for family and group travel."
+                Description = "Porsche 911 Turbo S — 640 HP, 0-100 km/s 2.7 saniye, çift turbolu boxer motor. Üstün performans ve lüksün mükemmel birleşimi."
             });
 
         dbContext.SaveChanges();
