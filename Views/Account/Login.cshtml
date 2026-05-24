@@ -4,33 +4,33 @@
     ViewData["Title"] = "Giriş Yap";
 }
 
-<section class="max-w-container-max mx-auto px-gutter py-section-lg">
-    <div class="max-w-md mx-auto">
-        <div class="text-center mb-gap-lg">
-            <span class="material-symbols-outlined text-5xl text-white mb-gap-sm">lock</span>
-            <h1 class="text-h1 font-bold text-text-primary">Giriş Yap</h1>
-            <p class="text-text-secondary mt-2">Admin paneline erişmek için hesabınızla giriş yapın.</p>
+<section class="w-full px-gutter min-h-[calc(100vh-4rem)] flex items-center justify-center">
+    <div class="w-full max-w-lg">
+        <div class="text-center mb-gap-sm">
+            <span class="material-symbols-outlined text-4xl text-white mb-1 block">lock</span>
+            <h1 class="text-h2 font-bold text-text-primary">Giriş Yap</h1>
+            <p class="text-text-secondary text-caption mt-1">Admin paneline erişmek için hesabınızla giriş yapın.</p>
         </div>
 
         @if (TempData["SuccessMessage"] is string successMessage)
         {
-            <div class="mb-gap-md bg-success/10 border border-success text-success p-gap-sm rounded" role="alert">
+            <div class="mb-gap-sm bg-success/10 border border-success text-success p-gap-sm rounded text-caption" role="alert">
                 @successMessage
             </div>
         }
 
         <div class="orion-card p-gap-md">
             <form asp-controller="Account" asp-action="Login" method="post">
-                <div asp-validation-summary="ModelOnly" class="text-error mb-gap-sm"></div>
+                <div asp-validation-summary="ModelOnly" class="text-error mb-gap-sm text-caption"></div>
 
                 <div class="mb-gap-sm">
-                    <label class="block text-caption text-text-secondary mb-2" asp-for="Email">E-posta</label>
+                    <label class="block text-caption text-text-secondary mb-1" asp-for="Email">E-posta</label>
                     <input class="orion-input" asp-for="Email" placeholder="ornek@mail.com" />
                     <span class="text-error text-caption" asp-validation-for="Email"></span>
                 </div>
 
                 <div class="mb-gap-sm">
-                    <label class="block text-caption text-text-secondary mb-2" asp-for="Password">Şifre</label>
+                    <label class="block text-caption text-text-secondary mb-1" asp-for="Password">Şifre</label>
                     <div class="relative">
                         <input class="orion-input pr-12" asp-for="Password" id="passwordInput" placeholder="••••••" />
                         <button type="button" class="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-white transition-colors" onclick="var p=document.getElementById('passwordInput'); var i=this.querySelector('span'); p.type=p.type==='password'?'text':'password'; i.textContent=p.type==='password'?'visibility_off':'visibility';">
@@ -40,21 +40,21 @@
                     <span class="text-error text-caption" asp-validation-for="Password"></span>
                 </div>
 
-                <div class="mb-gap-md flex items-center gap-gap-xs">
+                <div class="mb-gap-sm flex items-center gap-gap-xs">
                     <input class="w-4 h-4 accent-white" asp-for="RememberMe" type="checkbox" />
                     <label class="text-caption text-text-secondary" asp-for="RememberMe">Beni hatırla</label>
                 </div>
 
-                <button class="orion-button orion-button-primary w-full" type="submit">
+                <button class="orion-button orion-button-primary w-full mb-gap-sm" type="submit">
                     <span class="material-symbols-outlined">login</span>
                     Giriş Yap
                 </button>
+
+                <p class="text-center text-text-muted text-caption border-t border-border/50 pt-gap-sm">
+                    Demo: <span class="text-text-secondary">admin@meurent.com</span> / <span class="text-text-secondary">123456</span>
+                </p>
             </form>
         </div>
-
-        <p class="text-center text-text-secondary text-caption mt-gap-md">
-            Demo hesap: <span class="text-white font-code">admin@meurent.com</span> / <span class="text-white font-code">123456</span>
-        </p>
     </div>
 </section>
 
