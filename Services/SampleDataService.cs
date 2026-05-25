@@ -94,9 +94,9 @@ public class SampleDataService
 
         cars = priceRange switch
         {
-            "0-50" => cars.Where(car => car.DailyPrice <= 50),
-            "50-80" => cars.Where(car => car.DailyPrice > 50 && car.DailyPrice <= 80),
-            "80+" => cars.Where(car => car.DailyPrice > 80),
+            "0-5000" => cars.Where(car => car.DailyPrice <= 5000),
+            "5000-9000" => cars.Where(car => car.DailyPrice > 5000 && car.DailyPrice <= 9000),
+            "9000+" => cars.Where(car => car.DailyPrice > 9000),
             _ => cars
         };
 

@@ -36,7 +36,7 @@
             <div class="orion-card p-gap-md flex items-center justify-between">
                 <div>
                     <p class="text-text-secondary text-caption">Günlük kiralama fiyatı</p>
-                    <p class="font-code text-primary text-h1 font-bold">$@Model.DailyPrice</p>
+                    <p class="font-code text-primary text-h1 font-bold">₺@Model.DailyPrice.ToString("N0")</p>
                 </div>
                 <a class="orion-button orion-button-primary" asp-controller="Reservations" asp-action="Create" asp-route-carId="@Model.Id">
                     Bu Aracı Kirala

@@ -74,7 +74,7 @@
                             <td class="px-gap-sm py-gap-sm text-text-secondary">@reservation.PickupDate.ToString("yyyy-MM-dd")</td>
                             <td class="px-gap-sm py-gap-sm text-text-secondary">@reservation.ReturnDate.ToString("yyyy-MM-dd")</td>
                             <td class="px-gap-sm py-gap-sm text-text-secondary">@reservation.PickupLocation</td>
-                            <td class="px-gap-sm py-gap-sm font-code text-primary">$@reservation.TotalPrice.ToString("N0")</td>
+                            <td class="px-gap-sm py-gap-sm font-code text-primary">₺@reservation.TotalPrice.ToString("N0")</td>
                             <td class="px-gap-sm py-gap-sm">
                                 <span class="inline-block rounded px-2 py-1 text-caption font-semibold @StatusBadgeClass(reservation.Status)">
                                     @StatusDisplay(reservation.Status)

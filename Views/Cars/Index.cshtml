@@ -50,9 +50,9 @@
                 <label class="block text-caption text-text-secondary mb-2" for="priceRange">Fiyat aralığı</label>
                 <select class="orion-input" id="priceRange" name="priceRange">
                     <option value="">Tüm fiyatlar</option>
-                    <option value="0-50" selected="@(Model.PriceRange == "0-50" ? "selected" : null)">$0 - $50</option>
-                    <option value="50-80" selected="@(Model.PriceRange == "50-80" ? "selected" : null)">$50 - $80</option>
-                    <option value="80+" selected="@(Model.PriceRange == "80+" ? "selected" : null)">$80+</option>
+                    <option value="0-5000" selected="@(Model.PriceRange == "0-5000" ? "selected" : null)">₺0 - ₺5.000</option>
+                    <option value="5000-9000" selected="@(Model.PriceRange == "5000-9000" ? "selected" : null)">₺5.000 - ₺9.000</option>
+                    <option value="9000+" selected="@(Model.PriceRange == "9000+" ? "selected" : null)">₺9.000+</option>
                 </select>
             </div>
             <div class="flex items-end">
@@ -89,7 +89,7 @@
                             <h2 class="text-h3 font-semibold text-text-primary">@car.Brand @car.Model</h2>
                             <p class="text-text-secondary">@car.Type</p>
                         </div>
-                        <span class="font-code text-primary font-bold whitespace-nowrap">$@car.DailyPrice/d</span>
+                        <span class="font-code text-primary font-bold whitespace-nowrap">₺@car.DailyPrice.ToString("N0")/g</span>
                     </div>
                     <div class="grid grid-cols-2 gap-2 text-caption text-text-muted">
                         <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">calendar_month</span>@car.Year</div>

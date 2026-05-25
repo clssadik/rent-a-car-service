@@ -87,7 +87,7 @@
                 <h2 class="text-h3 font-semibold mb-gap-sm">Fiyat Özeti</h2>
                 <div class="flex justify-between text-text-secondary mb-gap-xs">
                     <span>Günlük fiyat</span>
-                    <strong class="text-text-primary">$@Model.SelectedCar.DailyPrice</strong>
+                    <strong class="text-text-primary">₺@Model.SelectedCar.DailyPrice.ToString("N0")</strong>
                 </div>
                 <div class="flex justify-between text-text-secondary mb-gap-sm">
                     <span>Kiralama günü</span>
@@ -95,7 +95,7 @@
                 </div>
                 <div class="border-t border-border pt-gap-sm flex justify-between items-center">
                     <span class="text-text-primary font-semibold">Toplam</span>
-                    <strong class="font-code text-primary text-h2">$@Model.TotalPrice</strong>
+                    <strong class="font-code text-primary text-h2">₺@Model.TotalPrice.ToString("N0")</strong>
                 </div>
             </div>
         </aside>

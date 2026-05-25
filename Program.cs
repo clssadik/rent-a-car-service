@@ -30,7 +30,7 @@ using (var scope = app.Services.CreateScope())
                 Transmission = "Automatic",
                 Type = "Coupe",
                 SeatCount = 4,
-                DailyPrice = 350,
+                DailyPrice = 9800,
                 IsAvailable = true,
                 Description = "Porsche 911 Turbo S — 640 HP, 0-100 km/s 2.7 saniye, çift turbolu boxer motor. Üstün performans ve lüksün mükemmel birleşimi."
             });
@@ -48,7 +48,7 @@ using (var scope = app.Services.CreateScope())
                 Transmission = "Automatic",
                 Type = "Sedan",
                 SeatCount = 5,
-                DailyPrice = 480,
+                DailyPrice = 7950,
                 IsAvailable = true,
                 Description = "Mercedes-Benz S Serisi — lüks ve konforun zirvesi. En son teknoloji sürüş destek sistemleri, premium iç mekan ve üstün performans."
             });

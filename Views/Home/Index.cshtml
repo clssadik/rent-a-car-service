@@ -76,7 +76,7 @@
                 <div class="p-gap-sm flex flex-col gap-gap-xs flex-grow">
                     <div class="flex justify-between items-start gap-gap-sm">
                         <h3 class="text-h3 text-text-primary font-semibold">@car.Brand @car.Model</h3>
-                        <span class="font-code text-primary font-bold whitespace-nowrap">$@car.DailyPrice/d</span>
+                        <span class="font-code text-primary font-bold whitespace-nowrap">₺@car.DailyPrice.ToString("N0")/g</span>
                     </div>
                     <p class="text-text-secondary text-sm">@car.Type</p>
                     <div class="grid grid-cols-2 gap-2 mt-4 text-caption text-text-muted">
