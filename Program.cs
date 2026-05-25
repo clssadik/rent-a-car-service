@@ -54,6 +54,114 @@ using (var scope = app.Services.CreateScope())
             });
     }
 
+    if (!dbContext.Cars.Any(c => c.Brand == "Alfa Romeo" && c.Model == "Giulietta"))
+    {
+        dbContext.Cars.Add(
+            new Car
+            {
+                Brand = "Alfa Romeo",
+                Model = "Giulietta",
+                Year = 2020,
+                FuelType = "Gasoline",
+                Transmission = "Automatic",
+                Type = "Hatchback",
+                SeatCount = 5,
+                DailyPrice = 2850,
+                IsAvailable = true,
+                Description = "Sportif tasarimi ve kompakt yapisiyla sehir ici ve kisa yolculuklar icin keyifli bir hatchback secenegidir."
+            });
+    }
+
+    if (!dbContext.Cars.Any(c => c.Brand == "Citroen" && c.Model == "C5"))
+    {
+        dbContext.Cars.Add(
+            new Car
+            {
+                Brand = "Citroen",
+                Model = "C5",
+                Year = 2022,
+                FuelType = "Diesel",
+                Transmission = "Automatic",
+                Type = "Sedan",
+                SeatCount = 5,
+                DailyPrice = 3600,
+                IsAvailable = true,
+                Description = "Konfor odakli surusu, genis ic hacmi ve ekonomik dizel motoruyla uzun yol kullanimi icin uygundur."
+            });
+    }
+
+    if (!dbContext.Cars.Any(c => c.Brand == "Fiat" && c.Model == "Egea"))
+    {
+        dbContext.Cars.Add(
+            new Car
+            {
+                Brand = "Fiat",
+                Model = "Egea",
+                Year = 2021,
+                FuelType = "Diesel",
+                Transmission = "Manual",
+                Type = "Sedan",
+                SeatCount = 5,
+                DailyPrice = 2300,
+                IsAvailable = true,
+                Description = "Uygun fiyati, genis bagaj hacmi ve dusuk yakit tuketimiyle gunluk kiralama icin pratik bir sedan secenegidir."
+            });
+    }
+
+    if (!dbContext.Cars.Any(c => c.Brand == "Renault" && c.Model == "Clio"))
+    {
+        dbContext.Cars.Add(
+            new Car
+            {
+                Brand = "Renault",
+                Model = "Clio",
+                Year = 2022,
+                FuelType = "Gasoline",
+                Transmission = "Automatic",
+                Type = "Hatchback",
+                SeatCount = 5,
+                DailyPrice = 2400,
+                IsAvailable = true,
+                Description = "Kompakt boyutlari ve kolay kullanimiyla sehir ici ulasimda ekonomik ve rahat bir tercihtir."
+            });
+    }
+
+    if (!dbContext.Cars.Any(c => c.Brand == "Volkswagen" && c.Model == "Passat"))
+    {
+        dbContext.Cars.Add(
+            new Car
+            {
+                Brand = "Volkswagen",
+                Model = "Passat",
+                Year = 2021,
+                FuelType = "Diesel",
+                Transmission = "Automatic",
+                Type = "Sedan",
+                SeatCount = 5,
+                DailyPrice = 4200,
+                IsAvailable = true,
+                Description = "Genis kabini, dengeli surus karakteri ve premium hissiyle is seyahatleri ve aile kullanimi icin uygundur."
+            });
+    }
+
+    if (!dbContext.Cars.Any(c => c.Brand == "Volvo" && c.Model == "XC90"))
+    {
+        dbContext.Cars.Add(
+            new Car
+            {
+                Brand = "Volvo",
+                Model = "XC90",
+                Year = 2023,
+                FuelType = "Hybrid",
+                Transmission = "Automatic",
+                Type = "SUV",
+                SeatCount = 7,
+                DailyPrice = 8900,
+                IsAvailable = true,
+                Description = "Yedi koltuklu yapisi, hibrit motoru ve gelismis guvenlik donanimlariyla luks SUV segmentinde guclu bir alternatiftir."
+            });
+    }
+
     dbContext.SaveChanges();
 
     if (!dbContext.Provinces.Any())
