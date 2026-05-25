@@ -51,7 +51,7 @@
                     </div>
                     <div>
                         <label class="block text-caption text-text-secondary mb-2" asp-for="PhoneNumber">Telefon numarası</label>
-                        <input class="orion-input" asp-for="PhoneNumber" type="tel" inputmode="numeric" pattern="[0-9+\-\s()]+" placeholder="+90 555 000 00 00" />
+                        <input class="orion-input" asp-for="PhoneNumber" type="tel" inputmode="numeric" pattern="[0-9+\-\s()]+" placeholder="+90 555 000 00 00" oninput="this.value = this.value.replace(/[^0-9+\-\s()]/g, '')" />
                         <span class="text-error text-caption" asp-validation-for="PhoneNumber"></span>
                     </div>
                 </div>
@@ -62,12 +62,12 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-gap-sm">
                     <div>
                         <label class="block text-caption text-text-secondary mb-2" asp-for="PickupDate">Alış tarihi</label>
-                        <input class="orion-input" asp-for="PickupDate" />
+                        <input class="orion-input" asp-for="PickupDate" id="pickupDate" />
                         <span class="text-error text-caption" asp-validation-for="PickupDate"></span>
                     </div>
                     <div>
                         <label class="block text-caption text-text-secondary mb-2" asp-for="ReturnDate">İade tarihi</label>
-                        <input class="orion-input" asp-for="ReturnDate" />
+                        <input class="orion-input" asp-for="ReturnDate" id="returnDate" />
                         <span class="text-error text-caption" asp-validation-for="ReturnDate"></span>
                     </div>
                     <div class="md:col-span-2">
@@ -108,11 +108,11 @@
                 </div>
                 <div class="flex justify-between text-text-secondary mb-gap-sm">
                     <span>Kiralama günü</span>
-                    <strong class="text-text-primary">@Model.RentalDays</strong>
+                    <strong class="text-text-primary" id="rentalDays">@Model.RentalDays</strong>
                 </div>
                 <div class="border-t border-border pt-gap-sm flex justify-between items-center">
                     <span class="text-text-primary font-semibold">Toplam</span>
-                    <strong class="font-code text-primary text-h2">₺@Model.TotalPrice.ToString("N0")</strong>
+                    <strong class="font-code text-primary text-h2" id="totalPrice">₺@Model.TotalPrice.ToString("N0")</strong>
                 </div>
             </div>
         </aside>
@@ -121,4 +121,26 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        var dailyPrice = @Model.SelectedCar.DailyPrice;
+        var pickup = document.getElementById('pickupDate');
+        var returnEl = document.getElementById('returnDate');
+        var rentalDaysEl = document.getElementById('rentalDays');
+        var totalPriceEl = document.getElementById('totalPrice');
+        var hiddenRentalDays = document.querySelector('input[name="RentalDays"]');
+
+        function updateTotal() {
+            if (!pickup.value || !returnEl.value) return;
+            var d1 = new Date(pickup.value);
+            var d2 = new Date(returnEl.value);
+            var days = Math.max(1, Math.round((d2 - d1) / (1000 * 60 * 60 * 24)));
+            rentalDaysEl.textContent = days;
+            var total = days * dailyPrice;
+            totalPriceEl.textContent = '₺' + total.toLocaleString('tr-TR');
+            hiddenRentalDays.value = days;
+        }
+
+        pickup.addEventListener('change', updateTotal);
+        returnEl.addEventListener('change', updateTotal);
+    </script>
 }
