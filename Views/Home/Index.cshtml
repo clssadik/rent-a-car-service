@@ -16,7 +16,7 @@
     }
 }
 
-<section class="w-full relative -mt-16 py-section-lg flex flex-col items-center justify-center min-h-[716px] hero-pattern px-gutter overflow-hidden">
+<section class="w-full relative -mt-16 py-section-lg flex flex-col items-center justify-center min-h-[716px] hero-pattern px-gutter">
     <div class="max-w-5xl w-full mx-açuto relative z-10 text-left flex flex-col items-start gap-gap-md pt-20">
         <h1 class="font-serif text-[80px] leading-none text-text-primary">
             Hayalinizdeki<br />
@@ -27,7 +27,7 @@
             <div class="flex-1 w-full relative">
                 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-white z-10">location_on</span>
                 <input class="orion-input pl-10" id="locationInput" name="location" placeholder="Alış lokasyonu" type="text" autocomplete="off" onfocus="showProvinceDropdown()" oninput="filterProvinces()" onblur="setTimeout(()=>hideProvinceDropdown(),200)" />
-                <div id="provinceDropdown" class="absolute top-full left-0 right-0 mt-1 orion-card p-gap-xs hidden flex-col max-h-48 overflow-y-auto z-20" style="display:none"></div>
+                <div id="provinceDropdown" class="absolute top-full left-0 right-0 mt-1 orion-card p-gap-xs hidden flex-col max-h-48 overflow-y-auto z-50" style="display:none"></div>
             </div>
             <div class="flex-1 w-full relative">
                 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-white">calendar_today</span>
@@ -97,20 +97,20 @@
 
 <section class="w-full border-t border-border bg-surface/40">
     <div class="max-w-container-max mx-auto px-gutter py-section-md grid grid-cols-1 md:grid-cols-3 gap-gap-md">
-        <div class="orion-card p-gap-md">
-            <span class="material-symbols-outlined text-primary text-4xl mb-gap-sm">payments</span>
-            <h3 class="text-h3 font-semibold mb-2">Uygun Fiyatlar</h3>
-            <p class="text-text-secondary">Şeffaf günlük fiyatlar ve basit kiralama özetleri.</p>
+        <div class="orion-card p-gap-md" style="background:#FFFFFF">
+            <span class="material-symbols-outlined text-bg-app text-4xl mb-gap-sm">payments</span>
+            <h3 class="text-h3 font-semibold mb-2 text-bg-app">Uygun Fiyatlar</h3>
+            <p class="text-text-muted">Şeffaf günlük fiyatlar ve basit kiralama özetleri.</p>
         </div>
-        <div class="orion-card p-gap-md">
-            <span class="material-symbols-outlined text-primary text-4xl mb-gap-sm">event_available</span>
-            <h3 class="text-h3 font-semibold mb-2">Kolay Rezervasyon</h3>
-            <p class="text-text-secondary">Dakikalar içinde araç seçin ve rezervasyon formunu doldurun.</p>
+        <div class="orion-card p-gap-md" style="background:#FFFFFF">
+            <span class="material-symbols-outlined text-bg-app text-4xl mb-gap-sm">event_available</span>
+            <h3 class="text-h3 font-semibold mb-2 text-bg-app">Kolay Rezervasyon</h3>
+            <p class="text-text-muted">Dakikalar içinde araç seçin ve rezervasyon formunu doldurun.</p>
         </div>
-        <div class="orion-card p-gap-md">
-            <span class="material-symbols-outlined text-primary text-4xl mb-gap-sm">verified</span>
-            <h3 class="text-h3 font-semibold mb-2">Güvenilir Araçlar</h3>
-            <p class="text-text-secondary">Düzenli araç bilgileri müşterilerin güvenle kiralamasını sağlar.</p>
+        <div class="orion-card p-gap-md" style="background:#FFFFFF">
+            <span class="material-symbols-outlined text-bg-app text-4xl mb-gap-sm">verified</span>
+            <h3 class="text-h3 font-semibold mb-2 text-bg-app">Güvenilir Araçlar</h3>
+            <p class="text-text-muted">Düzenli araç bilgileri müşterilerin güvenle kiralamasını sağlar.</p>
         </div>
     </div>
 </section>
