@@ -52,16 +52,16 @@ public class CarsController : Controller
         }
 
         var prefix = $"{car.Brand}-{car.Model}".ToLower().Replace(" ", "-");
-        var dir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "cars");
+        var dir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "cars", prefix);
         var images = new List<string>();
         if (Directory.Exists(dir))
         {
-            var files = Directory.GetFiles(dir, $"{prefix}-*")
+            var files = Directory.GetFiles(dir, "*")
                 .Select(Path.GetFileName)
                 .OrderBy(f => f)
                 .ToList();
             foreach (var f in files)
-                images.Add($"/images/cars/{f}");
+                images.Add($"/images/cars/{prefix}/{f}");
         }
         ViewBag.Images = images;
 

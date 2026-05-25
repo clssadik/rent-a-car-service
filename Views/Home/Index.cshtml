@@ -6,13 +6,13 @@
     string GetCarImage(RentACarService.Models.Car car)
     {
         var prefix = $"{car.Brand}-{car.Model}".ToLower().Replace(" ", "-");
-        var dir = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "images", "cars");
+        var dir = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "images", "cars", prefix);
         if (System.IO.Directory.Exists(dir))
         {
-            var first = System.IO.Directory.GetFiles(dir, $"{prefix}-*").Select(System.IO.Path.GetFileName).OrderBy(f => f).FirstOrDefault();
-            if (first != null) return $"/images/cars/{first}";
+            var first = System.IO.Directory.GetFiles(dir, "*").Select(System.IO.Path.GetFileName).OrderBy(f => f).FirstOrDefault();
+            if (first != null) return $"/images/cars/{prefix}/{first}";
         }
-        return "/images/cars/porsche-911-turbo-s-1.jpg";
+        return "/images/cars/porsche-911-turbo-s/porsche-911-turbo-s-1.jpg";
     }
 }
 
