@@ -16,6 +16,7 @@ public class ReservationsController : Controller
 
     public IActionResult Create(int carId = 1)
     {
+        TempData.Remove("SuccessMessage");
         var reservation = new ReservationCreateViewModel
         {
             SelectedCar = GetSelectedCar(carId),
@@ -44,12 +45,6 @@ public class ReservationsController : Controller
         if (!_sampleDataService.IsCarAvailable(reservation.SelectedCarId))
         {
             ModelState.AddModelError(nameof(reservation.SelectedCarId), "Seçilen araç müsait değil.");
-        }
-
-        if (reservation.PickupDate.HasValue && reservation.ReturnDate.HasValue &&
-            _sampleDataService.HasOverlappingReservation(reservation.SelectedCarId, reservation.PickupDate.Value, reservation.ReturnDate.Value))
-        {
-            ModelState.AddModelError(nameof(reservation.PickupDate), "Seçilen araç bu tarihler için zaten rezerve edilmiş.");
         }
 
         if (!ModelState.IsValid)

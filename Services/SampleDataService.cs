@@ -174,9 +174,7 @@ public class SampleDataService
 
     public decimal GetTotalRevenue()
     {
-        return _dbContext.Reservations
-            .Where(r => r.Status == "Confirmed" || r.Status == "Completed")
-            .Sum(r => r.TotalPrice);
+        return _dbContext.Revenues.Sum(r => r.Amount);
     }
 
     public bool HasOverlappingReservation(int carId, DateTime pickupDate, DateTime returnDate)
@@ -218,6 +216,17 @@ public class SampleDataService
         var reservation = _dbContext.Reservations.FirstOrDefault(r => r.Id == id);
         if (reservation == null) return false;
         reservation.Status = status;
+
+        if (status == "Confirmed" && !_dbContext.Revenues.Any(r => r.ReservationId == id))
+        {
+            _dbContext.Revenues.Add(new Revenue
+            {
+                Amount = reservation.TotalPrice,
+                ReservationId = id,
+                CreatedAt = DateTime.UtcNow
+            });
+        }
+
         _dbContext.SaveChanges();
         return true;
     }

@@ -24,8 +24,7 @@ public class AccountController : Controller
         if (model.Email == "admin@meurent.com" && model.Password == "123456")
         {
             HttpContext.Session.SetString("UserEmail", model.Email);
-            TempData["SuccessMessage"] = "Giriş başarılı.";
-            return RedirectToAction("Index", "Admin");
+            return RedirectToAction("Index", "Home");
         }
 
         ModelState.AddModelError(string.Empty, "E-posta veya şifre hatalı.");

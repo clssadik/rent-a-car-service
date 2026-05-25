@@ -14,17 +14,12 @@ public class CarsController : Controller
         _sampleDataService = sampleDataService;
     }
 
-    public IActionResult Index(string? brand, string? type, string? carType, string? transmission, string? priceRange)
+    public IActionResult Index()
     {
-        var selectedType = string.IsNullOrWhiteSpace(type) ? carType : type;
-        var cars = _sampleDataService.GetFilteredCars(brand, selectedType, transmission, priceRange);
+        var cars = _sampleDataService.GetCars();
         var viewModel = new CarsIndexViewModel
         {
-            Cars = cars,
-            Brand = brand,
-            Type = selectedType,
-            Transmission = transmission,
-            PriceRange = priceRange
+            Cars = cars
         };
 
         return View(viewModel);

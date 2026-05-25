@@ -19,55 +19,13 @@
     <div class="flex flex-col gap-gap-xs mb-gap-lg">
         <span class="text-primary font-bold uppercase tracking-wide text-caption">Filoyu İncele</span>
         <h1 class="text-h1 font-bold text-text-primary">Mevcut Araçlar</h1>
-        <p class="text-text-secondary max-w-2xl">Marka, tip, vites ve günlük bütçeye göre filtreleyin.</p>
-    </div>
-
-    <div class="orion-card p-gap-md mb-gap-lg">
-        <form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-gap-sm" asp-controller="Cars" asp-action="Index" method="get">
-            <div>
-                <label class="block text-caption text-text-secondary mb-2" for="brand">Marka</label>
-                <input class="orion-input" id="brand" name="brand" placeholder="Toyota" type="text" value="@Model.Brand" />
-            </div>
-            <div>
-                <label class="block text-caption text-text-secondary mb-2" for="type">Araç tipi</label>
-                <select class="orion-input" id="type" name="type">
-                    <option value="">Tüm tipler</option>
-                    <option value="Sedan" selected="@(Model.Type == "Sedan" ? "selected" : null)">Sedan</option>
-                    <option value="SUV" selected="@(Model.Type == "SUV" ? "selected" : null)">SUV</option>
-                    <option value="Hatchback" selected="@(Model.Type == "Hatchback" ? "selected" : null)">Hatchback</option>
-                    <option value="Van" selected="@(Model.Type == "Van" ? "selected" : null)">Van</option>
-                </select>
-            </div>
-            <div>
-                <label class="block text-caption text-text-secondary mb-2" for="transmission">Vites</label>
-                <select class="orion-input" id="transmission" name="transmission">
-                    <option value="">Tümü</option>
-                    <option value="Automatic" selected="@(Model.Transmission == "Automatic" ? "selected" : null)">Automatic</option>
-                    <option value="Manual" selected="@(Model.Transmission == "Manual" ? "selected" : null)">Manual</option>
-                </select>
-            </div>
-            <div>
-                <label class="block text-caption text-text-secondary mb-2" for="priceRange">Fiyat aralığı</label>
-                <select class="orion-input" id="priceRange" name="priceRange">
-                    <option value="">Tüm fiyatlar</option>
-                    <option value="0-5000" selected="@(Model.PriceRange == "0-5000" ? "selected" : null)">₺0 - ₺5.000</option>
-                    <option value="5000-9000" selected="@(Model.PriceRange == "5000-9000" ? "selected" : null)">₺5.000 - ₺9.000</option>
-                    <option value="9000+" selected="@(Model.PriceRange == "9000+" ? "selected" : null)">₺9.000+</option>
-                </select>
-            </div>
-            <div class="flex items-end">
-                <button class="orion-button orion-button-primary w-full" type="submit">
-                    <span class="material-symbols-outlined">tune</span>
-                    Filtrele
-                </button>
-            </div>
-        </form>
+        <p class="text-text-secondary max-w-2xl">Tüm araçlarımızı inceleyin.</p>
     </div>
 
     @if (Model.Cars.Count == 0)
     {
         <div class="orion-card p-gap-md text-text-secondary">
-            Seçilen filtrelere uygun araç bulunamadı.
+            Henüz araç eklenmedi.
         </div>
     }
     else
