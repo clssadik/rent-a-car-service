@@ -25,8 +25,9 @@
 
         <form class="orion-search-form glass mt-[200px] rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.6)] p-gap-sm w-full max-w-5xl flex flex-col md:flex-row gap-gap-sm items-center" asp-controller="Cars" asp-action="Index" method="get">
             <div class="flex-1 w-full relative">
-                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-white">location_on</span>
-                <input class="orion-input pl-10" name="location" placeholder="Alış lokasyonu" type="text" />
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-white z-10">location_on</span>
+                <input class="orion-input pl-10" id="locationInput" name="location" placeholder="Alış lokasyonu" type="text" autocomplete="off" onfocus="showProvinceDropdown()" oninput="filterProvinces()" onblur="setTimeout(()=>hideProvinceDropdown(),200)" />
+                <div id="provinceDropdown" class="absolute top-full left-0 right-0 mt-1 orion-card p-gap-xs hidden flex-col max-h-48 overflow-y-auto z-20" style="display:none"></div>
             </div>
             <div class="flex-1 w-full relative">
                 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-white">calendar_today</span>
@@ -87,7 +88,7 @@
                     </div>
                 </div>
                 <div class="p-gap-sm pt-0">
-                    <a class="orion-button orion-button-outline w-full" asp-controller="Cars" asp-action="Review" asp-route-id="@car.Id">İncele</a>
+                    <a class="orion-button orion-button-primary w-full" asp-controller="Cars" asp-action="Review" asp-route-id="@car.Id">İncele</a>
                 </div>
             </article>
         }
@@ -113,3 +114,37 @@
         </div>
     </div>
 </section>
+
+@section Scripts {
+    <script>
+        var provinces = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(((List<RentACarService.Models.Province>)ViewBag.Provinces).Select(p => p.Name)));
+        var dropdown = document.getElementById('provinceDropdown');
+        var input = document.getElementById('locationInput');
+
+        function showProvinceDropdown() {
+            filterProvinces();
+        }
+
+        function hideProvinceDropdown() {
+            dropdown.style.display = 'none';
+        }
+
+        function filterProvinces() {
+            var q = input.value.toLowerCase();
+            var matches = provinces.filter(function(p) { return p.toLowerCase().includes(q); }).slice(0, 5);
+            if (matches.length === 0 || (matches.length === 1 && matches[0].toLowerCase() === q.toLowerCase())) {
+                dropdown.style.display = 'none';
+                return;
+            }
+            dropdown.innerHTML = matches.map(function(p) {
+                return '<div class="px-2 py-1 rounded hover:bg-surface-raised cursor-pointer text-text-primary text-caption" onmousedown="selectProvince(\'' + p + '\')">' + p + '</div>';
+            }).join('');
+            dropdown.style.display = 'flex';
+        }
+
+        function selectProvince(name) {
+            input.value = name;
+            dropdown.style.display = 'none';
+        }
+    </script>
+}

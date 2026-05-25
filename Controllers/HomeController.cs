@@ -15,6 +15,7 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         var featuredCars = _sampleDataService.GetFeaturedCars();
+        ViewBag.Provinces = _sampleDataService.GetProvinces();
 
         return View(featuredCars);
     }
