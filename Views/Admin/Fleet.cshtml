@@ -1,0 +1,65 @@
+@model List<RentACarService.Models.Car>
+
+@{
+    ViewData["Title"] = "Araç Filosu";
+}
+
+<section class="max-w-container-max mx-auto px-gutter py-section-md">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-gap-md mb-gap-lg">
+        <div>
+            <span class="text-primary font-bold uppercase tracking-wide text-caption">Filo</span>
+            <h1 class="text-h1 font-bold text-text-primary mt-2">Araç Filosu</h1>
+            <p class="text-text-secondary max-w-2xl">Veritabanındaki tüm araçların listesi.</p>
+        </div>
+        <a class="orion-button orion-button-outline" asp-controller="Admin" asp-action="Index">
+            <span class="material-symbols-outlined">arrow_back</span>
+            Admin Paneli
+        </a>
+    </div>
+
+    <div class="orion-card overflow-hidden">
+        <div class="p-gap-md border-b border-border flex justify-between items-center">
+            <h2 class="text-h3 font-semibold">Tüm Araçlar</h2>
+            <span class="text-text-secondary text-caption">@Model.Count araç</span>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left">
+                <thead class="bg-surface-raised text-text-secondary text-caption uppercase">
+                    <tr>
+                        <th class="px-gap-sm py-gap-sm">ID</th>
+                        <th class="px-gap-sm py-gap-sm">Marka</th>
+                        <th class="px-gap-sm py-gap-sm">Model</th>
+                        <th class="px-gap-sm py-gap-sm">Yıl</th>
+                        <th class="px-gap-sm py-gap-sm">Tip</th>
+                        <th class="px-gap-sm py-gap-sm">Vites</th>
+                        <th class="px-gap-sm py-gap-sm">Yakıt</th>
+                        <th class="px-gap-sm py-gap-sm">Koltuk</th>
+                        <th class="px-gap-sm py-gap-sm">Günlük Fiyat</th>
+                        <th class="px-gap-sm py-gap-sm">Durum</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-border">
+                    @foreach (var car in Model)
+                    {
+                        <tr class="hover:bg-surface-raised/60 transition-colors">
+                            <td class="px-gap-sm py-gap-sm font-code">#@car.Id</td>
+                            <td class="px-gap-sm py-gap-sm">@car.Brand</td>
+                            <td class="px-gap-sm py-gap-sm text-text-secondary">@car.Model</td>
+                            <td class="px-gap-sm py-gap-sm text-text-secondary">@car.Year</td>
+                            <td class="px-gap-sm py-gap-sm text-text-secondary">@car.Type</td>
+                            <td class="px-gap-sm py-gap-sm text-text-secondary">@(car.Transmission == "Automatic" ? "Otomatik" : "Manuel")</td>
+                            <td class="px-gap-sm py-gap-sm text-text-secondary">@car.FuelType</td>
+                            <td class="px-gap-sm py-gap-sm text-text-secondary">@car.SeatCount</td>
+                            <td class="px-gap-sm py-gap-sm font-code text-primary">₺@car.DailyPrice.ToString("N0")</td>
+                            <td class="px-gap-sm py-gap-sm">
+                                <span class="inline-block rounded px-2 py-1 text-caption font-semibold @(car.IsAvailable ? "bg-success/15 text-success border border-success/30" : "bg-text-muted/15 text-text-muted border border-text-muted/30")">
+                                    @(car.IsAvailable ? "Müsait" : "Müsait Değil")
+                                </span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

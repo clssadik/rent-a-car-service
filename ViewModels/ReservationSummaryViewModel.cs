@@ -2,6 +2,7 @@ namespace RentACarService.ViewModels;
 
 public class ReservationSummaryViewModel
 {
+    public int Id { get; set; }
     public string CustomerName { get; set; } = string.Empty;
     public string CarName { get; set; } = string.Empty;
     public DateTime PickupDate { get; set; }

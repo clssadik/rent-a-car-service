@@ -3,6 +3,7 @@ namespace RentACarService.ViewModels;
 public class AdminReservationsViewModel
 {
     public List<AdminReservationItem> Reservations { get; set; } = [];
+    public decimal TotalRevenue { get; set; }
 }
 
 public class AdminReservationItem

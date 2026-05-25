@@ -37,6 +37,17 @@
         </a>
     </div>
 
+    <div class="grid grid-cols-2 gap-gap-md mb-gap-lg">
+        <div class="orion-card p-gap-md flex justify-between items-center">
+            <span class="text-text-secondary">Toplam Rezervasyon</span>
+            <strong class="text-h2 font-bold">@Model.Reservations.Count</strong>
+        </div>
+        <div class="orion-card p-gap-md flex justify-between items-center">
+            <span class="text-text-secondary">Toplam Gelir</span>
+            <strong class="text-h2 font-bold text-primary">₺@Model.TotalRevenue.ToString("N0")</strong>
+        </div>
+    </div>
+
     @if (TempData["SuccessMessage"] is string successMessage)
     {
         <div class="mb-gap-md bg-success/10 border border-success text-success p-gap-sm rounded" role="alert">

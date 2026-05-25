@@ -144,6 +144,7 @@ public class SampleDataService
             .Take(5)
             .Select(r => new ReservationSummaryViewModel
             {
+                Id = r.Id,
                 CustomerName = r.Customer != null ? r.Customer.FullName : "",
                 CarName = r.Car != null ? r.Car.Brand + " " + r.Car.Model : "",
                 PickupDate = r.PickupDate,

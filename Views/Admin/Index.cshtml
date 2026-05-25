@@ -11,34 +11,34 @@
             <h1 class="text-h1 font-bold text-text-primary mt-2">Admin Paneli</h1>
             <p class="text-text-secondary max-w-2xl">Filo durumu, rezervasyon hareketleri ve gelir özetini takip edin.</p>
         </div>
-        <a class="orion-button orion-button-primary" asp-controller="Admin" asp-action="Cars">
-            <span class="material-symbols-outlined">directions_car</span>
-            Araçları Yönet
+        <a class="orion-button orion-button-outline" asp-controller="Admin" asp-action="Reservations">
+            <span class="material-symbols-outlined">list_alt</span>
+            Tüm Rezervasyonlar
         </a>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gap-md mb-gap-lg">
-        <div class="orion-card p-gap-md">
+        <a class="orion-card p-gap-md hover:border-primary transition-colors block" asp-controller="Admin" asp-action="Fleet">
             <div class="flex justify-between items-start">
                 <span class="text-text-secondary">Toplam Araç</span>
                 <span class="material-symbols-outlined text-primary">directions_car</span>
             </div>
             <strong class="block text-h1 font-bold mt-gap-sm">@Model.TotalCars</strong>
-        </div>
-        <div class="orion-card p-gap-md">
+        </a>
+        <a class="orion-card p-gap-md hover:border-primary transition-colors block" asp-controller="Admin" asp-action="Reservations">
             <div class="flex justify-between items-start">
                 <span class="text-text-secondary">Aktif Rezervasyon</span>
                 <span class="material-symbols-outlined text-primary">event_available</span>
             </div>
             <strong class="block text-h1 font-bold mt-gap-sm">@Model.ActiveReservations</strong>
-        </div>
-        <div class="orion-card p-gap-md">
+        </a>
+        <a class="orion-card p-gap-md hover:border-primary transition-colors block" asp-controller="Admin" asp-action="Customers">
             <div class="flex justify-between items-start">
                 <span class="text-text-secondary">Müşteriler</span>
                 <span class="material-symbols-outlined text-primary">groups</span>
             </div>
             <strong class="block text-h1 font-bold mt-gap-sm">@Model.Customers</strong>
-        </div>
+        </a>
         <div class="orion-card p-gap-md">
             <div class="flex justify-between items-start">
                 <span class="text-text-secondary">Toplam Gelir</span>
@@ -62,6 +62,7 @@
                         <th class="px-gap-sm py-gap-sm">Alış tarihi</th>
                         <th class="px-gap-sm py-gap-sm">İade tarihi</th>
                         <th class="px-gap-sm py-gap-sm">Durum</th>
+                        <th class="px-gap-sm py-gap-sm">İşlem</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-border">
@@ -74,6 +75,17 @@
                             <td class="px-gap-sm py-gap-sm text-text-secondary">@reservation.ReturnDate.ToString("yyyy-MM-dd")</td>
                             <td class="px-gap-sm py-gap-sm">
                                 <span class="border border-border bg-surface-raised rounded px-2 py-1 text-caption">@reservation.Status</span>
+                            </td>
+                            <td class="px-gap-sm py-gap-sm">
+                                @if (reservation.Status == "Pending")
+                                {
+                                <form asp-controller="Admin" asp-action="UpdateReservationStatus" method="post" class="inline-flex gap-gap-xs">
+                                    <input name="id" type="hidden" value="@reservation.Id" />
+                                    <input name="returnUrl" type="hidden" value="/Admin" />
+                                    <button class="orion-button orion-button-primary text-caption px-2 py-1" type="submit" name="status" value="Confirmed" style="min-height:unset; padding:4px 12px;">Onayla</button>
+                                    <button class="orion-button orion-button-outline text-caption px-2 py-1 text-error border-error hover:bg-error/10" type="submit" name="status" value="Cancelled" style="min-height:unset; padding:4px 12px;">İptal</button>
+                                </form>
+                                }
                             </td>
                         </tr>
                     }

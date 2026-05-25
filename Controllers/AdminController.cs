@@ -31,6 +31,12 @@ public class AdminController : Controller
         return View(dashboard);
     }
 
+    public IActionResult Fleet()
+    {
+        var cars = _sampleDataService.GetCars();
+        return View(cars);
+    }
+
     public IActionResult Cars(int? editId)
     {
         return View(CreateAdminCarsViewModel(editId));
@@ -119,18 +125,19 @@ public class AdminController : Controller
     {
         var viewModel = new AdminReservationsViewModel
         {
-            Reservations = _sampleDataService.GetAllReservations()
+            Reservations = _sampleDataService.GetAllReservations(),
+            TotalRevenue = _sampleDataService.GetTotalRevenue()
         };
         return View(viewModel);
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult UpdateReservationStatus(int id, string status)
+    public IActionResult UpdateReservationStatus(int id, string status, string? returnUrl = null)
     {
         var updated = _sampleDataService.UpdateReservationStatus(id, status);
         TempData["SuccessMessage"] = updated ? "Rezervasyon durumu güncellendi." : "Rezervasyon bulunamadı.";
-        return RedirectToAction(nameof(Reservations));
+        return string.IsNullOrEmpty(returnUrl) ? RedirectToAction(nameof(Reservations)) : Redirect(returnUrl);
     }
 
     private static Car CreateCarFromForm(AdminCarFormViewModel form)
