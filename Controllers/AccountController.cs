@@ -8,6 +8,7 @@ public class AccountController : Controller
     [HttpGet]
     public IActionResult Login()
     {
+        TempData.Remove("SuccessMessage");
         return View();
     }
 

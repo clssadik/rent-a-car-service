@@ -66,25 +66,36 @@
 </head>
 <body class="bg-bg-app text-text-primary font-body antialiased min-h-screen flex flex-col @ViewData["BodyClass"]">
     <header class="frosted-nav fixed top-0 w-full h-16 z-50">
-        <div class="flex justify-between items-center px-gutter max-w-container-max mx-auto h-full">
+        <div class="grid grid-cols-[1fr_auto_1fr] items-center px-gutter max-w-container-max mx-auto h-full">
             <nav class="hidden md:flex gap-gap-md">
                 <a class="text-white hover:text-primary transition-colors duration-200 font-semibold" asp-controller="Home" asp-action="Index">Ana Sayfa</a>
                 <a class="text-white hover:text-primary transition-colors duration-200 font-semibold" asp-controller="Cars" asp-action="Index">Araçlar</a>
             </nav>
             <a class="text-h2 font-black text-white" style="font-family: 'Gelasio', serif;" asp-controller="Home" asp-action="Index">MEU RENT</a>
-            <div class="flex items-center gap-gap-sm">
+            <div class="flex items-center gap-gap-sm justify-end">
                 @if (Context.Session.GetString("UserEmail") != null)
                 {
-                    <span class="hidden md:inline text-white font-semibold">@Context.Session.GetString("UserEmail")</span>
-                    <form asp-controller="Account" asp-action="Logout" method="post" class="inline">
-                        <button class="text-white hover:text-primary transition-colors duration-200 bg-transparent border-0 cursor-pointer font-semibold" type="submit">Çıkış</button>
-                    </form>
+                    <div class="relative">
+                        <button class="flex items-center gap-1 text-white hover:text-primary transition-colors duration-200 font-semibold bg-transparent border-0 cursor-pointer" onclick="var m=document.getElementById('userMenu'); m.style.display=m.style.display==='flex'?'none':'flex'">
+                            <span class="material-symbols-outlined">menu</span>
+                        </button>
+                        <div id="userMenu" class="absolute right-0 top-full mt-2 w-48 orion-card p-gap-xs hidden flex-col gap-gap-xs" style="display:none">
+                            <span class="text-caption text-text-secondary px-2 pt-1">@Context.Session.GetString("UserEmail")</span>
+                            <hr class="border-border" />
+                            <a class="text-white hover:text-primary transition-colors duration-200 font-semibold px-2 py-1 rounded hover:bg-surface-raised" asp-controller="Admin" asp-action="Index">Admin Panel</a>
+                            <a class="text-white hover:text-primary transition-colors duration-200 font-semibold px-2 py-1 rounded hover:bg-surface-raised" asp-controller="Home" asp-action="About">Hakkımızda</a>
+                            <hr class="border-border" />
+                            <form asp-controller="Account" asp-action="Logout" method="post">
+                                <button class="w-full text-left text-white hover:text-primary transition-colors duration-200 bg-transparent border-0 cursor-pointer font-semibold px-2 py-1 rounded hover:bg-surface-raised" type="submit">Çıkış</button>
+                            </form>
+                        </div>
+                    </div>
                 }
                 else
                 {
                     <a class="hidden md:flex text-white hover:text-primary transition-colors duration-200 font-semibold" asp-controller="Account" asp-action="Login">Giriş Yap</a>
+                    <a class="text-white hover:text-primary transition-colors duration-200 font-semibold" asp-controller="Home" asp-action="About">Hakkımızda</a>
                 }
-                <a class="text-white hover:text-primary transition-colors duration-200 font-semibold" asp-controller="Home" asp-action="About">Hakkımızda</a>
             </div>
         </div>
     </header>
@@ -101,5 +112,13 @@
     </footer>
 
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        document.addEventListener('click', function(e) {
+            var menu = document.getElementById('userMenu');
+            if (menu && !e.target.closest('#userMenu') && !e.target.closest('button[onclick*="userMenu"]')) {
+                menu.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
