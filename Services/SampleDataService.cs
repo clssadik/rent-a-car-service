@@ -26,6 +26,11 @@ public class SampleDataService
         return _dbContext.Cars.OrderBy(car => car.Id).ToList();
     }
 
+    public List<Province> GetProvinces()
+    {
+        return _dbContext.Provinces.OrderBy(p => p.Name).ToList();
+    }
+
     public void AddCar(Car car)
     {
         _dbContext.Cars.Add(car);

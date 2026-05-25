@@ -7,6 +7,8 @@ public class ReservationCreateViewModel
 {
     public Car SelectedCar { get; set; } = new();
 
+    public List<Province> Provinces { get; set; } = new();
+
     public int SelectedCarId { get; set; }
 
     public int RentalDays { get; set; }
@@ -19,6 +21,7 @@ public class ReservationCreateViewModel
     public string Email { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Telefon numarası zorunludur.")]
+    [Phone(ErrorMessage = "Geçerli bir telefon numarası girin.")]
     public string PhoneNumber { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Alış tarihi zorunludur.")]

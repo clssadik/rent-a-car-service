@@ -20,7 +20,8 @@ public class ReservationsController : Controller
         {
             SelectedCar = GetSelectedCar(carId),
             SelectedCarId = carId,
-            RentalDays = 3
+            RentalDays = 3,
+            Provinces = _sampleDataService.GetProvinces()
         };
 
         return View(reservation);
@@ -53,6 +54,7 @@ public class ReservationsController : Controller
 
         if (!ModelState.IsValid)
         {
+            reservation.Provinces = _sampleDataService.GetProvinces();
             return View(reservation);
         }
 

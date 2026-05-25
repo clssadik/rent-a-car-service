@@ -1,7 +1,18 @@
 @model RentACarService.ViewModels.ReservationCreateViewModel
-
+@using System.IO
 @{
     ViewData["Title"] = "Rezervasyon Oluştur";
+    string GetCarImage(RentACarService.Models.Car car)
+    {
+        var prefix = $"{car.Brand}-{car.Model}".ToLower().Replace(" ", "-");
+        var dir = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot", "images", "cars", prefix);
+        if (System.IO.Directory.Exists(dir))
+        {
+            var first = System.IO.Directory.GetFiles(dir, "*").Select(System.IO.Path.GetFileName).OrderBy(f => f).FirstOrDefault();
+            if (first != null) return $"/images/cars/{prefix}/{first}";
+        }
+        return "/images/cars/porsche-911-turbo-s/porsche-911-turbo-s-1.jpg";
+    }
 }
 
 <section class="max-w-container-max mx-auto px-gutter py-section-md">
@@ -29,8 +40,8 @@
                 <h2 class="text-h3 font-semibold mb-gap-sm">Müşteri Bilgileri</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-gap-sm">
                     <div>
-                        <label class="block text-caption text-text-secondary mb-2" asp-for="FullName">Ad soyad</label>
-                        <input class="orion-input" asp-for="FullName" placeholder="Ad soyad girin" />
+                        <label class="block text-caption text-text-secondary mb-2" asp-for="FullName">Ad Soyad</label>
+                        <input class="orion-input" asp-for="FullName" placeholder="Ad Soyad girin" />
                         <span class="text-error text-caption" asp-validation-for="FullName"></span>
                     </div>
                     <div>
@@ -40,7 +51,7 @@
                     </div>
                     <div>
                         <label class="block text-caption text-text-secondary mb-2" asp-for="PhoneNumber">Telefon numarası</label>
-                        <input class="orion-input" asp-for="PhoneNumber" placeholder="+90 555 000 00 00" />
+                        <input class="orion-input" asp-for="PhoneNumber" type="tel" inputmode="numeric" pattern="[0-9+\-\s()]+" placeholder="+90 555 000 00 00" />
                         <span class="text-error text-caption" asp-validation-for="PhoneNumber"></span>
                     </div>
                 </div>
@@ -61,7 +72,13 @@
                     </div>
                     <div class="md:col-span-2">
                         <label class="block text-caption text-text-secondary mb-2" asp-for="PickupLocation">Alış lokasyonu</label>
-                        <input class="orion-input" asp-for="PickupLocation" placeholder="Kiralama ofisi veya şehir" />
+                        <select class="orion-input" asp-for="PickupLocation">
+                            <option value="">İl seçiniz</option>
+                            @foreach (var p in Model.Provinces)
+                            {
+                                <option value="@p.Name">@p.Name</option>
+                            }
+                        </select>
                         <span class="text-error text-caption" asp-validation-for="PickupLocation"></span>
                     </div>
                 </div>
@@ -75,7 +92,7 @@
 
         <aside class="flex flex-col gap-gap-md">
             <div class="orion-card overflow-hidden">
-                <img alt="@Model.SelectedCar.Brand @Model.SelectedCar.Model" class="w-full h-56 object-cover" src="/images/cars/porsche-911-turbo-s-1.jpg" />
+                <img alt="@Model.SelectedCar.Brand @Model.SelectedCar.Model" class="w-full h-56 object-cover" src="@GetCarImage(Model.SelectedCar)" />
                 <div class="p-gap-sm">
                     <p class="text-text-secondary text-caption">Seçilen araç</p>
                     <h2 class="text-h3 font-semibold">@Model.SelectedCar.Brand @Model.SelectedCar.Model</h2>

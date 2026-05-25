@@ -12,6 +12,7 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<Car> Cars => Set<Car>();
     public DbSet<Customer> Customers => Set<Customer>();
+    public DbSet<Province> Provinces => Set<Province>();
     public DbSet<Reservation> Reservations => Set<Reservation>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
