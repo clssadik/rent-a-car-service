@@ -2,7 +2,7 @@
 @using System.IO
 @{
     ViewData["Title"] = "Ana Sayfa";
-    var heroImage = "/images/hero-bg.jpg";
+    var heroImage = "/images/hero.jpg?v=20260526";
     string GetCarImage(RentACarService.Models.Car car)
     {
         var prefix = $"{car.Brand}-{car.Model}".ToLower().Replace(" ", "-");
@@ -16,14 +16,9 @@
     }
 }
 
-<section class="w-full relative -mt-16 py-section-lg flex flex-col items-center justify-center min-h-[716px] hero-pattern px-gutter">
-    <div class="max-w-5xl w-full mx-açuto relative z-10 text-left flex flex-col items-start gap-gap-md pt-20">
-        <h1 class="font-serif text-[80px] leading-none text-text-primary">
-            Hayalinizdeki<br />
-            <span class="font-serif">Yolculuk</span>
-        </h1>
-
-        <form class="orion-search-form glass mt-[200px] rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.6)] p-gap-sm w-full max-w-5xl flex flex-col md:flex-row gap-gap-sm items-center" asp-controller="Cars" asp-action="Index" method="get">
+<section class="w-full relative -mt-16 pt-24 pb-gap-md flex flex-col items-center justify-start min-h-[760px] hero-pattern px-gutter">
+    <div class="max-w-5xl w-full mx-açuto relative z-10 text-left flex min-h-[620px] flex-col items-start justify-end gap-gap-md">
+        <form class="orion-search-form glass rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.6)] p-gap-sm w-full max-w-5xl flex flex-col md:flex-row gap-gap-sm items-center" asp-controller="Cars" asp-action="Index" method="get">
             <div class="flex-1 w-full relative">
                 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-white z-10">location_on</span>
                 <input class="orion-input pl-10" id="locationInput" name="location" placeholder="Alış lokasyonu" type="text" autocomplete="off" onfocus="showProvinceDropdown()" oninput="filterProvinces()" onblur="setTimeout(()=>hideProvinceDropdown(),200)" />
@@ -53,7 +48,7 @@
             </button>
         </form>
     </div>
-    <div class="absolute inset-0 z-0 opacity-100 bg-cover bg-center" style="background-image: url('@heroImage');"></div>
+    <div class="absolute inset-0 z-0 opacity-100 bg-cover" style="background-image: url('@heroImage'); background-position: center 35%;"></div>
     <div class="absolute inset-0 bg-gradient-to-t from-bg-app via-transparent to-transparent z-0"></div>
 </section>
 

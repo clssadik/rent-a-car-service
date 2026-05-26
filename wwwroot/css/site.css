@@ -33,22 +33,216 @@ body {
 }
 
 .frosted-nav {
-    background: rgba(10, 10, 10, 0.2);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    isolation: isolate;
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.1) 42%, rgba(8, 8, 8, 0.3)),
+        rgba(12, 12, 12, 0.36);
+    backdrop-filter: blur(30px) saturate(210%) contrast(112%);
+    -webkit-backdrop-filter: blur(30px) saturate(210%) contrast(112%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.34);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.54),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.12),
+        0 18px 50px rgba(0, 0, 0, 0.3);
+}
+
+.frosted-nav::before,
+.frosted-nav::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.frosted-nav::before {
+    z-index: 0;
+    background:
+        linear-gradient(112deg, transparent 0%, rgba(255, 0, 120, 0.18) 16%, rgba(255, 214, 0, 0.16) 32%, rgba(0, 225, 255, 0.18) 48%, rgba(126, 87, 255, 0.16) 64%, transparent 82%),
+        linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+    opacity: 0;
+    mix-blend-mode: screen;
+    transform: translateX(-18%);
+    transition: opacity 0.24s ease, transform 0.24s ease;
+}
+
+.frosted-nav::after {
+    z-index: 0;
+    background:
+        linear-gradient(100deg, rgba(255, 255, 255, 0.36), transparent 24%, transparent 70%, rgba(255, 255, 255, 0.18)),
+        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.3), transparent 44%);
+    opacity: 0.68;
+}
+
+.frosted-nav.is-scrolled::before {
+    opacity: 0.72;
+    transform: translateX(0);
+}
+
+.frosted-nav.is-scrolled {
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.12) 42%, rgba(8, 8, 8, 0.38)),
+        rgba(12, 12, 12, 0.48);
+}
+
+.frosted-nav > * {
+    position: relative;
+    z-index: 1;
 }
 
 .glass {
-    background: rgba(20, 20, 20, 0.45);
-    backdrop-filter: blur(14px) saturate(150%);
-    -webkit-backdrop-filter: blur(14px) saturate(150%);
-    border-color: rgba(255, 255, 255, 0.06);
+    position: relative;
+    isolation: isolate;
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.045) 38%, rgba(0, 0, 0, 0.3)),
+        rgba(8, 10, 12, 0.42);
+    backdrop-filter: blur(32px) saturate(165%) contrast(104%);
+    -webkit-backdrop-filter: blur(32px) saturate(165%) contrast(104%);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.24),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.05),
+        0 24px 70px rgba(0, 0, 0, 0.42);
 }
 
-header nav a,
+.glass::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: inherit;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at 18% 0%, rgba(255, 255, 255, 0.18), transparent 30%),
+        linear-gradient(115deg, rgba(255, 255, 255, 0.1), transparent 42%);
+    opacity: 0.64;
+}
+
+.orion-search-form > * {
+    position: relative;
+    z-index: 1;
+}
+
 header a[href="/Admin/Cars"] {
     color: #FFFFFF !important;
+}
+
+.nav-brand {
+    color: #FFFFFF;
+    font-family: "Gelasio", Georgia, serif;
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    text-shadow: 0 1px 18px rgba(255, 255, 255, 0.22);
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.nav-brand:hover {
+    color: #F8F8F8;
+    text-shadow: 0 1px 24px rgba(255, 255, 255, 0.32);
+}
+
+.nav-link,
+.nav-menu-link {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.015em;
+    line-height: 1.35;
+    transition: color 0.2s ease, background-color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-menu-link:hover {
+    color: #FFFFFF;
+    text-shadow: 0 0 18px rgba(255, 255, 255, 0.28);
+}
+
+.nav-menu-link {
+    display: block;
+    padding: 0.5rem 0.625rem;
+    border-radius: 0.25rem;
+}
+
+.nav-menu-link:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.nav-menu-panel {
+    position: absolute;
+    overflow: hidden;
+    padding: 0.625rem;
+    color: rgba(255, 255, 255, 0.86);
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.26), rgba(255, 255, 255, 0.08) 40%, rgba(0, 0, 0, 0.32)),
+        rgba(9, 10, 12, 0.62);
+    backdrop-filter: blur(32px) saturate(210%) contrast(110%);
+    -webkit-backdrop-filter: blur(32px) saturate(210%) contrast(110%);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 0.5rem;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.44),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+        0 22px 56px rgba(0, 0, 0, 0.52);
+    opacity: 0;
+    transform: translateY(-8px) scale(0.97);
+    transform-origin: top right;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.nav-menu-panel::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: inherit;
+    pointer-events: none;
+    background:
+        linear-gradient(120deg, rgba(255, 58, 182, 0.16), rgba(255, 221, 64, 0.12) 28%, rgba(60, 220, 255, 0.16) 54%, rgba(139, 92, 246, 0.14) 72%, transparent),
+        radial-gradient(circle at 18% 0%, rgba(255, 255, 255, 0.34), transparent 34%),
+        linear-gradient(120deg, rgba(255, 255, 255, 0.16), transparent 46%);
+    opacity: 0.82;
+    mix-blend-mode: screen;
+}
+
+.nav-menu-panel > * {
+    position: relative;
+    z-index: 1;
+}
+
+.nav-menu-panel.is-open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.nav-menu-panel .text-caption {
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+.nav-menu-panel hr {
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.nav-icon-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    color: rgba(255, 255, 255, 0.86);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-icon-button:hover {
+    color: #FFFFFF;
+    background: rgba(255, 255, 255, 0.11);
+    border-color: rgba(255, 255, 255, 0.22);
 }
 
 .orion-input {
@@ -156,9 +350,14 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .orion-search-form .orion-input,
 .orion-search-form select {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.15);
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.035)),
+        rgba(7, 9, 11, 0.35);
+    border-color: rgba(255, 255, 255, 0.18);
     color: #FFFFFF;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.13),
+        0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .orion-search-form .orion-input::placeholder,
@@ -168,10 +367,16 @@ input[type=range]::-webkit-slider-runnable-track {
 
 .orion-search-form .orion-input:focus,
 .orion-search-form select:focus {
-    border-color: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.42);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        0 0 0 1px rgba(255, 255, 255, 0.18),
+        0 0 26px rgba(255, 255, 255, 0.08);
 }
 
 .orion-search-form button[type="submit"] {
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.46);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.52),
+        0 10px 30px rgba(0, 0, 0, 0.24);
 }
