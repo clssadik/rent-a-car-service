@@ -92,28 +92,27 @@
                                 </span>
                             </td>
                             <td class="px-gap-sm py-gap-sm">
-                                <div class="flex items-center gap-gap-xs">
+                                <form asp-controller="Admin" asp-action="UpdateReservationStatus" method="post" class="flex items-center gap-gap-xs">
+                                    <input name="id" type="hidden" value="@reservation.Id" />
                                     @if (reservation.Status == "Pending")
                                     {
-                                    <form asp-controller="Admin" asp-action="UpdateReservationStatus" method="post" class="inline">
-                                        <input name="id" type="hidden" value="@reservation.Id" />
-                                        <input name="status" type="hidden" value="Confirmed" />
-                                        <button class="orion-button orion-button-primary text-caption px-3 py-1" type="submit" style="min-height:unset;">
-                                            <span class="material-symbols-outlined text-sm">check</span>
-                                            Onayla
-                                        </button>
-                                    </form>
+                                        <button class="orion-button orion-button-primary text-caption px-2 py-1" type="submit" name="status" value="Confirmed" style="min-height:unset; padding:4px 10px;">Onayla</button>
+                                        <button class="border border-error text-error hover:bg-error/10 rounded px-2 py-1 text-caption font-semibold transition-colors" type="submit" name="status" value="Cancelled" style="min-height:unset;">İptal</button>
                                     }
-                                    <form asp-controller="Admin" asp-action="UpdateReservationStatus" method="post" class="flex items-center gap-gap-xs">
-                                        <input name="id" type="hidden" value="@reservation.Id" />
+                                    else if (reservation.Status == "Confirmed")
+                                    {
+                                        <button class="border border-info text-info hover:bg-info/10 rounded px-2 py-1 text-caption font-semibold transition-colors" type="submit" name="status" value="Completed" style="min-height:unset;">Tamamla</button>
+                                    }
+                                    else
+                                    {
                                         <select name="status" class="bg-surface-raised border border-border text-text-primary text-caption rounded px-2 py-1 focus:border-primary focus:outline-none" onchange="this.form.submit()">
                                             <option selected="@(reservation.Status == "Pending")" value="Pending">Beklemede</option>
                                             <option selected="@(reservation.Status == "Confirmed")" value="Confirmed">Onaylandı</option>
                                             <option selected="@(reservation.Status == "Completed")" value="Completed">Tamamlandı</option>
                                             <option selected="@(reservation.Status == "Cancelled")" value="Cancelled">İptal Edildi</option>
                                         </select>
-                                    </form>
-                                </div>
+                                    }
+                                </form>
                             </td>
                         </tr>
                     }
