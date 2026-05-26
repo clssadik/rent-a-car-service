@@ -27,7 +27,7 @@ public class AdminCarFormViewModel
     [Range(1, 20, ErrorMessage = "Koltuk sayısı 1-20 arasında olmalıdır.")]
     public int SeatCount { get; set; }
 
-    [Range(1, 1000, ErrorMessage = "Günlük fiyat 0'dan büyük olmalıdır.")]
+    [Range(1, 100000, ErrorMessage = "Günlük fiyat 0'dan büyük olmalıdır.")]
     public int DailyPrice { get; set; }
 
     [Url(ErrorMessage = "Geçerli bir görsel URL'si girin.")]

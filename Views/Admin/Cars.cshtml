@@ -1,0 +1,182 @@
+@model RentACarService.ViewModels.AdminCarsViewModel
+
+@{
+    ViewData["Title"] = "Araç Yönetimi";
+    var isEditing = Model.Form.Id > 0;
+}
+
+<section class="max-w-container-max mx-auto px-gutter py-section-md">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-gap-md mb-gap-lg">
+        <div>
+            <span class="text-primary font-bold uppercase tracking-wide text-caption">Filo Yönetimi</span>
+            <h1 class="text-h1 font-bold text-text-primary mt-2">Araç Yönetimi</h1>
+            <p class="text-text-secondary max-w-2xl">Araç ekleyin, mevcut araçları düzenleyin veya filodan kaldırın.</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-gap-sm">
+            <a class="orion-button orion-button-outline" asp-controller="Admin" asp-action="Fleet">
+                <span class="material-symbols-outlined">list</span>
+                Liste Görünümü
+            </a>
+            <a class="orion-button orion-button-outline" asp-controller="Admin" asp-action="Index">
+                <span class="material-symbols-outlined">arrow_back</span>
+                Admin Paneli
+            </a>
+        </div>
+    </div>
+
+    @if (TempData["SuccessMessage"] is string successMessage)
+    {
+        <div class="mb-gap-md bg-success/10 border border-success text-success p-gap-sm rounded" role="alert">
+            @successMessage
+        </div>
+    }
+
+    <div class="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-gap-lg items-start">
+        <form class="orion-card p-gap-md" asp-controller="Admin" asp-action="Cars" method="post">
+            <input asp-for="Form.Id" type="hidden" />
+
+            <div asp-validation-summary="ModelOnly" class="text-error mb-gap-sm"></div>
+
+            <h2 class="text-h3 font-semibold mb-gap-sm">@(isEditing ? "Araç Düzenle" : "Yeni Araç Ekle")</h2>
+
+            <div class="flex flex-col gap-gap-sm">
+                <div>
+                    <label class="block text-caption text-text-secondary mb-2" asp-for="Form.Brand">Marka</label>
+                    <input class="orion-input" asp-for="Form.Brand" placeholder="Örn: Toyota" />
+                    <span class="text-error text-caption" asp-validation-for="Form.Brand"></span>
+                </div>
+                <div>
+                    <label class="block text-caption text-text-secondary mb-2" asp-for="Form.Model">Model</label>
+                    <input class="orion-input" asp-for="Form.Model" placeholder="Örn: Corolla" />
+                    <span class="text-error text-caption" asp-validation-for="Form.Model"></span>
+                </div>
+                <div class="grid grid-cols-2 gap-gap-sm">
+                    <div>
+                        <label class="block text-caption text-text-secondary mb-2" asp-for="Form.Year">Yıl</label>
+                        <input class="orion-input" asp-for="Form.Year" />
+                        <span class="text-error text-caption" asp-validation-for="Form.Year"></span>
+                    </div>
+                    <div>
+                        <label class="block text-caption text-text-secondary mb-2" asp-for="Form.SeatCount">Koltuk</label>
+                        <input class="orion-input" asp-for="Form.SeatCount" />
+                        <span class="text-error text-caption" asp-validation-for="Form.SeatCount"></span>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-caption text-text-secondary mb-2" asp-for="Form.Type">Araç Tipi</label>
+                    <select class="orion-input" asp-for="Form.Type">
+                        <option value="Sedan">Sedan</option>
+                        <option value="Hatchback">Hatchback</option>
+                        <option value="SUV">SUV</option>
+                        <option value="Coupe">Coupe</option>
+                    </select>
+                    <span class="text-error text-caption" asp-validation-for="Form.Type"></span>
+                </div>
+                <div class="grid grid-cols-2 gap-gap-sm">
+                    <div>
+                        <label class="block text-caption text-text-secondary mb-2" asp-for="Form.Transmission">Vites</label>
+                        <select class="orion-input" asp-for="Form.Transmission">
+                            <option value="Automatic">Otomatik</option>
+                            <option value="Manual">Manuel</option>
+                        </select>
+                        <span class="text-error text-caption" asp-validation-for="Form.Transmission"></span>
+                    </div>
+                    <div>
+                        <label class="block text-caption text-text-secondary mb-2" asp-for="Form.FuelType">Yakıt</label>
+                        <select class="orion-input" asp-for="Form.FuelType">
+                            <option value="Gasoline">Benzin</option>
+                            <option value="Diesel">Dizel</option>
+                            <option value="Hybrid">Hibrit</option>
+                            <option value="Electric">Elektrik</option>
+                        </select>
+                        <span class="text-error text-caption" asp-validation-for="Form.FuelType"></span>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-caption text-text-secondary mb-2" asp-for="Form.DailyPrice">Günlük Fiyat</label>
+                    <input class="orion-input" asp-for="Form.DailyPrice" />
+                    <span class="text-error text-caption" asp-validation-for="Form.DailyPrice"></span>
+                </div>
+                <div>
+                    <label class="block text-caption text-text-secondary mb-2" asp-for="Form.ImageUrl">Görsel URL</label>
+                    <input class="orion-input" asp-for="Form.ImageUrl" placeholder="/images/cars/..." />
+                    <span class="text-error text-caption" asp-validation-for="Form.ImageUrl"></span>
+                </div>
+                <label class="flex items-center gap-gap-xs text-text-secondary">
+                    <input class="rounded border-border bg-surface-raised text-primary focus:ring-primary" asp-for="Form.IsAvailable" />
+                    Müsait
+                </label>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-gap-sm mt-gap-md">
+                <button class="orion-button orion-button-primary flex-1" type="submit">
+                    <span class="material-symbols-outlined">save</span>
+                    @(isEditing ? "Güncelle" : "Ekle")
+                </button>
+                @if (isEditing)
+                {
+                    <a class="orion-button orion-button-outline flex-1" asp-controller="Admin" asp-action="Cars">Vazgeç</a>
+                }
+            </div>
+        </form>
+
+        <div class="orion-card overflow-hidden">
+            <div class="p-gap-md border-b border-border flex justify-between items-center">
+                <h2 class="text-h3 font-semibold">Kayıtlı Araçlar</h2>
+                <span class="text-text-secondary text-caption">@Model.Cars.Count araç</span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="bg-surface-raised text-text-secondary text-caption uppercase">
+                        <tr>
+                            <th class="px-gap-sm py-gap-sm">ID</th>
+                            <th class="px-gap-sm py-gap-sm">Araç</th>
+                            <th class="px-gap-sm py-gap-sm">Yıl</th>
+                            <th class="px-gap-sm py-gap-sm">Tip</th>
+                            <th class="px-gap-sm py-gap-sm">Fiyat</th>
+                            <th class="px-gap-sm py-gap-sm">Durum</th>
+                            <th class="px-gap-sm py-gap-sm">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-border">
+                        @foreach (var car in Model.Cars)
+                        {
+                            <tr class="hover:bg-surface-raised/60 transition-colors">
+                                <td class="px-gap-sm py-gap-sm font-code">#@car.Id</td>
+                                <td class="px-gap-sm py-gap-sm">
+                                    <strong class="block">@car.Brand @car.Model</strong>
+                                    <span class="text-caption text-text-secondary">@car.Transmission, @car.FuelType</span>
+                                </td>
+                                <td class="px-gap-sm py-gap-sm text-text-secondary">@car.Year</td>
+                                <td class="px-gap-sm py-gap-sm text-text-secondary">@car.Type</td>
+                                <td class="px-gap-sm py-gap-sm font-code text-primary">₺@car.DailyPrice.ToString("N0")</td>
+                                <td class="px-gap-sm py-gap-sm">
+                                    <span class="inline-block rounded px-2 py-1 text-caption font-semibold @(car.IsAvailable ? "bg-success/15 text-success border border-success/30" : "bg-text-muted/15 text-text-muted border border-text-muted/30")">
+                                        @(car.IsAvailable ? "Müsait" : "Müsait Değil")
+                                    </span>
+                                </td>
+                                <td class="px-gap-sm py-gap-sm">
+                                    <div class="flex flex-col sm:flex-row gap-gap-xs">
+                                        <a class="orion-button orion-button-outline text-caption px-2 py-1" style="min-height:unset;" asp-controller="Admin" asp-action="Cars" asp-route-editId="@car.Id">
+                                            Düzenle
+                                        </a>
+                                        <form asp-controller="Admin" asp-action="DeleteCar" method="post" onsubmit="return confirm('Bu araç silinsin mi?');">
+                                            <input name="id" type="hidden" value="@car.Id" />
+                                            <button class="border border-error text-error hover:bg-error/10 rounded px-2 py-1 text-caption font-semibold transition-colors" type="submit">
+                                                Sil
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
