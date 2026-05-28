@@ -65,7 +65,7 @@ data into a clean interface with:
 ## Preview
 
 <p align="center">
-  <img src="assets/previews/rent-a-car-homepage.png" alt="Rent-a-Car Service homepage" width="600">
+  <img src="assets/previews/rent-a-car-homepage.png" alt="Rent-a-Car Service homepage" width="700" style="border-radius: 12px;">
 </p>
 
 ## Getting Started
