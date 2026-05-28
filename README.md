@@ -16,7 +16,9 @@ and viewing revenue data.
 
 ## Visual Overview
 
-![Rent-a-Car Service workflow](assets/diagrams/rent-a-car-workflow.jpg)
+<p align="center">
+  <img src="assets/diagrams/rent-a-car-workflow.jpg" alt="Rent-a-Car Service workflow" width="700" style="border-radius: 12px;">
+</p>
 
 ## About
 
