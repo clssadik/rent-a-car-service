@@ -7,13 +7,14 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-Dark%20Theme-06B6D4?logo=tailwindcss&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-2EA44F)
 
-Rent-a-Car Service is an ASP.NET Core MVC web application for browsing cars
-and making rental reservations online.
+Rent-a-Car Service is a car rental platform built with ASP.NET Core MVC. It
+lets customers discover vehicles, submit booking requests, and receive instant
+confirmations — all through a dark-themed Tailwind interface.
 
-The application provides a public storefront where customers can explore the
-available fleet, view car details, and create reservations with pickup and
-return dates. An admin panel allows managing cars, customers, reservations,
-and viewing revenue data.
+The solution covers both sides of the counter: a customer-facing storefront for
+browsing the fleet and placing reservations, plus an admin area where fleet
+inventory, bookings, customer records, and income are tracked from a single
+dashboard.
 
 ## Visual Overview
 
@@ -23,47 +24,47 @@ and viewing revenue data.
 
 ## About
 
-This project focuses on a simple rental question: which cars are available,
-and how can a customer reserve one?
+This project answers a straightforward business need: help customers find the
+right car and book it with minimal friction.
 
-Instead of showing raw database records, it turns the fleet and reservation
-data into a clean interface with:
+It transforms raw database tables into an intuitive experience that includes:
 
-- Featured car listings on the homepage
-- Detailed car pages with image galleries
-- Reservation form with date and location selection
-- Reservation confirmation summary
-- Admin dashboard with fleet, customer, and revenue overview
-- Session-based admin authentication
+- Curated vehicle showcase on the landing page
+- Individual car pages packed with specs and photo galleries
+- Multi-step reservation wizard with date and location picking
+- Booking success page with a clear summary
+- Back-office panel covering fleet, reservations, customers, and earnings
+- Lightweight authentication using server-side sessions
 
 ## How It Works
 
-1. `Program.cs` configures the SQLite database, session middleware, and seeds
-   the initial fleet and province data.
-2. `HomeController` displays featured cars and a search form on the homepage.
-3. `CarsController` lists all available cars and shows detailed car pages with
-   image galleries.
-4. `ReservationsController` handles reservation creation with date validation
-   and automatic customer registration.
-5. `AdminController` provides a dashboard with fleet management, customer
-   listing, reservation status updates, and revenue tracking.
-6. `AccountController` manages admin login and logout through session-based
-   authentication.
-7. `SampleDataService` acts as the data access layer between controllers and
-   the Entity Framework Core `ApplicationDbContext`.
+1. `Program.cs` wires up SQLite, session state, and populates the fleet and
+   province catalog on first run.
+2. `HomeController` presents featured vehicles and a province dropdown to kick
+   off the booking flow.
+3. `CarsController` serves the full inventory list and single-car views
+   complete with an image carousel.
+4. `ReservationsController` validates availability, checks date conflicts, and
+   creates both a customer record and a reservation in one shot.
+5. `AdminController` surfaces key metrics — fleet size, active bookings,
+   customer count, total revenue — and provides CRUD operations for cars.
+6. `AccountController` handles sign-in and sign-out using in-memory session
+   state with hard-coded credentials.
+7. `SampleDataService` encapsulates all data-access logic, querying and
+   mutating entities through the EF Core-backed `ApplicationDbContext`.
 
 ## Features
 
-- Car fleet browsing with details and images
-- Online reservation with pickup and return date selection
-- Automatic customer creation on reservation
-- Province-based pickup location selection
-- Admin dashboard with revenue and reservation overview
-- Fleet management (add, edit, delete cars)
-- Reservation status management (pending, confirmed, completed, cancelled)
-- Session-based admin authentication
-- SQLite database with Entity Framework Core migrations
-- Automatic database migration and seed data on startup
+- Vehicle catalog with rich detail views and photo galleries
+- End-to-end reservation flow with automatic customer registration
+- Date-range conflict detection before confirming a booking
+- Fleet administration (create, update, remove vehicles)
+- Booking lifecycle management (Pending → Confirmed → Completed / Cancelled)
+- Customer directory with per-person reservation history
+- Revenue auto-logging when a reservation is confirmed
+- Session-powered admin authentication
+- EF Core migrations backed by SQLite
+- Tailwind CSS dark-mode UI with responsive design
 
 ## Preview
 
