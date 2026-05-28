@@ -1,9 +1,10 @@
 # Rent-a-Car Service
 
 ![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet&logoColor=white)
-![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-MVC-512BD4?logo=dotnet&logoColor=white)
-![Entity Framework Core](https://img.shields.io/badge/Entity%20Framework%20Core-SQLite-512BD4)
-![SQLite](https://img.shields.io/badge/SQLite-MeurentDb.db-003B57?logo=sqlite&logoColor=white)
+![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-MVC%20%2B%20Razor-512BD4?logo=dotnet&logoColor=white)
+![EF Core](https://img.shields.io/badge/EF%20Core-ORM%20%2B%20Migrations-6C3483)
+![SQLite](https://img.shields.io/badge/SQLite-Local%20Database-003B57?logo=sqlite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-Dark%20Theme-06B6D4?logo=tailwindcss&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-2EA44F)
 
 Rent-a-Car Service is an ASP.NET Core MVC web application for browsing cars
